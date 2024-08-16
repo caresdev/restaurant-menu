@@ -1,7 +1,6 @@
 # Restaurant Digital Menu
 
-![Home Page & Products List](./images/homepage-products.png "Home Page & Products List")
-![Products List & Contact](./images/products-contact.png "Products List & Contact")
+![App Homepage, Products List, and Contact Info](./images/figma-app-design.png "App Homepage, Products List, and Contact Info")
 
 ## Introduction
 This project is a generic implementation of a menu that can be used to display a list of products a restaurant offers. It provides generic descriptions of the products, which can be modified and extended as needed. This project was specifically created for **Sandra Salgados**, a small family-owned business in Brazil specializing in Brazilian pastries. Only placeholder images and descriptions are made public to protect the privacy and security of the business.
