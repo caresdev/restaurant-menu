@@ -1,13 +1,13 @@
-# Restaurant Digital Menu
+# Digital Menu
 
 ![App Homepage, Products List, and Contact Info](./images/figma-app-design.png "App Homepage, Products List, and Contact Info")
 
 ## Introduction
-This project is a generic implementation of a menu that can be used to display a list of products a restaurant offers. It provides generic descriptions of the products, which can be modified and extended as needed. This project was specifically created for **Sandra Salgados**, a small family-owned business in Brazil specializing in Brazilian pastries. Only placeholder images and descriptions are made public to protect the privacy and security of the business.
+This is a generic implementation of a digital menu that can be used to display a list of products a restaurant or any company offers. It provides generic descriptions of the products, which can be modified and extended as needed. This project was specifically created for **Sandra Salgados**, a small family-owned business in Brazil specializing in Brazilian pastries. Only placeholder images and descriptions are made public to protect the privacy and security of the business.
 
 ## Technologies and Tools
 - **Design & Prototype:** Figma, Canva.
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript, Bootstrap.
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript, Bootstrap5.
 - **Deployment & Hosting:** Netlify.
 
 ## Features
@@ -16,7 +16,7 @@ This project is a generic implementation of a menu that can be used to display a
 - **Product Details:** Each product includes a title, an image, a description, and a price.
 
 ## Future Goals
-This project currently provides a basic implementation of a restaurant menu. Future enhancements could include:
+This project currently provides a basic implementation of a digital menu. Future enhancements could include:
 - **Advanced Frontend Technologies:** Migrating to frameworks like React or Next.js for a more dynamic and responsive user experience.
 - **Image Zoom:** Implementing a feature to zoom in on product images.
 - **Shopping Cart:** Adding a shopping cart feature to allow users to select multiple items.
