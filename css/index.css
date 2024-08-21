@@ -1,0 +1,41 @@
+/* Global Styles */
+
+
+
+
+
+/* Banner */
+#hero{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header-bg{
+    height: inherit;
+    object-fit: cover;
+}
+
+.header-overlay{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo{
+    width: 6.5em;
+    height: 6.5em;
+}
+
+.header-img img{
+    width: 20em;
+    height: auto;
+    object-fit: contain; 
+}
+
+.header-title .btn{
+    color: white;
+    background-color: #16940C;
+}
+
