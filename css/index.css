@@ -1,5 +1,6 @@
 /* Global Styles */
 
+/* Fonts (sizes, family, weight?), primary and secondary colors, sections padding and margins, line height, h sizes */
 
 
 
@@ -25,7 +26,17 @@
 
 .logo{
     width: 6.5em;
-    height: 6.5em;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid black;
+}
+
+.header-logo-slogan h1, .header-title h2{
+    font-weight: 600;
+}
+
+.slogan{
+    font-weight: 200;
 }
 
 .header-img img{
@@ -39,3 +50,37 @@
     background-color: #16940C;
 }
 
+
+/* Navigation */
+
+.navbar{
+    background-color: black;
+}
+
+
+.navbar .nav-link{
+    color: white;
+    
+}
+
+
+
+
+
+/* Media Queries */
+
+@media  screen and (min-width: 768px) {
+    
+
+    .header-img img{
+        width: 25em;
+    }
+    
+}
+
+@media  screen and (min-width: 1024px) {
+    
+
+    
+    
+}
