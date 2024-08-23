@@ -59,8 +59,11 @@
 
 
 .navbar .nav-link{
-    color: white;
-    
+    color: white !important;
+}
+
+.navbar-toggler:focus{
+    box-shadow: none;
 }
 
 
