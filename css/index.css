@@ -31,11 +31,11 @@
     border: 3px solid black;
 }
 
-.header-logo-slogan h1, .header-title h2{
+.header-title h1, .slogan{
     font-weight: 600;
 }
 
-.slogan{
+.slogan-small{
     font-weight: 200;
 }
 
@@ -45,7 +45,7 @@
     object-fit: contain; 
 }
 
-.header-title .btn{
+.header-slogan .btn{
     color: white;
     background-color: #16940C;
 }
