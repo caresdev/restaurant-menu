@@ -5,6 +5,21 @@
 
 
 
+
+/* Navigation */
+.navbar{
+    background-color: black;
+}
+
+.navbar .nav-link{
+    color: white !important;
+}
+
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+
+
 /* Banner */
 #hero{
     width: 100vw;
@@ -24,12 +39,6 @@
     transform: translate(-50%, -50%);
 }
 
-.logo{
-    width: 6.5em;
-    height: auto;
-    border-radius: 50%;
-    border: 3px solid black;
-}
 
 .header-title h1, .slogan{
     font-weight: 600;
@@ -40,7 +49,7 @@
 }
 
 .header-img img{
-    width: 20em;
+    width: 18em;
     height: auto;
     object-fit: contain; 
 }
@@ -51,39 +60,30 @@
 }
 
 
-/* Navigation */
-
-.navbar{
-    background-color: black;
-}
-
-
-.navbar .nav-link{
-    color: white !important;
-}
-
-.navbar-toggler:focus{
-    box-shadow: none;
-}
-
-
-
-
 
 /* Media Queries */
 
 @media  screen and (min-width: 768px) {
     
-
     .header-img img{
-        width: 25em;
+        width: 22em;
     }
-    
 }
 
 @media  screen and (min-width: 1024px) {
-    
+    .header-img img{
+        width: 30em;
+    }
 
-    
-    
+    .header-slogan{
+        color: black !important;
+    }
+
+
+}
+
+@media  screen and (min-width: 1440px) {
+    .header-img img{
+        width: 35em;
+    }
 }
