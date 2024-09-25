@@ -1,18 +1,54 @@
-/* Global Styles */
+/**** CSS variables ****/
+
+:root {
+    /* Colors */
+    --primary-background-color: #FDD044;
+    --secondary-background-color: #EFEFEF;
+    --primary-black: #000000;
+    --secondary-text-color: #ffffff;
+    --primary-red-color: #AE0706;
+    --primary-green-color: #16940C;
+
+    /* Text */
+    --primary-font: 'Poppins', sans-serif;
+    --secondary-font: 'Bebas Neue', sans-serif;
+    --terciary-font: 'Roboto Condensed', sans-serif;
+    --spacing: 0.10rem;
+}
+
+
+/**** Global Styles ****/
+
+h1, h2, h3, h4 {
+  letter-spacing: var(--spacing);
+}
+
+h1 {
+  font-size: 2.3em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.25rem;
+}
+h4 {
+  font-size: 0.875rem;
+}
+
+
 
 /* Fonts (sizes, family, weight?), primary and secondary colors, sections padding and margins, line height, h sizes */
 
 
 
-
-
 /* Navigation */
 .navbar{
-    background-color: black;
+    background-color: var(--primary-black);
 }
 
 .navbar .nav-link{
-    color: white !important;
+    color: var(--secondary-text-color);
 }
 
 .navbar-toggler:focus{
@@ -24,7 +60,7 @@
 #hero{
     width: 100vw;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--primary-font);
 }
 
 .header-bg{
@@ -55,8 +91,8 @@
 }
 
 .header-slogan .btn{
-    color: white;
-    background-color: #16940C;
+    color: var(--secondary-text-color);
+    background-color: var(--primary-green-color);
 }
 
 
@@ -76,7 +112,7 @@
     }
 
     .header-slogan{
-        color: black !important;
+        color: var(--primary-black) !important;
     }
 
 
