@@ -19,7 +19,7 @@
 
 /**** Global Styles ****/
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   letter-spacing: var(--spacing);
 }
 
@@ -111,9 +111,9 @@ h4 {
         width: 30em;
     }
 
-    .header-slogan{
+    /* .header-slogan{
         color: var(--primary-black) !important;
-    }
+    } */
 
 
 }
