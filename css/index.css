@@ -41,11 +41,11 @@ h4 {
 
 
 /* Navigation */
-.navbar{
+.navbar, footer{
     background-color: var(--primary-black);
 }
 
-.navbar .nav-link{
+.navbar .nav-link, footer {
     color: var(--secondary-text-color);
 }
 
@@ -96,6 +96,44 @@ h4 {
     font-weight: 200;
     letter-spacing: var(--spacing);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Main */
+main{
+    background-color: var(--primary-background-color);
+}
+
+
+/* Items section */
+
+.section-items{
+    background-color: var(--secondary-background-color);
+}
+
+.item-title, .item-price, .social h4, .contact h4{
+    font-family: var(--secondary-font);
+}
+
+.item-description, .contact p{
+    font-family: var(--terciary-font);
+}
+
+
+
+/* Footer */
+
 
 
 
