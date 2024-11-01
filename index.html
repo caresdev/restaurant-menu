@@ -77,7 +77,7 @@
      <main>
 
       <!-- Filtering menu -->
-      <section>
+      <section class="my-4 text-center">
         <nav aria-label="Submenu">
           <button>Category 1</button>
           <button>Category 2</button>
@@ -86,29 +86,37 @@
       </section>
 
       <!-- Menu Categories -->
-      <section class="menu-category">
-        <h2 class="category-name text-uppercase"> Category 1 </h2>
+      <h2 class="category-name text-uppercase"> Category 1 </h2>
+      <section class="container-fluid menu-category d-flex justify-content-center">
 
-        <div class="section-items">
+        <div class="section-items row justify-content-evenly m-2">
           <!-- Category items -->
-          <article class="menu-item">
-            <img src="/images/menu-item.png" alt="Meaningful description of item" class="item-img"/>
+          <article class="menu-item row">
+            <img src="/images/menu-item.png" alt="Meaningful description of item" class="menu-img col"/>
+            <div class="item-info col">
+              <h4 class="item-title text-uppercase"> Item Title </h4>
+              <p class="item-description"> Item Description </p>
+              <h4 class="item-price">$Price</h4>
+            </div>
+          </article>
+          <article class="menu-item col-md-6">
+            <img src="/images/menu-item.png" alt="Meaningful description of item" class="menu-img"/>
             <div class="item-info">
               <h4 class="item-title text-uppercase"> Item Title </h4>
               <p class="item-description"> Item Description </p>
               <h4 class="item-price">$Price</h4>
             </div>
           </article>
-          <article class="menu-item">
-            <img src="/images/menu-item.png" alt="Meaningful description of item" class="item-img"/>
+          <article class="menu-item col-md-6">
+            <img src="/images/menu-item.png" alt="Meaningful description of item" class="menu-img"/>
             <div class="item-info">
               <h4 class="item-title text-uppercase"> Item Title </h4>
               <p class="item-description"> Item Description </p>
               <h4 class="item-price">$Price</h4>
             </div>
           </article>
-          <article class="menu-item">
-            <img src="/images/menu-item.png" alt="Meaningful description of item" class="item-img"/>
+          <article class="menu-item col-md-6">
+            <img src="/images/menu-item.png" alt="Meaningful description of item" class="menu-img"/>
             <div class="item-info">
               <h4 class="item-title text-uppercase"> Item Title </h4>
               <p class="item-description"> Item Description </p>
