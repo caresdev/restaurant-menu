@@ -13,14 +13,17 @@
     --primary-font: 'Poppins', sans-serif;
     --secondary-font: 'Bebas Neue', sans-serif;
     --terciary-font: 'Roboto Condensed', sans-serif;
-    --spacing: 0.10rem;
+    --primary-text-size: 0.6em;
+    --secondary-text-size: 0.87em;
+    --slight-spacing: 0.12em;
+    --greater-spacing: 0.18em;
 }
 
 
 /**** Global Styles ****/
 
 h3{
-  letter-spacing: var(--spacing);
+  letter-spacing: var(--slight-spacing);
 }
 
 h1 {
@@ -117,26 +120,43 @@ body{
     background-color: var(--secondary-background-color);
 }
 
-.item-title, .item-price, .social h4, .contact h4{
+.category-name, .item-title, .item-price, .social h4, .contact h4{
     font-family: var(--secondary-font);
+}
+
+.item-price{
+    text-align: end;
+}
+
+.item-title{
+    letter-spacing: var(--greater-spacing);
+}
+
+.category-name{
+    letter-spacing: var(--slight-spacing);
 }
 
 .item-description, .contact p{
     font-family: var(--terciary-font);
+    font-size: var(--primary-text-size);
 }
 
-.menu-item {
+.menu-item, .item-description{
+    padding: 0;
+}
+
+/* .menu-item {
     display: grid;
     gap: 1rem 2rem;
     max-width: 25rem;
-}
+} */
 
 .menu-img {
     object-fit: cover;
-    height: 100px;
+    height: 5em;
     width: auto;
+    border-radius: 8%;
 }
-
 
 
 /* Footer */
