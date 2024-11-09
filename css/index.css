@@ -113,7 +113,6 @@ body{
 /* Main */
 
 
-
 /* Items section */
 
 .section-items{
@@ -151,12 +150,18 @@ body{
     max-width: 25rem;
 } */
 
+.menu-item{
+    margin-top: 0.5em;
+}
+
 .menu-img {
     object-fit: cover;
-    height: 5em;
+    height: 10em;
     width: auto;
-    border-radius: 8%;
+    border-radius: 0.5rem;
 }
+
+
 
 
 /* Footer */
