@@ -4,7 +4,7 @@
     /* Colors */
     --primary-background-color: #FDD044;
     --secondary-background-color: #EFEFEF;
-    --primary-black: #000000;
+    --primary-text-color: #000000;
     --secondary-text-color: #ffffff;
     --primary-red-color: #AE0706;
     --primary-green-color: #16940C;
@@ -50,7 +50,7 @@ body{
 
 /* Navigation */
 .navbar, footer{
-    background-color: var(--primary-black);
+    background-color: var(--primary-text-color);
 }
 
 .navbar .nav-link, footer {
@@ -102,16 +102,27 @@ body{
     background-color: var(--primary-green-color);
     font-family: var(--secondary-font);
     font-weight: 200;
+    width: 10em;
     letter-spacing: var(--spacing);
 }
 
 
-
-
-
-
-
 /* Main */
+
+/* Filtering Menu */
+.filter-btn{
+    color: var(--primary-red-color);
+    background-color: var(--secondary-background-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover{
+    background-color: var(--primary-red-color);
+    color: var(--secondary-text-color);
+}
 
 
 /* Items section */
