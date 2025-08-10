@@ -12,10 +12,10 @@
     /* Text */
     --primary-font: 'Poppins', sans-serif;
     --secondary-font: 'Bebas Neue', sans-serif;
-    --terciary-font: 'Roboto Condensed', sans-serif;
+    --tertiary-font: 'Roboto Condensed', sans-serif;
     --primary-text-size: 0.85em;
     --secondary-text-size: 1em;
-    --terciary-text-size: 1.15em;
+    --tertiary-text-size: 1.15em;
     --slight-spacing: 0.12em;
     --greater-spacing: 0.18em;
 }
@@ -148,7 +148,7 @@ body{
 }
 
 .item-description, .contact p{
-    font-family: var(--terciary-font);
+    font-family: var(--tertiary-font);
     font-size: var(--primary-text-size);
 }
 
@@ -241,7 +241,7 @@ body{
     }
 
     .item-description{
-        font-size: var(--terciary-text-size);
+        font-size: var(--tertiary-text-size);
     }
     .menu-img{
         height: 16em;
