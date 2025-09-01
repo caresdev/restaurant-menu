@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Fetching menu data...");
 
     let response;
+
     try {
       response = await fetch("/data.json");
     } catch (e) {
