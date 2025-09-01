@@ -31,7 +31,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     console.log("Fetching menu data...");
-    const response = await fetch("./data.json");
+
+    let response;
+    try {
+      response = await fetch("/data.json");
+    } catch (e) {
+      console.warn("Absolute path failed, trying relative path...", e);
+      response = await fetch("./data.json");
+    }
 
     if (!response.ok) {
       throw new Error(`Error fetching menu data. Status: ${response.status}`);
@@ -41,12 +48,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     menuData = await response.json();
     console.log("Menu data loaded successfully:", menuData);
 
+    // Validate menu data structure
+    if (!menuData || !menuData.restaurant || !menuData.categories) {
+      throw new Error("Invalid menu data structure");
+    }
+
     initializeApp();
   } catch (error) {
     console.error("Failed to load menu data:", error);
     if (menuContainerEl) {
-      menuContainerEl.innerHTML =
-        '<p class="text-center text-danger">Failed to load menu. Please try again later.</p>';
+      menuContainerEl.innerHTML = `
+        <div class="text-center text-danger p-4">
+          <h3>Failed to load menu</h3>
+          <p>Error: ${error.message}</p>
+          <button class="btn btn-primary" onclick="location.reload()">Reload Page</button>
+        </div>
+      `;
     }
   }
 });
