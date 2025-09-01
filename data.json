@@ -1,0 +1,90 @@
+{
+  "restaurant": {
+    "name": "Company Name",
+    "tagline": "Digital Menu",
+    "slogan": "Captivating Message!",
+    "description": "A captivating message describing your products.",
+    "phone": "5531999999999",
+    "contact": {
+      "address": "Company Address",
+      "email": "company@example.com",
+      "phone": "+1 (123) 456-7890"
+    }
+  },
+  "categories": [
+    {
+      "id": "appetizers",
+      "name": "Appetizers",
+      "items": [
+        {
+          "id": "item-001",
+          "title": "Classic Bruschetta",
+          "description": "Fresh tomatoes, basil, and mozzarella on toasted baguette slices. A perfect start to your meal.",
+          "price": 12.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-002",
+          "title": "Stuffed Mushrooms",
+          "description": "Button mushrooms filled with seasoned breadcrumbs, herbs, and parmesan cheese.",
+          "price": 14.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "mains",
+      "name": "Main Courses",
+      "items": [
+        {
+          "id": "item-003",
+          "title": "Grilled Chicken",
+          "description": "Tender chicken breast grilled to perfection, served with seasonal vegetables and your choice of sauce.",
+          "price": 24.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-004",
+          "title": "Beef Tenderloin",
+          "description": "Premium cut beef tenderloin cooked to your preference, accompanied by roasted potatoes and asparagus.",
+          "price": 32.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-005",
+          "title": "Salmon Fillet",
+          "description": "Fresh Atlantic salmon fillet with lemon herb butter, served with rice pilaf and steamed broccoli.",
+          "price": 28.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    }
+  ]
+}
