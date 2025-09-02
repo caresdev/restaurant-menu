@@ -44,7 +44,57 @@
           "description": "Tender chicken breast grilled to perfection, served with seasonal vegetables and your choice of sauce.",
           "price": 24.99,
           "image": "images/menu-item.png",
-          "available": true
+          "available": true,
+          "optionGroups": [
+            {
+              "id": "sauce",
+              "name": "Choose your free sauce",
+              "type": "single",
+              "min": 0,
+              "max": 1,
+              "options": [
+                {
+                  "id": "mustard",
+                  "name": "Spicy Mustard",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "herb-butter",
+                  "name": "Herb Butter",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "bbq",
+                  "name": "BBQ Sauce",
+                  "description": "",
+                  "priceDelta": 0
+                }
+              ]
+            },
+            {
+              "id": "extras",
+              "name": "Extra sides",
+              "type": "multi",
+              "min": 0,
+              "max": 3,
+              "options": [
+                {
+                  "id": "extra-vegetables",
+                  "name": "Extra Vegetables (+$2.00)",
+                  "description": "",
+                  "priceDelta": 2.00
+                },
+                {
+                  "id": "garlic-bread",
+                  "name": "Garlic Bread (+$3.50)",
+                  "description": "",
+                  "priceDelta": 3.50
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "item-004",
@@ -52,7 +102,75 @@
           "description": "Premium cut beef tenderloin cooked to your preference, accompanied by roasted potatoes and asparagus.",
           "price": 32.99,
           "image": "images/menu-item.png",
-          "available": true
+          "available": true,
+          "optionGroups": [
+            {
+              "id": "cooking",
+              "name": "How would you like it cooked? *",
+              "type": "single",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "id": "rare",
+                  "name": "Rare",
+                  "description": "Cool red center",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "medium-rare",
+                  "name": "Medium Rare",
+                  "description": "Warm red center",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "medium",
+                  "name": "Medium",
+                  "description": "Warm pink center",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "well-done",
+                  "name": "Well Done",
+                  "description": "No pink",
+                  "priceDelta": 0
+                }
+              ]
+            },
+            {
+              "id": "sides",
+              "name": "Choose your sides (2 required) *",
+              "type": "multi",
+              "min": 2,
+              "max": 3,
+              "options": [
+                {
+                  "id": "roasted-potatoes",
+                  "name": "Roasted Potatoes",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "asparagus",
+                  "name": "Asparagus",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "mixed-vegetables",
+                  "name": "Mixed Vegetables",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "mashed-potatoes",
+                  "name": "Mashed Potatoes (+$1.50)",
+                  "description": "",
+                  "priceDelta": 1.50
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "item-005",

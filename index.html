@@ -145,6 +145,44 @@
       </div>
     </div>
 
+    <!-- Options Modal -->
+    <div id="optionsModal" class="options-modal" style="display: none;" role="dialog" aria-labelledby="optionsModalTitle" aria-modal="true">
+      <div class="options-overlay" onclick="closeOptionsModal()"></div>
+      <div class="options-content">
+        <div class="options-header">
+          <h5 id="optionsModalTitle" class="options-title">Customize Your Order</h5>
+          <button class="btn-close-options" onclick="closeOptionsModal()" aria-label="Close options">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="options-body">
+          <div class="item-summary">
+            <h6 id="optionsItemTitle">Item Name</h6>
+            <div class="item-base-price">
+              Base price: <span id="optionsBasePrice">$0.00</span>
+            </div>
+          </div>
+          
+          <div id="optionGroupsContainer" class="option-groups">
+            <!-- Option groups will be rendered here dynamically -->
+          </div>
+        </div>
+        
+        <div class="options-footer">
+          <div class="total-section">
+            <div class="total-display">
+              <span class="total-label">Total:</span>
+              <span id="optionsTotalPrice" class="total-amount">$0.00</span>
+            </div>
+          </div>
+          <button id="confirmOptionsBtn" class="btn btn-success btn-add-to-cart-options" disabled>
+            <i class="fas fa-plus me-1"></i>Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Screen reader announcements -->
     <div id="cartAnnouncements" class="sr-only" aria-live="polite"></div>
 

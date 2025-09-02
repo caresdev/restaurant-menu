@@ -362,7 +362,7 @@ function setupEventListeners() {
     }
   });
 
-  // Add to cart buttons
+  // Add to cart buttons with options support
   menuContainerEl.addEventListener("click", (e) => {
     if (
       e.target.classList.contains("add-to-cart") ||
@@ -371,7 +371,7 @@ function setupEventListeners() {
       const button = e.target.classList.contains("add-to-cart")
         ? e.target
         : e.target.parentElement;
-      addToCart(
+      addToCartWithOptions(
         button.dataset.itemId,
         button.dataset.title,
         parseFloat(button.dataset.price)
@@ -384,6 +384,10 @@ function setupEventListeners() {
   if (sendWhatsAppBtn)
     sendWhatsAppBtn.addEventListener("click", sendOrderToWhatsApp);
   if (toggleCartBtn) toggleCartBtn.addEventListener("click", toggleCart);
+  
+  // Options modal
+  const confirmOptionsBtn = document.getElementById('confirmOptionsBtn');
+  if (confirmOptionsBtn) confirmOptionsBtn.addEventListener("click", confirmOptions);
 
   // Keyboard support for cart
   if (cartSummaryEl) {
@@ -431,7 +435,7 @@ function updateCartDisplay() {
   cartItemsEl.innerHTML = "";
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + (item.unitPrice || item.price) * item.quantity, 0);
 
   // Update cart counter and total
   if (cartItemCountExpandedEl) cartItemCountExpandedEl.textContent = totalItems;
@@ -447,8 +451,33 @@ function updateCartDisplay() {
   // Show cart when items are added
   showCartSummary();
 
-  cart.forEach((item) => {
-    const itemTotal = item.price * item.quantity;
+  cart.forEach((item, index) => {
+    const unitPrice = item.unitPrice || item.price;
+    const itemTotal = unitPrice * item.quantity;
+
+    // Build options display
+    let optionsHtml = '';
+    if (item.options && item.options.length > 0) {
+      const optionsByGroup = {};
+      item.options.forEach(option => {
+        if (!optionsByGroup[option.groupName]) {
+          optionsByGroup[option.groupName] = [];
+        }
+        optionsByGroup[option.groupName].push(option);
+      });
+      
+      Object.keys(optionsByGroup).forEach(groupName => {
+        const groupOptions = optionsByGroup[groupName];
+        const optionNames = groupOptions.map(opt => {
+          let optionText = opt.name;
+          if (opt.priceDelta > 0) {
+            optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
+          }
+          return optionText;
+        }).join(', ');
+        optionsHtml += `<div class="item-option"><strong>${groupName}:</strong> ${optionNames}</div>`;
+      });
+    }
 
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item-expanded p-3 mb-2 bg-white rounded border";
@@ -456,9 +485,8 @@ function updateCartDisplay() {
       <div class="cart-item-content">
         <div class="item-details">
           <h6 class="item-name mb-1">${item.title}</h6>
-          <span class="item-unit-price text-muted">$${item.price.toFixed(
-            2
-          )} each</span>
+          <span class="item-unit-price text-muted">$${unitPrice.toFixed(2)} each</span>
+          ${optionsHtml ? `<div class="item-options mt-1">${optionsHtml}</div>` : ''}
         </div>
         
         <div class="item-controls">
@@ -478,7 +506,12 @@ function updateCartDisplay() {
           
           <div class="item-total-section">
             <span class="item-total">$${itemTotal.toFixed(2)}</span>
-            <button class="btn btn-sm btn-outline-danger remove-item ms-2" data-item-id="${
+            ${item.options && item.options.length > 0 ? 
+              `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Edit options">
+                <i class="fas fa-edit"></i>
+              </button>` : ''
+            }
+            <button class="btn btn-sm btn-outline-danger remove-item" data-item-id="${
               item.id
             }" title="Remove item">
               <i class="fas fa-times"></i>
@@ -544,14 +577,16 @@ function setupQuantityControls() {
     if (!button) return;
 
     const itemId = button.dataset.itemId;
-    if (!itemId) return;
+    const itemIndex = button.dataset.itemIndex;
 
-    if (button.classList.contains("qty-decrease")) {
+    if (button.classList.contains("qty-decrease") && itemId) {
       changeQuantity(itemId, -1);
-    } else if (button.classList.contains("qty-increase")) {
+    } else if (button.classList.contains("qty-increase") && itemId) {
       changeQuantity(itemId, 1);
-    } else if (button.classList.contains("remove-item")) {
+    } else if (button.classList.contains("remove-item") && itemId) {
       removeFromCart(itemId);
+    } else if (button.classList.contains("edit-item") && itemIndex !== undefined) {
+      editCartItem(parseInt(itemIndex));
     }
   });
 
@@ -619,30 +654,338 @@ function updateToggleIcon(isCollapsed) {
   }
 }
 
-// Send order to WhatsApp
+// Options Modal Variables
+let currentOptionsItem = null;
+let currentSelections = {};
+let isEditingCartItem = false;
+let editingCartItemIndex = -1;
+
+// Options Modal Functions
+function openOptionsModal(item, isEdit = false, cartItemIndex = -1) {
+  currentOptionsItem = item;
+  isEditingCartItem = isEdit;
+  editingCartItemIndex = cartItemIndex;
+  currentSelections = {};
+
+  // If editing, pre-populate selections
+  if (isEdit && cartItemIndex >= 0) {
+    const cartItem = cart[cartItemIndex];
+    if (cartItem.options) {
+      cartItem.options.forEach(option => {
+        if (!currentSelections[option.groupId]) {
+          currentSelections[option.groupId] = [];
+        }
+        currentSelections[option.groupId].push(option.id);
+      });
+    }
+  }
+
+  renderOptionsModal(item);
+  document.getElementById('optionsModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOptionsModal() {
+  document.getElementById('optionsModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  currentOptionsItem = null;
+  currentSelections = {};
+  isEditingCartItem = false;
+  editingCartItemIndex = -1;
+}
+
+function renderOptionsModal(item) {
+  // Update item info
+  document.getElementById('optionsItemTitle').textContent = item.title;
+  document.getElementById('optionsBasePrice').textContent = `$${item.price.toFixed(2)}`;
+  
+  const container = document.getElementById('optionGroupsContainer');
+  container.innerHTML = '';
+
+  if (!item.optionGroups || item.optionGroups.length === 0) {
+    container.innerHTML = '<p class="text-muted">No customization options available.</p>';
+    return;
+  }
+
+  item.optionGroups.forEach(group => {
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'option-group';
+    
+    const isRequired = group.min > 0;
+    const groupTitle = group.name + (isRequired ? ' *' : '');
+    
+    groupDiv.innerHTML = `
+      <div class="option-group-header">
+        <h6 class="option-group-title${isRequired ? ' required' : ''}">${groupTitle}</h6>
+      </div>
+      <div class="option-group-body" data-group-id="${group.id}">
+        ${group.options.map(option => renderOptionItem(group, option)).join('')}
+      </div>
+    `;
+
+    container.appendChild(groupDiv);
+  });
+
+  updateOptionsTotal();
+  validateOptionsSelection();
+}
+
+function renderOptionItem(group, option) {
+  const inputType = group.type === 'single' ? 'radio' : 'checkbox';
+  const inputName = group.type === 'single' ? `option-${group.id}` : '';
+  const isChecked = currentSelections[group.id]?.includes(option.id) || false;
+  
+  const priceText = option.priceDelta > 0 ? 
+    `+$${option.priceDelta.toFixed(2)}` : 
+    (option.priceDelta < 0 ? `-$${Math.abs(option.priceDelta).toFixed(2)}` : 'Free');
+
+  const priceClass = option.priceDelta === 0 ? 'free' : '';
+
+  return `
+    <div class="option-item" onclick="toggleOption('${group.id}', '${option.id}', '${group.type}', ${group.max})">
+      <input type="${inputType}" 
+             ${inputName ? `name="${inputName}"` : ''} 
+             value="${option.id}"
+             ${isChecked ? 'checked' : ''}
+             onchange="event.stopPropagation()">
+      <div class="option-details">
+        <div class="option-info">
+          <div class="option-name">${option.name}</div>
+          ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
+        </div>
+        <div class="option-price ${priceClass}">${priceText}</div>
+      </div>
+    </div>
+  `;
+}
+
+function toggleOption(groupId, optionId, groupType, maxSelections) {
+  if (!currentSelections[groupId]) {
+    currentSelections[groupId] = [];
+  }
+
+  if (groupType === 'single') {
+    // Single selection: replace current selection
+    currentSelections[groupId] = [optionId];
+  } else {
+    // Multi selection: toggle
+    const currentIndex = currentSelections[groupId].indexOf(optionId);
+    if (currentIndex > -1) {
+      currentSelections[groupId].splice(currentIndex, 1);
+    } else {
+      if (currentSelections[groupId].length < maxSelections) {
+        currentSelections[groupId].push(optionId);
+      } else {
+        return; // Max reached, don't add
+      }
+    }
+  }
+
+  // Re-render to update UI
+  renderOptionsModal(currentOptionsItem);
+}
+
+function updateOptionsTotal() {
+  let extraCost = 0;
+  
+  Object.keys(currentSelections).forEach(groupId => {
+    const group = currentOptionsItem.optionGroups.find(g => g.id === groupId);
+    if (group) {
+      currentSelections[groupId].forEach(optionId => {
+        const option = group.options.find(o => o.id === optionId);
+        if (option && option.priceDelta) {
+          extraCost += option.priceDelta;
+        }
+      });
+    }
+  });
+
+  const total = currentOptionsItem.price + extraCost;
+  document.getElementById('optionsTotalPrice').textContent = `$${total.toFixed(2)}`;
+}
+
+function validateOptionsSelection() {
+  let isValid = true;
+
+  if (!currentOptionsItem.optionGroups) {
+    document.getElementById('confirmOptionsBtn').disabled = false;
+    return;
+  }
+
+  currentOptionsItem.optionGroups.forEach(group => {
+    const selected = currentSelections[group.id] || [];
+    const min = group.min || 0;
+    const max = group.max || selected.length;
+
+    if (selected.length < min || selected.length > max) {
+      isValid = false;
+    }
+  });
+
+  document.getElementById('confirmOptionsBtn').disabled = !isValid;
+}
+
+function confirmOptions() {
+  if (!currentOptionsItem) return;
+
+  const chosenOptions = [];
+  let extraCost = 0;
+
+  Object.keys(currentSelections).forEach(groupId => {
+    const group = currentOptionsItem.optionGroups.find(g => g.id === groupId);
+    if (group) {
+      currentSelections[groupId].forEach(optionId => {
+        const option = group.options.find(o => o.id === optionId);
+        if (option) {
+          chosenOptions.push({
+            groupId: groupId,
+            groupName: group.name,
+            id: option.id,
+            name: option.name,
+            description: option.description,
+            priceDelta: option.priceDelta || 0
+          });
+          if (option.priceDelta) {
+            extraCost += option.priceDelta;
+          }
+        }
+      });
+    }
+  });
+
+  const lineItem = {
+    id: generateLineId(currentOptionsItem.id, chosenOptions),
+    title: currentOptionsItem.title,
+    basePrice: currentOptionsItem.price,
+    options: chosenOptions,
+    unitPrice: +(currentOptionsItem.price + extraCost).toFixed(2),
+    quantity: 1
+  };
+
+  if (isEditingCartItem && editingCartItemIndex >= 0) {
+    // Update existing cart item
+    cart[editingCartItemIndex] = { ...lineItem, quantity: cart[editingCartItemIndex].quantity };
+    announceToScreenReader(`Updated ${lineItem.title} in cart`);
+  } else {
+    // Add new item to cart
+    const existingItemIndex = cart.findIndex(item => item.id === lineItem.id);
+    if (existingItemIndex > -1) {
+      cart[existingItemIndex].quantity += 1;
+      announceToScreenReader(`Added another ${lineItem.title} to cart. Total: ${cart[existingItemIndex].quantity}`);
+    } else {
+      cart.push(lineItem);
+      announceToScreenReader(`Added ${lineItem.title} to cart`);
+    }
+  }
+
+  updateCartDisplay();
+  showCartSummary();
+  closeOptionsModal();
+}
+
+function generateLineId(itemId, options) {
+  const optionIds = options.map(o => `${o.groupId}:${o.id}`).sort().join('|');
+  return `${itemId}${optionIds ? '|' + optionIds : ''}`;
+}
+
+// Edit existing cart item
+function editCartItem(cartItemIndex) {
+  if (cartItemIndex < 0 || cartItemIndex >= cart.length) return;
+  
+  const cartItem = cart[cartItemIndex];
+  
+  // Find the original menu item
+  let menuItem = null;
+  if (menuData && menuData.categories) {
+    menuData.categories.forEach(category => {
+      const foundItem = category.items.find(item => item.title === cartItem.title);
+      if (foundItem) {
+        menuItem = foundItem;
+      }
+    });
+  }
+  
+  if (!menuItem) {
+    console.error('Original menu item not found for editing:', cartItem.title);
+    return;
+  }
+  
+  openOptionsModal(menuItem, true, cartItemIndex);
+}
+
+// Modify existing addToCart function to handle options
+function addToCartWithOptions(itemId, title, price) {
+  // Find the menu item
+  let menuItem = null;
+  if (menuData && menuData.categories) {
+    menuData.categories.forEach(category => {
+      const foundItem = category.items.find(item => item.id === itemId);
+      if (foundItem) {
+        menuItem = foundItem;
+      }
+    });
+  }
+
+  if (!menuItem) {
+    console.error('Menu item not found:', itemId);
+    return;
+  }
+
+  // Check if item has options
+  if (!menuItem.optionGroups || menuItem.optionGroups.length === 0) {
+    // No options, add directly to cart as before
+    addToCart(itemId, title, price);
+    return;
+  }
+
+  // Has options, open modal
+  openOptionsModal(menuItem);
+}
+
+// Send order to WhatsApp with updated format
 function sendOrderToWhatsApp() {
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
 
-  let message = `Hello! I would like to place an order from ${menuData.restaurant.name}:\n\n`;
+  let message = `Hello! I would like to place an order from ${menuData.restaurant.name}:\n\nOrder:\n`;
 
   let total = 0;
   cart.forEach((item) => {
-    const itemTotal = item.price * item.quantity;
+    const itemTotal = (item.unitPrice || item.price) * item.quantity;
     total += itemTotal;
-    message += `• ${item.title} × ${item.quantity} - $${itemTotal.toFixed(
-      2
-    )}\n`;
+    
+    message += `- ${item.title} × ${item.quantity} ($${itemTotal.toFixed(2)})\n`;
+    
+    // Add options if they exist
+    if (item.options && item.options.length > 0) {
+      const optionsByGroup = {};
+      item.options.forEach(option => {
+        if (!optionsByGroup[option.groupName]) {
+          optionsByGroup[option.groupName] = [];
+        }
+        optionsByGroup[option.groupName].push(option);
+      });
+      
+      Object.keys(optionsByGroup).forEach(groupName => {
+        const groupOptions = optionsByGroup[groupName];
+        const optionNames = groupOptions.map(opt => {
+          let optionText = opt.name;
+          if (opt.priceDelta > 0) {
+            optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
+          }
+          return optionText;
+        }).join(', ');
+        message += `  • ${groupName}: ${optionNames}\n`;
+      });
+    }
   });
 
   message += `\nTotal: $${total.toFixed(2)}\n\nThank you!`;
 
   const phoneNumber = menuData.restaurant.phone;
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message
-  )}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   window.open(whatsappUrl, "_blank");
 }
