@@ -115,6 +115,30 @@ footer{
 /* Main */
 
 /* Filtering Menu */
+#categoryFilters {
+    position: sticky;
+    overflow-x: auto;
+    top: 71px;
+    background-color: var(--primary-background-color);
+    padding: 1rem 0;
+
+    /* Hide scrollbar on WebKit browsers */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+#categoryFilters nav::-webkit-scrollbar {
+    display: none; /* WebKit */
+}
+
+#categoryFilters nav {
+    display: flex;
+    gap: 0.75rem;
+    white-space: nowrap;
+    min-width: max-content;
+}
+
 .filter-btn{
     color: var(--primary-red-color);
     background-color: var(--secondary-background-color);
@@ -122,12 +146,17 @@ footer{
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .filter-btn:hover, .filter-btn.active{
     background-color: var(--primary-red-color);
     color: var(--secondary-text-color);
     transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(174, 7, 6, 0.3);
 }
 
 /* Cart Styles */
