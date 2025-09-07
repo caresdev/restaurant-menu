@@ -9,6 +9,15 @@
       "address": "Company Address",
       "email": "company@example.com",
       "phone": "+1 (123) 456-7890"
+    },
+    "hours": {
+      "monday": "7AM - 8PM",
+      "tuesday": "7AM - 8PM", 
+      "wednesday": "7AM - 8PM",
+      "thursday": "7AM - 8PM",
+      "friday": "7AM - 8PM",
+      "saturday": "8AM - 11PM",
+      "sunday": "9AM - 5PM"
     }
   },
   "categories": [

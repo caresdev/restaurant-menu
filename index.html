@@ -189,55 +189,27 @@
 
     <!-- Footer -->
     <footer>
-      <div class="container py-5 px-4 px-sm-1">
-        <div class="row align-items-start justify-content-around g-4">
+      <div class="container py-5 px-4">
+        <div class="row align-items-start justify-content-around text-center text-md-start g-5">
 
           <!-- Hours Section -->
-          <div class="col-sm-3 location-section">
+          <div class="col-sm-5 hours-section">
             <h4 class="text-uppercase mb-3 text-white">
               Hours
             </h4>
             
-            <!-- Written Address -->
-            <div id="contact" class="contact-info">
-              <p class="text-white small">
-                <span id="restaurantAddress">Company Address</span>
-              </p>
-            </div>
-          </div>
-
-          <!-- Location Section -->
-          <div class="col-sm-4 location-section">
-            <h4 class="text-uppercase mb-3 text-white">
-              Location
-            </h4>
-            
-            <!-- Google Maps Embed -->
-            <div class="map-container mb-2">
-              <iframe 
-                id="googleMap"
-                class="google-map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.4037!2d-74.0059413!3d40.7589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzMyLjAiTiA3NMKwMDAnMjEuNCJX!5e0!3m2!1sen!2sus!4v1635000000000"
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Restaurant Location">
-              </iframe>
-            </div>
-            
-            <!-- Written Address -->
-            <div id="contact" class="contact-info">
-              <p class="text-white small">
-                <span id="restaurantAddress">Company Address</span>
-              </p>
+            <div class="contact-info">
+              <div id="restaurantHours" class="text-white small">
+                <!-- Hours will be populated by JavaScript -->
+              </div>
             </div>
           </div>
 
           <!-- Contact Section -->
-          <div class="col-sm-4 contact-section">
+          <div class="col-sm-5 contact-section">
             <h4 class="text-uppercase mb-3 text-white">
               Contact
-            </h3>
+            </h4>
             
             <div class="contact-info">
               <p class="mb-2 small">
@@ -256,9 +228,9 @@
           </div>
 
           <!-- Social Media Section -->
-          <div class="col-sm-4 social-section text-center mb-3">
+          <div class="col-sm-5 social-section">
             <h4 class="text-uppercase mb-3 text-white">
-              <i class="fas fa-share-alt me-2"></i>Follow Us
+              Follow Us
             </h4>
             
             <div class="social-links">
@@ -277,13 +249,41 @@
             </div>
           </div>
 
-          <div class="mt-5 text-center">
-            <p class="text-muted-sm fw-lighter mb-0">© 2024 <span id="restaurantNameFooter">Company Name</span>. All rights reserved.</p>
+          <!-- Location Section -->
+          <div class="col-sm-5 location-section">
+            <h4 class="text-uppercase mb-3 text-white">
+              Location
+            </h4>
+            
+            <!-- Google Maps Embed -->
+            <div class="map-container mb-2">
+              <iframe 
+                id="googleMap"
+                class="google-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.4037!2d-74.0059413!3d40.7589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzMyLjAiTiA3NMKwMDAnMjEuNCJX!5e0!3m2!1sen!2sus!4v1635000000000"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Restaurant Location">
+              </iframe>
+            </div>
+            
+            <!-- Written Address -->
+            <div class="contact-info">
+              <p class="text-white small">
+                <span id="restaurantAddress">Company Address</span>
+              </p>
+            </div>
           </div>
           
         </div>
       </div>
     </footer>
+
+    <!-- Copyright Section (outside footer for better cart modal UX) -->
+    <div id="copyright-section" class="pt-3 pb-3 text-center">
+      <p class="text-muted-sm fw-lighter mb-0">© Copyright <span id="currentYear"></span> <span id="restaurantNameFooter">Company Name</span>. All rights reserved.</p>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

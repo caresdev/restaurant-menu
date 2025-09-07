@@ -14,7 +14,9 @@ let cartItemCountExpandedEl, cartToggleIconEl, cartAnnouncementsEl;
 let restaurantAddressEl,
   restaurantEmailEl,
   restaurantPhoneEl,
-  restaurantNameFooterEl;
+  restaurantNameFooterEl,
+  restaurantHoursEl,
+  currentYearEl;
 
 // Load menu data and initialize app
 document.addEventListener("DOMContentLoaded", async () => {
@@ -90,6 +92,8 @@ function initializeDOMElements() {
   restaurantEmailEl = document.getElementById("restaurantEmail");
   restaurantPhoneEl = document.getElementById("restaurantPhone");
   restaurantNameFooterEl = document.getElementById("restaurantNameFooter");
+  restaurantHoursEl = document.getElementById("restaurantHours");
+  currentYearEl = document.getElementById("currentYear");
 
   // Log missing elements for debugging
   const elements = {
@@ -112,6 +116,8 @@ function initializeDOMElements() {
     restaurantEmailEl,
     restaurantPhoneEl,
     restaurantNameFooterEl,
+    restaurantHoursEl,
+    currentYearEl,
   };
 
   Object.entries(elements).forEach(([name, element]) => {
@@ -127,6 +133,7 @@ function initializeApp() {
 
   try {
     updateRestaurantInfo();
+    updateCopyright();
     renderCategoryFilters();
     renderMenu();
     setupEventListeners();
@@ -173,6 +180,9 @@ function updateRestaurantInfo() {
   // Update Google Maps embed URL
   updateGoogleMapsEmbed(restaurant.contact?.address);
 
+  // Update hours display
+  updateHoursDisplay(restaurant.hours);
+
   console.log("Restaurant info updated");
 }
 
@@ -190,6 +200,75 @@ function updateGoogleMapsEmbed(address) {
 
   googleMapEl.src = fallbackUrl;
   console.log("Google Maps updated for address:", targetAddress);
+}
+
+// Update copyright year
+function updateCopyright() {
+  if (currentYearEl) {
+    currentYearEl.textContent = new Date().getFullYear();
+  }
+}
+
+// Update hours display
+function updateHoursDisplay(hours) {
+  if (!restaurantHoursEl || !hours) return;
+
+  const daysOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  const dayNames = {
+    'monday': 'Mon',
+    'tuesday': 'Tue', 
+    'wednesday': 'Wed',
+    'thursday': 'Thu',
+    'friday': 'Fri',
+    'saturday': 'Sat',
+    'sunday': 'Sun'
+  };
+
+  // Group consecutive days with same hours
+  const groupedHours = [];
+  let currentGroup = null;
+
+  daysOrder.forEach(day => {
+    const currentHours = hours[day];
+    
+    if (!currentGroup || currentGroup.hours !== currentHours) {
+      // Start a new group
+      if (currentGroup) {
+        groupedHours.push(currentGroup);
+      }
+      currentGroup = {
+        startDay: day,
+        endDay: day,
+        hours: currentHours,
+        days: [day]
+      };
+    } else {
+      // Extend current group
+      currentGroup.endDay = day;
+      currentGroup.days.push(day);
+    }
+  });
+
+  // Add the last group
+  if (currentGroup) {
+    groupedHours.push(currentGroup);
+  }
+
+  // Format display
+  const hoursHtml = groupedHours.map(group => {
+    let dayRange;
+    if (group.days.length === 1) {
+      dayRange = dayNames[group.startDay];
+    } else if (group.days.length === 2) {
+      dayRange = `${dayNames[group.startDay]} - ${dayNames[group.endDay]}`;
+    } else {
+      dayRange = `${dayNames[group.startDay]} - ${dayNames[group.endDay]}`;
+    }
+    
+    return `<div class="hours-row mb-1">${dayRange}: ${group.hours}</div>`;
+  }).join('');
+
+  restaurantHoursEl.innerHTML = hoursHtml;
 }
 
 // Render category filter buttons
