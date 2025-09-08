@@ -2,10 +2,12 @@ const fs = require("fs");
 const path = require("path");
 
 const config = {
-  siteName: process.env.SITE_NAME || "",
-  phone: process.env.PHONE || "",
-  address: process.env.ADDRESS || "",
-  email: process.env.EMAIL || "",
+  name: process.env.SITE_NAME || "",
+  contact: {
+    phone: process.env.PHONE || "",
+    address: process.env.ADDRESS || "",
+    email: process.env.EMAIL || "",
+  },
 };
 
 // Read the base data.json file
@@ -13,12 +15,11 @@ const dataPath = path.join(process.cwd(), "data.json");
 const menuData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
 
 // Update restaurant info with config values
-menuData.restaurant.name = config.siteName;
-menuData.restaurant.phone = config.whatsappPhone;
-menuData.restaurant.contact.address = config.city;
+menuData.restaurant.name = config.name;
+menuData.restaurant.contact = config.contact;
 
 // Write to public directory
-const outDir = path.join(process.cwd(), "public");
+const outDir = path.join(process.cwd(), "/");
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 fs.writeFileSync(
