@@ -1,0 +1,217 @@
+{
+  "restaurant": {
+    "name": "Company Name",
+    "tagline": "Digital Menu",
+    "slogan": "Captivating Message!",
+    "description": "A captivating message describing your products.",
+    "phone": "5531999999999",
+    "contact": {
+      "address": "Company Address",
+      "email": "company@example.com",
+      "phone": "+1 (123) 456-7890"
+    },
+    "hours": {
+      "monday": "7AM - 8PM",
+      "tuesday": "7AM - 8PM", 
+      "wednesday": "7AM - 8PM",
+      "thursday": "7AM - 8PM",
+      "friday": "7AM - 8PM",
+      "saturday": "8AM - 11PM",
+      "sunday": "9AM - 5PM"
+    }
+  },
+  "categories": [
+    {
+      "id": "appetizers",
+      "name": "Appetizers",
+      "items": [
+        {
+          "id": "item-001",
+          "title": "Classic Bruschetta",
+          "description": "Fresh tomatoes, basil, and mozzarella on toasted baguette slices. A perfect start to your meal.",
+          "price": 12.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-002",
+          "title": "Stuffed Mushrooms",
+          "description": "Button mushrooms filled with seasoned breadcrumbs, herbs, and parmesan cheese.",
+          "price": 14.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "mains",
+      "name": "Main Courses",
+      "items": [
+        {
+          "id": "item-003",
+          "title": "Grilled Chicken",
+          "description": "Tender chicken breast grilled to perfection, served with seasonal vegetables and your choice of sauce.",
+          "price": 24.99,
+          "image": "images/menu-item.png",
+          "available": true,
+          "optionGroups": [
+            {
+              "id": "sauce",
+              "name": "Choose your free sauce",
+              "type": "single",
+              "min": 0,
+              "max": 1,
+              "options": [
+                {
+                  "id": "mustard",
+                  "name": "Spicy Mustard",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "herb-butter",
+                  "name": "Herb Butter",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "bbq",
+                  "name": "BBQ Sauce",
+                  "description": "",
+                  "priceDelta": 0
+                }
+              ]
+            },
+            {
+              "id": "extras",
+              "name": "Extra sides",
+              "type": "multi",
+              "min": 0,
+              "max": 3,
+              "options": [
+                {
+                  "id": "extra-vegetables",
+                  "name": "Extra Vegetables (+$2.00)",
+                  "description": "",
+                  "priceDelta": 2.00
+                },
+                {
+                  "id": "garlic-bread",
+                  "name": "Garlic Bread (+$3.50)",
+                  "description": "",
+                  "priceDelta": 3.50
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "item-004",
+          "title": "Beef Tenderloin",
+          "description": "Premium cut beef tenderloin cooked to your preference, accompanied by roasted potatoes and asparagus.",
+          "price": 32.99,
+          "image": "images/menu-item.png",
+          "available": true,
+          "optionGroups": [
+            {
+              "id": "cooking",
+              "name": "How would you like it cooked? *",
+              "type": "single",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "id": "rare",
+                  "name": "Rare",
+                  "description": "Cool red center",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "medium-rare",
+                  "name": "Medium Rare",
+                  "description": "Warm red center",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "medium",
+                  "name": "Medium",
+                  "description": "Warm pink center",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "well-done",
+                  "name": "Well Done",
+                  "description": "No pink",
+                  "priceDelta": 0
+                }
+              ]
+            },
+            {
+              "id": "sides",
+              "name": "Choose your sides (2 required) *",
+              "type": "multi",
+              "min": 2,
+              "max": 3,
+              "options": [
+                {
+                  "id": "roasted-potatoes",
+                  "name": "Roasted Potatoes",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "asparagus",
+                  "name": "Asparagus",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "mixed-vegetables",
+                  "name": "Mixed Vegetables",
+                  "description": "",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "mashed-potatoes",
+                  "name": "Mashed Potatoes (+$1.50)",
+                  "description": "",
+                  "priceDelta": 1.50
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "item-005",
+          "title": "Salmon Fillet",
+          "description": "Fresh Atlantic salmon fillet with lemon herb butter, served with rice pilaf and steamed broccoli.",
+          "price": 28.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

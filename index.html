@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Menu</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    
+    <header>
+
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark">
+        <div class="container-fluid px-3 px-md-5 justify-content-between">
+
+          <a class="navbar-brand" href="#">
+            <img src="/images/logo.png" alt="Company Logo" width="45" height="auto" class="rounded-pill"/>
+          </a>
+
+          <button class="navbar-toggler ms-auto border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            
+          <!-- Collapsable menu  -->
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto text-center">
+              <a class="nav-link" aria-current="page" href="#menuContainer">Menu</a>
+              <a class="nav-link" href="#menuContainer">Order</a>
+              <a class="nav-link" href="#contact">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Banner -->
+      <div id="hero" class="text-center position-relative">
+        
+        <!-- Banner background image -->
+        <img src="images/header-bg.png" class="header-bg w-100" loading="lazy" alt="Symmetric black and yellow menu banner">
+
+
+        <!-- Overlay  -->
+        <div class="header-overlay container-fluid w-100">
+          
+          <div class="row align-items-center justify-content-around">
+
+            <!-- Title -->
+            <div class="col header-title text-black text-uppercase my-4">
+              <h1 class="mb-0" id="restaurantName">Company Name</h1>
+              <h3 id="restaurantTagline"> Digital Menu</h3>
+            </div>
+
+            <!-- Header Image -->
+            <div class="col header-img">
+              <img src="images/header-img.png" alt="Appealing Company Image">
+            </div>
+
+            <!-- Call to Action -->
+            <div class="header-slogan text-white text-center mt-4">
+              <h2 class="slogan text-uppercase mb-2" id="restaurantSlogan"> Captivating Message! </h2>
+              <h4 class="slogan-txt mb-4" id="restaurantDescription"> A captivating message describing your products.</h4>
+              <a href="#menuContainer" class="btn rounded-pill text-uppercase py-1"> Order Now </a> 
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-2 px-2">
+
+      <!-- Filtering menu -->
+      <section id="categoryFilters" class="mb-5 text-center">
+        <nav aria-label="Submenu" class="text-center">
+          <!-- Category filter buttons to be rendered here -->
+        </nav>
+      </section>
+
+
+      <!-- Menu Categories Container -->
+      <div id="menuContainer">
+
+        <!-- Loading menu fallback -->
+        <div id="loadingFallback" class="text-center p-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3">Loading menu...</p>
+        </div>
+
+
+        <!-- Menu categories will be inserted here -->
+      </div>
+
+    </main>
+
+    <!-- Sticky Cart Summary -->
+    <div id="cartSummary" class="sticky-cart collapsed" style="display: none;" role="region" aria-label="Shopping cart">
+      
+      <!-- Collapsable Cart Body  -->
+      <div id="cartBody" class="cart-body">
+
+        <!-- Cart Header (always visible) -->
+        <div class="cart-header-expanded">
+          <div class="cart-header-content">
+            <div class="cart-title-section">
+              <h5 class="cart-title">Your Order (<span id="cartItemCountExpanded">0</span> items)</h5>
+            </div>
+            <div class="cart-header-actions">
+              <button id="toggleCart" class="btn btn-toggle" aria-label="Toggle cart items">
+                <i class="fas fa-chevron-down" id="cartToggleIcon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Cart Items - Only visible when in expanded state -->
+        <div class="cart-items-container">
+          <div id="cartItems" class="cart-items-list">
+           
+          </div>
+        </div>
+        
+        <!-- Cart Footer with Total and CTA - (should be visible in both collapsed/expanded states) -->
+        <div class="cart-footer">
+          <div class="cart-total-section">
+            <div class="total-display">
+              <span class="total-label-large">Total:</span>
+              <span class="total-amount-large" id="cartTotal">$0.00</span>
+            </div>
+          </div>
+          <button id="sendWhatsApp" class="btn btn-whatsapp-full">
+            <i class="fab fa-whatsapp me-2"></i>Send Order via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Options Modal -->
+    <div id="optionsModal" class="options-modal" style="display: none;" role="dialog" aria-labelledby="optionsModalTitle" aria-modal="true">
+      <div class="options-overlay" onclick="closeOptionsModal()"></div>
+      <div class="options-content">
+        <div class="options-header">
+          <h5 id="optionsModalTitle" class="options-title">Customize Your Order</h5>
+          <button class="btn-close-options" onclick="closeOptionsModal()" aria-label="Close options">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="options-body">
+          <div class="item-summary">
+            <h6 id="optionsItemTitle">Item Name</h6>
+            <div class="item-base-price">
+              Base price: <span id="optionsBasePrice">$0.00</span>
+            </div>
+          </div>
+          
+          <div id="optionGroupsContainer" class="option-groups">
+            <!-- Option groups will be rendered here dynamically -->
+          </div>
+        </div>
+        
+        <div class="options-footer">
+          <div class="total-section">
+            <div class="total-display">
+              <span class="total-label">Total:</span>
+              <span id="optionsTotalPrice" class="total-amount">$0.00</span>
+            </div>
+          </div>
+          <button id="confirmOptionsBtn" class="btn btn-success btn-add-to-cart-options" disabled>
+            <i class="fas fa-plus me-1"></i>Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen reader announcements -->
+    <div id="cartAnnouncements" class="sr-only" aria-live="polite"></div>
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="container py-5 px-4">
+        <div class="row align-items-start justify-content-around text-center text-md-start g-5">
+
+          <!-- Hours Section -->
+          <div class="col-sm-5 hours-section">
+            <h4 class="text-uppercase mb-3 text-white">
+              Hours
+            </h4>
+            
+            <div class="contact-info">
+              <div id="restaurantHours" class="text-white small">
+                <!-- Hours will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Section -->
+          <div class="col-sm-5 contact-section">
+            <h4 class="text-uppercase mb-3 text-white">
+              Contact
+            </h4>
+            
+            <div class="contact-info">
+              <p class="mb-2 small">
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:company@example.com" class="text-white small text-decoration-none" id="restaurantEmail">
+                  company@example.com
+                </a>
+              </p>
+              <p class="mb-2 small">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:+11234567890" class="small text-white text-decoration-none" id="restaurantPhone">
+                  +1 (123) 456-7890
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Social Media Section -->
+          <div class="col-sm-5 social-section">
+            <h4 class="text-uppercase mb-3 text-white">
+              Follow Us
+            </h4>
+            
+            <div class="social-links">
+              <a href="#" class="btn btn-outline-light btn-floating m-1" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1" title="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1" title="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1" title="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Location Section -->
+          <div class="col-sm-5 location-section">
+            <h4 class="text-uppercase mb-3 text-white">
+              Location
+            </h4>
+            
+            <!-- Google Maps Embed -->
+            <div class="map-container mb-2">
+              <iframe 
+                id="googleMap"
+                class="google-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.4037!2d-74.0059413!3d40.7589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzMyLjAiTiA3NMKwMDAnMjEuNCJX!5e0!3m2!1sen!2sus!4v1635000000000"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Restaurant Location">
+              </iframe>
+            </div>
+            
+            <!-- Written Address -->
+            <div class="contact-info">
+              <p class="text-white small">
+                <span id="restaurantAddress">Company Address</span>
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+    <!-- Copyright Section (outside footer for better cart modal UX) -->
+    <div id="copyright-section" class="pt-3 pb-3 text-center">
+      <p class="text-muted-sm fw-lighter mb-0">© Copyright <span id="currentYear"></span> <span id="restaurantNameFooter">Company Name</span>. All rights reserved.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="js/index.js" defer></script>
+  </body>
+
+  
+              
+</html>
