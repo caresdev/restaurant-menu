@@ -1,3 +1,4 @@
+
 // Global variables
 let menuData = null;
 let cart = [];
@@ -213,24 +214,32 @@ function updateCopyright() {
 function updateHoursDisplay(hours) {
   if (!restaurantHoursEl || !hours) return;
 
-  const daysOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  const daysOrder = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ];
   const dayNames = {
-    'monday': 'Mon',
-    'tuesday': 'Tue', 
-    'wednesday': 'Wed',
-    'thursday': 'Thu',
-    'friday': 'Fri',
-    'saturday': 'Sat',
-    'sunday': 'Sun'
+    monday: "Mon",
+    tuesday: "Tue",
+    wednesday: "Wed",
+    thursday: "Thu",
+    friday: "Fri",
+    saturday: "Sat",
+    sunday: "Sun",
   };
 
   // Group consecutive days with same hours
   const groupedHours = [];
   let currentGroup = null;
 
-  daysOrder.forEach(day => {
+  daysOrder.forEach((day) => {
     const currentHours = hours[day];
-    
+
     if (!currentGroup || currentGroup.hours !== currentHours) {
       // Start a new group
       if (currentGroup) {
@@ -240,7 +249,7 @@ function updateHoursDisplay(hours) {
         startDay: day,
         endDay: day,
         hours: currentHours,
-        days: [day]
+        days: [day],
       };
     } else {
       // Extend current group
@@ -255,18 +264,20 @@ function updateHoursDisplay(hours) {
   }
 
   // Format display
-  const hoursHtml = groupedHours.map(group => {
-    let dayRange;
-    if (group.days.length === 1) {
-      dayRange = dayNames[group.startDay];
-    } else if (group.days.length === 2) {
-      dayRange = `${dayNames[group.startDay]} - ${dayNames[group.endDay]}`;
-    } else {
-      dayRange = `${dayNames[group.startDay]} - ${dayNames[group.endDay]}`;
-    }
-    
-    return `<div class="hours-row mb-1">${dayRange}: ${group.hours}</div>`;
-  }).join('');
+  const hoursHtml = groupedHours
+    .map((group) => {
+      let dayRange;
+      if (group.days.length === 1) {
+        dayRange = dayNames[group.startDay];
+      } else if (group.days.length === 2) {
+        dayRange = `${dayNames[group.startDay]} - ${dayNames[group.endDay]}`;
+      } else {
+        dayRange = `${dayNames[group.startDay]} - ${dayNames[group.endDay]}`;
+      }
+
+      return `<div class="hours-row mb-1">${dayRange}: ${group.hours}</div>`;
+    })
+    .join("");
 
   restaurantHoursEl.innerHTML = hoursHtml;
 }
@@ -463,10 +474,11 @@ function setupEventListeners() {
   if (sendWhatsAppBtn)
     sendWhatsAppBtn.addEventListener("click", sendOrderToWhatsApp);
   if (toggleCartBtn) toggleCartBtn.addEventListener("click", toggleCart);
-  
+
   // Options modal
-  const confirmOptionsBtn = document.getElementById('confirmOptionsBtn');
-  if (confirmOptionsBtn) confirmOptionsBtn.addEventListener("click", confirmOptions);
+  const confirmOptionsBtn = document.getElementById("confirmOptionsBtn");
+  if (confirmOptionsBtn)
+    confirmOptionsBtn.addEventListener("click", confirmOptions);
 
   // Keyboard support for cart
   if (cartSummaryEl) {
@@ -514,7 +526,10 @@ function updateCartDisplay() {
   cartItemsEl.innerHTML = "";
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const total = cart.reduce((sum, item) => sum + (item.unitPrice || item.price) * item.quantity, 0);
+  const total = cart.reduce(
+    (sum, item) => sum + (item.unitPrice || item.price) * item.quantity,
+    0
+  );
 
   // Update cart counter and total
   if (cartItemCountExpandedEl) cartItemCountExpandedEl.textContent = totalItems;
@@ -535,25 +550,27 @@ function updateCartDisplay() {
     const itemTotal = unitPrice * item.quantity;
 
     // Build options display
-    let optionsHtml = '';
+    let optionsHtml = "";
     if (item.options && item.options.length > 0) {
       const optionsByGroup = {};
-      item.options.forEach(option => {
+      item.options.forEach((option) => {
         if (!optionsByGroup[option.groupName]) {
           optionsByGroup[option.groupName] = [];
         }
         optionsByGroup[option.groupName].push(option);
       });
-      
-      Object.keys(optionsByGroup).forEach(groupName => {
+
+      Object.keys(optionsByGroup).forEach((groupName) => {
         const groupOptions = optionsByGroup[groupName];
-        const optionNames = groupOptions.map(opt => {
-          let optionText = opt.name;
-          if (opt.priceDelta > 0) {
-            optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
-          }
-          return optionText;
-        }).join(', ');
+        const optionNames = groupOptions
+          .map((opt) => {
+            let optionText = opt.name;
+            if (opt.priceDelta > 0) {
+              optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
+            }
+            return optionText;
+          })
+          .join(", ");
         optionsHtml += `<div class="item-option"><strong>${groupName}:</strong> ${optionNames}</div>`;
       });
     }
@@ -564,8 +581,14 @@ function updateCartDisplay() {
       <div class="cart-item-content">
         <div class="item-details">
           <h6 class="item-name mb-1">${item.title}</h6>
-          <span class="item-unit-price text-muted">$${unitPrice.toFixed(2)} each</span>
-          ${optionsHtml ? `<div class="item-options mt-1">${optionsHtml}</div>` : ''}
+          <span class="item-unit-price text-muted">$${unitPrice.toFixed(
+            2
+          )} each</span>
+          ${
+            optionsHtml
+              ? `<div class="item-options mt-1">${optionsHtml}</div>`
+              : ""
+          }
         </div>
         
         <div class="item-controls">
@@ -585,10 +608,12 @@ function updateCartDisplay() {
           
           <div class="item-total-section">
             <span class="item-total">$${itemTotal.toFixed(2)}</span>
-            ${item.options && item.options.length > 0 ? 
-              `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Edit options">
+            ${
+              item.options && item.options.length > 0
+                ? `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Edit options">
                 <i class="fas fa-edit"></i>
-              </button>` : ''
+              </button>`
+                : ""
             }
             <button class="btn btn-sm btn-outline-danger remove-item" data-item-id="${
               item.id
@@ -664,7 +689,10 @@ function setupQuantityControls() {
       changeQuantity(itemId, 1);
     } else if (button.classList.contains("remove-item") && itemId) {
       removeFromCart(itemId);
-    } else if (button.classList.contains("edit-item") && itemIndex !== undefined) {
+    } else if (
+      button.classList.contains("edit-item") &&
+      itemIndex !== undefined
+    ) {
       editCartItem(parseInt(itemIndex));
     }
   });
@@ -750,7 +778,7 @@ function openOptionsModal(item, isEdit = false, cartItemIndex = -1) {
   if (isEdit && cartItemIndex >= 0) {
     const cartItem = cart[cartItemIndex];
     if (cartItem.options) {
-      cartItem.options.forEach(option => {
+      cartItem.options.forEach((option) => {
         if (!currentSelections[option.groupId]) {
           currentSelections[option.groupId] = [];
         }
@@ -760,13 +788,13 @@ function openOptionsModal(item, isEdit = false, cartItemIndex = -1) {
   }
 
   renderOptionsModal(item);
-  document.getElementById('optionsModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  document.getElementById("optionsModal").style.display = "flex";
+  document.body.style.overflow = "hidden";
 }
 
 function closeOptionsModal() {
-  document.getElementById('optionsModal').style.display = 'none';
-  document.body.style.overflow = 'auto';
+  document.getElementById("optionsModal").style.display = "none";
+  document.body.style.overflow = "auto";
   currentOptionsItem = null;
   currentSelections = {};
   isEditingCartItem = false;
@@ -775,30 +803,37 @@ function closeOptionsModal() {
 
 function renderOptionsModal(item) {
   // Update item info
-  document.getElementById('optionsItemTitle').textContent = item.title;
-  document.getElementById('optionsBasePrice').textContent = `$${item.price.toFixed(2)}`;
-  
-  const container = document.getElementById('optionGroupsContainer');
-  container.innerHTML = '';
+  document.getElementById("optionsItemTitle").textContent = item.title;
+  document.getElementById(
+    "optionsBasePrice"
+  ).textContent = `$${item.price.toFixed(2)}`;
+
+  const container = document.getElementById("optionGroupsContainer");
+  container.innerHTML = "";
 
   if (!item.optionGroups || item.optionGroups.length === 0) {
-    container.innerHTML = '<p class="text-muted">No customization options available.</p>';
+    container.innerHTML =
+      '<p class="text-muted">No customization options available.</p>';
     return;
   }
 
-  item.optionGroups.forEach(group => {
-    const groupDiv = document.createElement('div');
-    groupDiv.className = 'option-group';
-    
+  item.optionGroups.forEach((group) => {
+    const groupDiv = document.createElement("div");
+    groupDiv.className = "option-group";
+
     const isRequired = group.min > 0;
-    const groupTitle = group.name + (isRequired ? ' *' : '');
-    
+    const groupTitle = group.name + (isRequired ? " *" : "");
+
     groupDiv.innerHTML = `
       <div class="option-group-header">
-        <h6 class="option-group-title${isRequired ? ' required' : ''}">${groupTitle}</h6>
+        <h6 class="option-group-title${
+          isRequired ? " required" : ""
+        }">${groupTitle}</h6>
       </div>
       <div class="option-group-body" data-group-id="${group.id}">
-        ${group.options.map(option => renderOptionItem(group, option)).join('')}
+        ${group.options
+          .map((option) => renderOptionItem(group, option))
+          .join("")}
       </div>
     `;
 
@@ -810,27 +845,36 @@ function renderOptionsModal(item) {
 }
 
 function renderOptionItem(group, option) {
-  const inputType = group.type === 'single' ? 'radio' : 'checkbox';
-  const inputName = group.type === 'single' ? `option-${group.id}` : '';
+  const inputType = group.type === "single" ? "radio" : "checkbox";
+  const inputName = group.type === "single" ? `option-${group.id}` : "";
   const isChecked = currentSelections[group.id]?.includes(option.id) || false;
-  
-  const priceText = option.priceDelta > 0 ? 
-    `+$${option.priceDelta.toFixed(2)}` : 
-    (option.priceDelta < 0 ? `-$${Math.abs(option.priceDelta).toFixed(2)}` : 'Free');
 
-  const priceClass = option.priceDelta === 0 ? 'free' : '';
+  const priceText =
+    option.priceDelta > 0
+      ? `+$${option.priceDelta.toFixed(2)}`
+      : option.priceDelta < 0
+      ? `-$${Math.abs(option.priceDelta).toFixed(2)}`
+      : "Free";
+
+  const priceClass = option.priceDelta === 0 ? "free" : "";
 
   return `
-    <div class="option-item" onclick="toggleOption('${group.id}', '${option.id}', '${group.type}', ${group.max})">
+    <div class="option-item" onclick="toggleOption('${group.id}', '${
+    option.id
+  }', '${group.type}', ${group.max})">
       <input type="${inputType}" 
-             ${inputName ? `name="${inputName}"` : ''} 
+             ${inputName ? `name="${inputName}"` : ""} 
              value="${option.id}"
-             ${isChecked ? 'checked' : ''}
+             ${isChecked ? "checked" : ""}
              onchange="event.stopPropagation()">
       <div class="option-details">
         <div class="option-info">
           <div class="option-name">${option.name}</div>
-          ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
+          ${
+            option.description
+              ? `<div class="option-description">${option.description}</div>`
+              : ""
+          }
         </div>
         <div class="option-price ${priceClass}">${priceText}</div>
       </div>
@@ -843,7 +887,7 @@ function toggleOption(groupId, optionId, groupType, maxSelections) {
     currentSelections[groupId] = [];
   }
 
-  if (groupType === 'single') {
+  if (groupType === "single") {
     // Single selection: replace current selection
     currentSelections[groupId] = [optionId];
   } else {
@@ -866,12 +910,12 @@ function toggleOption(groupId, optionId, groupType, maxSelections) {
 
 function updateOptionsTotal() {
   let extraCost = 0;
-  
-  Object.keys(currentSelections).forEach(groupId => {
-    const group = currentOptionsItem.optionGroups.find(g => g.id === groupId);
+
+  Object.keys(currentSelections).forEach((groupId) => {
+    const group = currentOptionsItem.optionGroups.find((g) => g.id === groupId);
     if (group) {
-      currentSelections[groupId].forEach(optionId => {
-        const option = group.options.find(o => o.id === optionId);
+      currentSelections[groupId].forEach((optionId) => {
+        const option = group.options.find((o) => o.id === optionId);
         if (option && option.priceDelta) {
           extraCost += option.priceDelta;
         }
@@ -880,18 +924,20 @@ function updateOptionsTotal() {
   });
 
   const total = currentOptionsItem.price + extraCost;
-  document.getElementById('optionsTotalPrice').textContent = `$${total.toFixed(2)}`;
+  document.getElementById("optionsTotalPrice").textContent = `$${total.toFixed(
+    2
+  )}`;
 }
 
 function validateOptionsSelection() {
   let isValid = true;
 
   if (!currentOptionsItem.optionGroups) {
-    document.getElementById('confirmOptionsBtn').disabled = false;
+    document.getElementById("confirmOptionsBtn").disabled = false;
     return;
   }
 
-  currentOptionsItem.optionGroups.forEach(group => {
+  currentOptionsItem.optionGroups.forEach((group) => {
     const selected = currentSelections[group.id] || [];
     const min = group.min || 0;
     const max = group.max || selected.length;
@@ -901,7 +947,7 @@ function validateOptionsSelection() {
     }
   });
 
-  document.getElementById('confirmOptionsBtn').disabled = !isValid;
+  document.getElementById("confirmOptionsBtn").disabled = !isValid;
 }
 
 function confirmOptions() {
@@ -910,11 +956,11 @@ function confirmOptions() {
   const chosenOptions = [];
   let extraCost = 0;
 
-  Object.keys(currentSelections).forEach(groupId => {
-    const group = currentOptionsItem.optionGroups.find(g => g.id === groupId);
+  Object.keys(currentSelections).forEach((groupId) => {
+    const group = currentOptionsItem.optionGroups.find((g) => g.id === groupId);
     if (group) {
-      currentSelections[groupId].forEach(optionId => {
-        const option = group.options.find(o => o.id === optionId);
+      currentSelections[groupId].forEach((optionId) => {
+        const option = group.options.find((o) => o.id === optionId);
         if (option) {
           chosenOptions.push({
             groupId: groupId,
@@ -922,7 +968,7 @@ function confirmOptions() {
             id: option.id,
             name: option.name,
             description: option.description,
-            priceDelta: option.priceDelta || 0
+            priceDelta: option.priceDelta || 0,
           });
           if (option.priceDelta) {
             extraCost += option.priceDelta;
@@ -938,19 +984,24 @@ function confirmOptions() {
     basePrice: currentOptionsItem.price,
     options: chosenOptions,
     unitPrice: +(currentOptionsItem.price + extraCost).toFixed(2),
-    quantity: 1
+    quantity: 1,
   };
 
   if (isEditingCartItem && editingCartItemIndex >= 0) {
     // Update existing cart item
-    cart[editingCartItemIndex] = { ...lineItem, quantity: cart[editingCartItemIndex].quantity };
+    cart[editingCartItemIndex] = {
+      ...lineItem,
+      quantity: cart[editingCartItemIndex].quantity,
+    };
     announceToScreenReader(`Updated ${lineItem.title} in cart`);
   } else {
     // Add new item to cart
-    const existingItemIndex = cart.findIndex(item => item.id === lineItem.id);
+    const existingItemIndex = cart.findIndex((item) => item.id === lineItem.id);
     if (existingItemIndex > -1) {
       cart[existingItemIndex].quantity += 1;
-      announceToScreenReader(`Added another ${lineItem.title} to cart. Total: ${cart[existingItemIndex].quantity}`);
+      announceToScreenReader(
+        `Added another ${lineItem.title} to cart. Total: ${cart[existingItemIndex].quantity}`
+      );
     } else {
       cart.push(lineItem);
       announceToScreenReader(`Added ${lineItem.title} to cart`);
@@ -963,32 +1014,37 @@ function confirmOptions() {
 }
 
 function generateLineId(itemId, options) {
-  const optionIds = options.map(o => `${o.groupId}:${o.id}`).sort().join('|');
-  return `${itemId}${optionIds ? '|' + optionIds : ''}`;
+  const optionIds = options
+    .map((o) => `${o.groupId}:${o.id}`)
+    .sort()
+    .join("|");
+  return `${itemId}${optionIds ? "|" + optionIds : ""}`;
 }
 
 // Edit existing cart item
 function editCartItem(cartItemIndex) {
   if (cartItemIndex < 0 || cartItemIndex >= cart.length) return;
-  
+
   const cartItem = cart[cartItemIndex];
-  
+
   // Find the original menu item
   let menuItem = null;
   if (menuData && menuData.categories) {
-    menuData.categories.forEach(category => {
-      const foundItem = category.items.find(item => item.title === cartItem.title);
+    menuData.categories.forEach((category) => {
+      const foundItem = category.items.find(
+        (item) => item.title === cartItem.title
+      );
       if (foundItem) {
         menuItem = foundItem;
       }
     });
   }
-  
+
   if (!menuItem) {
-    console.error('Original menu item not found for editing:', cartItem.title);
+    console.error("Original menu item not found for editing:", cartItem.title);
     return;
   }
-  
+
   openOptionsModal(menuItem, true, cartItemIndex);
 }
 
@@ -997,8 +1053,8 @@ function addToCartWithOptions(itemId, title, price) {
   // Find the menu item
   let menuItem = null;
   if (menuData && menuData.categories) {
-    menuData.categories.forEach(category => {
-      const foundItem = category.items.find(item => item.id === itemId);
+    menuData.categories.forEach((category) => {
+      const foundItem = category.items.find((item) => item.id === itemId);
       if (foundItem) {
         menuItem = foundItem;
       }
@@ -1006,7 +1062,7 @@ function addToCartWithOptions(itemId, title, price) {
   }
 
   if (!menuItem) {
-    console.error('Menu item not found:', itemId);
+    console.error("Menu item not found:", itemId);
     return;
   }
 
@@ -1034,28 +1090,32 @@ function sendOrderToWhatsApp() {
   cart.forEach((item) => {
     const itemTotal = (item.unitPrice || item.price) * item.quantity;
     total += itemTotal;
-    
-    message += `- ${item.title} × ${item.quantity} ($${itemTotal.toFixed(2)})\n`;
-    
+
+    message += `- ${item.title} × ${item.quantity} ($${itemTotal.toFixed(
+      2
+    )})\n`;
+
     // Add options if they exist
     if (item.options && item.options.length > 0) {
       const optionsByGroup = {};
-      item.options.forEach(option => {
+      item.options.forEach((option) => {
         if (!optionsByGroup[option.groupName]) {
           optionsByGroup[option.groupName] = [];
         }
         optionsByGroup[option.groupName].push(option);
       });
-      
-      Object.keys(optionsByGroup).forEach(groupName => {
+
+      Object.keys(optionsByGroup).forEach((groupName) => {
         const groupOptions = optionsByGroup[groupName];
-        const optionNames = groupOptions.map(opt => {
-          let optionText = opt.name;
-          if (opt.priceDelta > 0) {
-            optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
-          }
-          return optionText;
-        }).join(', ');
+        const optionNames = groupOptions
+          .map((opt) => {
+            let optionText = opt.name;
+            if (opt.priceDelta > 0) {
+              optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
+            }
+            return optionText;
+          })
+          .join(", ");
         message += `  • ${groupName}: ${optionNames}\n`;
       });
     }
@@ -1064,7 +1124,9 @@ function sendOrderToWhatsApp() {
   message += `\nTotal: $${total.toFixed(2)}\n\nThank you!`;
 
   const phoneNumber = menuData.restaurant.phone;
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
 
   window.open(whatsappUrl, "_blank");
 }
