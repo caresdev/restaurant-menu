@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const config = {
-  name: process.env.SITE_NAME || "",
+  name: process.env.RESTAURANT_NAME || "",
   contact: {
     phone: process.env.PHONE || "",
     address: process.env.ADDRESS || "",
