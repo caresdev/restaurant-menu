@@ -6,6 +6,10 @@ const config = {
   contact: {
     phone: process.env.PHONE || "",
     address: process.env.ADDRESS || "",
+    city: process.env.CITY || "",
+    state: process.env.STATE || "",
+    zip: process.env.ZIP || "",
+    country: process.env.COUNTRY || "",
     email: process.env.EMAIL || "",
   },
 };

@@ -15,6 +15,10 @@
     "contact": {
       "phone": "",
       "address": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "country": "",
       "email": ""
     },
     "name": ""
