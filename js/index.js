@@ -1,4 +1,3 @@
-
 // Global variables
 let menuData = null;
 let cart = [];
@@ -395,7 +394,9 @@ function renderMenu(categoryFilter = "all") {
             <div class="col-md-6 col-lg-5 item-info mt-3 px-4">
               <div class="row justify-content-between">
                 <h4 class="col item-title text-uppercase">${item.title}</h4>
-                <h4 class="col item-price">$${(item.price || 0).toFixed(2)}</h4>
+                <h4 class="col item-price">R$${(item.price || 0).toFixed(
+                  2
+                )}</h4>
               </div>
               <p class="item-description">${
                 item.description || "No description available"
@@ -406,7 +407,7 @@ function renderMenu(categoryFilter = "all") {
                   data-item-id="${item.id}"
                   data-title="${item.title}" 
                   data-price="${item.price || 0}">
-                  <i class="fas fa-plus me-1"></i>Add to Cart
+                  <i class="fas fa-plus me-1"></i>Adicionar
                 </button>
               </div>
             </div>
@@ -1080,11 +1081,11 @@ function addToCartWithOptions(itemId, title, price) {
 // Send order to WhatsApp with updated format
 function sendOrderToWhatsApp() {
   if (cart.length === 0) {
-    alert("Your cart is empty!");
+    alert("Seu carrinho está vazio!");
     return;
   }
 
-  let message = `Hello! I would like to place an order from ${menuData.restaurant.name}:\n\nOrder:\n`;
+  let message = `Olá! Gostaria de fazer um pedido na ${menuData.restaurant.name}:\n\nPedido:\n`;
 
   let total = 0;
   cart.forEach((item) => {
@@ -1111,7 +1112,7 @@ function sendOrderToWhatsApp() {
           .map((opt) => {
             let optionText = opt.name;
             if (opt.priceDelta > 0) {
-              optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
+              optionText += ` (+R$${opt.priceDelta.toFixed(2)})`;
             }
             return optionText;
           })
@@ -1121,9 +1122,9 @@ function sendOrderToWhatsApp() {
     }
   });
 
-  message += `\nTotal: $${total.toFixed(2)}\n\nThank you!`;
+  message += `\nTotal: $${total.toFixed(2)}\n\nObrigada!`;
 
-  const phoneNumber = menuData.restaurant.phone;
+  const phoneNumber = menuData.restaurant.contact.phone;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
   )}`;

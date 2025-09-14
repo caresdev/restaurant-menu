@@ -1,8 +1,9 @@
 {
   "restaurant": {
-    "tagline": "Digital Menu",
-    "slogan": "Captivating Message!",
-    "description": "A captivating message describing your products.",
+    "tagline": "Cardápio Digital",
+    "slogan": "Fome de Coxinha? A gente resolve!",
+    "description": "Sabores tradicionais, vegetarianos e veganos, temos sempre o melhor para você!",
+    "ctaText": "Entre em contato",
     "hours": {
       "monday": "7AM - 8PM",
       "tuesday": "7AM - 8PM",
@@ -13,7 +14,7 @@
       "sunday": "9AM - 5PM"
     },
     "contact": {
-      "phone": "",
+      "phone": "5544998663351",
       "address": "",
       "city": "",
       "state": "",
@@ -21,18 +22,18 @@
       "country": "",
       "email": ""
     },
-    "name": ""
+    "name": "Sandra Salgados"
   },
   "categories": [
     {
-      "id": "appetizers",
-      "name": "Appetizers",
+      "id": "risoles",
+      "name": "Risoles",
       "items": [
         {
           "id": "item-001",
-          "title": "Classic Bruschetta",
+          "title": "Risoles de Carne",
           "description": "Fresh tomatoes, basil, and mozzarella on toasted baguette slices. A perfect start to your meal.",
-          "price": 12.99,
+          "price": 22.5,
           "image": "images/menu-item.png",
           "available": true
         },
@@ -47,8 +48,8 @@
       ]
     },
     {
-      "id": "mains",
-      "name": "Main Courses",
+      "id": "coxinhas",
+      "name": "Coxinhas",
       "items": [
         {
           "id": "item-003",
@@ -195,8 +196,162 @@
       ]
     },
     {
-      "id": "desserts",
-      "name": "Desserts",
+      "id": "empadao",
+      "name": "Empadão",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "empadinhas",
+      "name": "Empadinhas",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "bolinhas-de-queijo",
+      "name": "Bolinhas de Queijo",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "pao-de-queijo",
+      "name": "Pão de Queijo Artesanal (5/10/15)",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "combos-mini-salgados",
+      "name": "Combos & Mini Salgados",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "petiscos-variados",
+      "name": "Petiscos Varidados",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "doces",
+      "name": "Bolos & Doces",
+      "items": [
+        {
+          "id": "item-006",
+          "title": "Chocolate Cake",
+          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "price": 8.99,
+          "image": "images/menu-item.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Tiramisu",
+          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
+          "price": 9.99,
+          "image": "images/menu-item.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas",
       "items": [
         {
           "id": "item-006",

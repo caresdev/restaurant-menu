@@ -1,5 +1,17 @@
+// import fs from "fs";
+// import path from "path";
+// import dotenv from "dotenv";
+// import { fileURLToPath } from "url";
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
 const fs = require("fs");
 const path = require("path");
+const dotenv = require("dotenv");
+
+// Load environment variables from .env file
+dotenv.config();
 
 const config = {
   name: process.env.RESTAURANT_NAME || "",

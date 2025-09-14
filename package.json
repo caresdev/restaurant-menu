@@ -3,5 +3,8 @@
   "private": true,
   "scripts": {
     "build": "node js/make-config.js"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.2"
   }
 }
