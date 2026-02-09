@@ -5,24 +5,44 @@
     "description": "Sabores tradicionais, vegetarianos e veganos, temos sempre o melhor para você!",
     "ctaText": "Entre em contato",
     "hours": {
-      "monday": "7AM - 8PM",
-      "tuesday": "7AM - 8PM",
-      "wednesday": "7AM - 8PM",
-      "thursday": "7AM - 8PM",
-      "friday": "7AM - 8PM",
-      "saturday": "8AM - 11PM",
-      "sunday": "9AM - 5PM"
+      "monday": "7:00 - 22:00",
+      "tuesday": "7:00 - 22:00",
+      "wednesday": "7:00 - 22:00",
+      "thursday": "7:00 - 22:00",
+      "friday": "7:00 - 22:00",
+      "saturday": "16 - 23:00",
+      "sunday": "9:00 - 22:00"
     },
     "contact": {
       "phone": "5544998663351",
-      "address": "",
-      "city": "",
-      "state": "",
-      "zip": "",
+      "address": "Rua Pioneiro José Fernandes, 227, Conjunto João de Barro I",
+      "city": "Maringá",
+      "state": "PR",
+      "zip": "87053-100",
       "country": "",
-      "email": ""
+      "email": "contato@sandrasalgados.com"
     },
-    "name": "Sandra Salgados"
+    "name": "Sandra Salgados",
+    "social": [
+      {
+        "platform": "whatsapp",
+        "url": "https://wa.me/5544998663351",
+        "icon": "fab fa-whatsapp",
+        "label": "Whatsapp"
+      },
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/sandrasalgadosmga",
+        "icon": "fab fa-instagram",
+        "label": "Instagram"
+      },
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/profile.php?id=100089738227856",
+        "icon": "fab fa-facebook-f",
+        "label": "Facebook"
+      }
+    ]
   },
   "categories": [
     {
@@ -32,17 +52,65 @@
         {
           "id": "item-001",
           "title": "Risoles de Carne",
-          "description": "Fresh tomatoes, basil, and mozzarella on toasted baguette slices. A perfect start to your meal.",
+          "description": "8 deliciosos risoles de carne feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (448g)",
           "price": 22.5,
-          "image": "images/menu-item.png",
+          "image": "images/menu-items/risoles-de-carne.png",
           "available": true
         },
         {
           "id": "item-002",
-          "title": "Stuffed Mushrooms",
-          "description": "Button mushrooms filled with seasoned breadcrumbs, herbs, and parmesan cheese.",
+          "title": "Risoles de Frango",
+          "description": "8 deliciosos risoles de frango feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal!",
           "price": 14.99,
-          "image": "images/menu-item.png",
+          "image": "images/menu-items/risoles-de-frango.png",
+          "available": true
+        },
+        {
+          "id": "item-003",
+          "title": "Risoles de Presunto e Queijo",
+          "description": "8 deliciosos risoles de presunto e queijo muçarela feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal!",
+          "price": 14.99,
+          "image": "images/menu-items/risoles-de-presunto-e-queijo.png",
+          "available": true
+        },
+        {
+          "id": "item-004",
+          "title": "Risoles Margherita",
+          "description": "Clássico recheio italiano com queijo muçarela, tomate seco e manjericão fresquinho. Feitos com massa pré-cozida, e preparo totalmente artesanal!",
+          "price": 14.99,
+          "image": "images/menu-items/risoles-margherita.png",
+          "available": true
+        },
+        {
+          "id": "item-005",
+          "title": "Risoles de Alho-Poró com Queijo",
+          "description": "8 risoles de massa tradicional pré-cozida recheados com alho-poró e queijo muçarela.",
+          "price": 14.99,
+          "image": "images/menu-items/risoles-de-alho-poro-com-queijo.jpeg",
+          "available": true
+        },
+        {
+          "id": "item-006",
+          "title": "Risoles de Queijo",
+          "description": "8 risoles de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal!",
+          "price": 14.99,
+          "image": "images/menu-items/risoles-de-queijo.png",
+          "available": true
+        },
+        {
+          "id": "item-007",
+          "title": "Risoles de Cogumelos(Vegano)",
+          "description": "8 deliciosos risoles veganos recheados com cogumelos Portobello, massa pré-cozida, e preparo totalmente artesanal!",
+          "price": 14.99,
+          "image": "images/menu-items/risoles-de-cogumelos.png",
+          "available": true
+        },
+        {
+          "id": "item-008",
+          "title": "Risoles de Alho-Poró",
+          "description": "8 deliciosos risoles veganos feitos com massa pré-cozida e recheados com alho-poró.",
+          "price": 14.99,
+          "image": "images/menu-items/risoles-de-alho-poro.jpeg",
           "available": true
         }
       ]
@@ -52,58 +120,76 @@
       "name": "Coxinhas",
       "items": [
         {
-          "id": "item-003",
-          "title": "Grilled Chicken",
-          "description": "Tender chicken breast grilled to perfection, served with seasonal vegetables and your choice of sauce.",
+          "id": "item-001",
+          "title": "Coxinhas de Frango",
+          "description": "Coxinhas de frango feitas com uma deliciosa massa de mandioca. Preparo totalmente artesanal. Contém 6 unidades médias.",
           "price": 24.99,
           "image": "images/menu-item.png",
           "available": true,
           "optionGroups": [
             {
               "id": "sauce",
-              "name": "Choose your free sauce",
+              "name": "Escolha Seu Molho Grátis",
               "type": "single",
               "min": 0,
               "max": 1,
               "options": [
                 {
-                  "id": "mustard",
-                  "name": "Spicy Mustard",
-                  "description": "",
+                  "id": "mostarda-picante",
+                  "name": "Molho de Mostarda Picante",
+                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "herb-butter",
-                  "name": "Herb Butter",
-                  "description": "",
+                  "id": "maionese-verde",
+                  "name": "Maionese Verde com Alho Assado",
+                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "bbq",
-                  "name": "BBQ Sauce",
-                  "description": "",
+                  "id": "pimenta-defumado",
+                  "name": "Molho de Pimenta Defumado",
+                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "especial-defumado",
+                  "name": "Molho Especial Defumado",
+                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
                   "priceDelta": 0
                 }
               ]
             },
             {
               "id": "extras",
-              "name": "Extra sides",
+              "name": "Molhos Extras (Adicionais)",
               "type": "multi",
               "min": 0,
-              "max": 3,
+              "max": 5,
               "options": [
                 {
-                  "id": "extra-vegetables",
-                  "name": "Extra Vegetables (+$2.00)",
-                  "description": "",
-                  "priceDelta": 2
+                  "id": "mostarda-picante",
+                  "name": "Molho de Mostarda Picante",
+                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+                  "priceDelta": 0
                 },
                 {
-                  "id": "garlic-bread",
-                  "name": "Garlic Bread (+$3.50)",
-                  "description": "",
-                  "priceDelta": 3.5
+                  "id": "maionese-verde",
+                  "name": "Maionese Verde com Alho Assado",
+                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "pimenta-defumado",
+                  "name": "Molho de Pimenta Defumado",
+                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+                  "priceDelta": 0
+                },
+                {
+                  "id": "especial-defumado",
+                  "name": "Molho Especial Defumado",
+                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+                  "priceDelta": 0
                 }
               ]
             }
@@ -111,75 +197,75 @@
         },
         {
           "id": "item-004",
-          "title": "Beef Tenderloin",
-          "description": "Premium cut beef tenderloin cooked to your preference, accompanied by roasted potatoes and asparagus.",
+          "title": "Coxinhas de Frango com Catupiry",
+          "description": "6 coxinhas de frango com recheio cremoso de queijo Catupiry envoltas em uma massa de mandioca incrivelmente macia e saborosa.",
           "price": 32.99,
           "image": "images/menu-item.png",
           "available": true,
           "optionGroups": [
             {
-              "id": "cooking",
-              "name": "How would you like it cooked? *",
+              "id": "sauce",
+              "name": "Escolha Seu Molho Grátis",
               "type": "single",
-              "min": 1,
+              "min": 0,
               "max": 1,
               "options": [
                 {
-                  "id": "rare",
-                  "name": "Rare",
-                  "description": "Cool red center",
+                  "id": "mostarda-picante",
+                  "name": "Molho de Mostarda Picante",
+                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "medium-rare",
-                  "name": "Medium Rare",
-                  "description": "Warm red center",
+                  "id": "maionese-verde",
+                  "name": "Maionese Verde com Alho Assado",
+                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "medium",
-                  "name": "Medium",
-                  "description": "Warm pink center",
+                  "id": "pimenta-defumado",
+                  "name": "Molho de Pimenta Defumado",
+                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "well-done",
-                  "name": "Well Done",
-                  "description": "No pink",
+                  "id": "especial-defumado",
+                  "name": "Molho Especial Defumado",
+                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
                   "priceDelta": 0
                 }
               ]
             },
             {
-              "id": "sides",
-              "name": "Choose your sides (2 required) *",
+              "id": "extras",
+              "name": "Molhos Extras (Adicionais)",
               "type": "multi",
-              "min": 2,
-              "max": 3,
+              "min": 0,
+              "max": 5,
               "options": [
                 {
-                  "id": "roasted-potatoes",
-                  "name": "Roasted Potatoes",
-                  "description": "",
+                  "id": "mostarda-picante",
+                  "name": "Molho de Mostarda Picante",
+                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "asparagus",
-                  "name": "Asparagus",
-                  "description": "",
+                  "id": "maionese-verde",
+                  "name": "Maionese Verde com Alho Assado",
+                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "mixed-vegetables",
-                  "name": "Mixed Vegetables",
-                  "description": "",
+                  "id": "pimenta-defumado",
+                  "name": "Molho de Pimenta Defumado",
+                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
                   "priceDelta": 0
                 },
                 {
-                  "id": "mashed-potatoes",
-                  "name": "Mashed Potatoes (+$1.50)",
-                  "description": "",
-                  "priceDelta": 1.5
+                  "id": "especial-defumado",
+                  "name": "Molho Especial Defumado",
+                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+                  "priceDelta": 0
                 }
               ]
             }
@@ -187,7 +273,7 @@
         },
         {
           "id": "item-005",
-          "title": "Salmon Fillet",
+          "title": "Coxinhas de Carne",
           "description": "Fresh Atlantic salmon fillet with lemon herb butter, served with rice pilaf and steamed broccoli.",
           "price": 28.99,
           "image": "images/menu-item.png",

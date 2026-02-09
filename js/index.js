@@ -161,9 +161,17 @@ function updateRestaurantInfo() {
   // Update footer information
   if (restaurantNameFooterEl)
     restaurantNameFooterEl.textContent = restaurant.name;
-  if (restaurantAddressEl)
-    restaurantAddressEl.textContent =
-      restaurant.contact?.address || "Company Address";
+  if (restaurantAddressEl) {
+    const contact = restaurant.contact || {};
+    const street = contact.address || "";
+    const cityState = [contact.city, contact.state].filter(Boolean).join(" - ");
+    const secondLine = contact.zip
+      ? [cityState, contact.zip].filter(Boolean).join(", ")
+      : cityState;
+    restaurantAddressEl.innerHTML = street
+      ? `${street}<br>${secondLine}`
+      : secondLine || "Company Address";
+  }
   if (restaurantEmailEl) {
     restaurantEmailEl.textContent =
       restaurant.contact?.email || "company@example.com";
@@ -172,16 +180,32 @@ function updateRestaurantInfo() {
     }`;
   }
   if (restaurantPhoneEl) {
-    const phone = restaurant.contact?.phone || "+1 (123) 456-7890";
-    restaurantPhoneEl.textContent = phone;
-    restaurantPhoneEl.href = `tel:${phone.replace(/\D/g, "")}`;
+    const rawPhone = restaurant.contact?.phone || "";
+    // Strip country code (55) for display, format as (DD)XXXXX-XXXX
+    const digits = rawPhone.replace(/\D/g, "");
+    const local = digits.startsWith("55") ? digits.slice(2) : digits;
+    const displayPhone =
+      local.length === 11
+        ? `(${local.slice(0, 2)})${local.slice(2, 7)}-${local.slice(7)}`
+        : local.length === 10
+          ? `(${local.slice(0, 2)})${local.slice(2, 6)}-${local.slice(6)}`
+          : rawPhone;
+    restaurantPhoneEl.textContent = displayPhone;
+    restaurantPhoneEl.href = `tel:+${digits}`;
   }
 
-  // Update Google Maps embed URL
-  updateGoogleMapsEmbed(restaurant.contact?.address);
+  // Update Google Maps embed URL with full address
+  const contact = restaurant.contact || {};
+  const mapAddress = [contact.address, contact.city, contact.state, contact.zip]
+    .filter(Boolean)
+    .join(", ");
+  updateGoogleMapsEmbed(mapAddress);
 
   // Update hours display
   updateHoursDisplay(restaurant.hours);
+
+  // Update social links
+  updateSocialLinks(restaurant.social);
 
   console.log("Restaurant info updated");
 }
@@ -191,8 +215,8 @@ function updateGoogleMapsEmbed(address) {
   const googleMapEl = document.getElementById("googleMap");
   if (!googleMapEl) return;
 
-  const defaultAddress = "Company Address, New York, NY";
-  const targetAddress = address || defaultAddress;
+  if (!address) return;
+  const targetAddress = address;
 
   // Create Google Maps embed URL
   const encodedAddress = encodeURIComponent(targetAddress);
@@ -204,9 +228,7 @@ function updateGoogleMapsEmbed(address) {
 
 // Update copyright year
 function updateCopyright() {
-  if (currentYearEl) {
-    currentYearEl.textContent = new Date().getFullYear();
-  }
+  if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
 }
 
 // Update hours display
@@ -223,13 +245,13 @@ function updateHoursDisplay(hours) {
     "sunday",
   ];
   const dayNames = {
-    monday: "Mon",
-    tuesday: "Tue",
-    wednesday: "Wed",
-    thursday: "Thu",
-    friday: "Fri",
-    saturday: "Sat",
-    sunday: "Sun",
+    monday: "Segunda",
+    tuesday: "Terça-feira",
+    wednesday: "Quarta-feira",
+    thursday: "Quinta-feira",
+    friday: "Sexta-feira",
+    saturday: "Sábado",
+    sunday: "Domingo",
   };
 
   // Group consecutive days with same hours
@@ -279,6 +301,21 @@ function updateHoursDisplay(hours) {
     .join("");
 
   restaurantHoursEl.innerHTML = hoursHtml;
+}
+
+// Update social links
+function updateSocialLinks(socialLinks) {
+  const socialLinksEl = document.getElementById("socialLinks");
+  if (!socialLinksEl || !socialLinks || socialLinks.length === 0) return;
+
+  socialLinksEl.innerHTML = socialLinks
+    .map(
+      (link) =>
+        `<a href="${link.url}" class="btn btn-outline-light btn-floating m-1" title="${link.label}" target="_blank" rel="noopener noreferrer">
+          <i class="${link.icon}"></i>
+        </a>`,
+    )
+    .join("");
 }
 
 // Render category filter buttons
@@ -388,14 +425,14 @@ function renderMenu(categoryFilter = "all") {
         <div class="row justify-content-md-around">
             <div class="col-md-6 col-lg-5 text-center">
               <img src="${item.image || "images/menu-item.png"}" alt="${
-        item.title
-      }" class="menu-img"/>
+                item.title
+              }" class="menu-img"/>
             </div>
             <div class="col-md-6 col-lg-5 item-info mt-3 px-4">
               <div class="row justify-content-between">
-                <h4 class="col item-title text-uppercase">${item.title}</h4>
-                <h4 class="col item-price">R$${(item.price || 0).toFixed(
-                  2
+                <h4 class="col-8 item-title text-uppercase">${item.title}</h4>
+                <h4 class="col-4 item-price">R$${(item.price || 0).toFixed(
+                  2,
                 )}</h4>
               </div>
               <p class="item-description">${
@@ -465,7 +502,7 @@ function setupEventListeners() {
       addToCartWithOptions(
         button.dataset.itemId,
         button.dataset.title,
-        parseFloat(button.dataset.price)
+        parseFloat(button.dataset.price),
       );
     }
   });
@@ -529,7 +566,7 @@ function updateCartDisplay() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const total = cart.reduce(
     (sum, item) => sum + (item.unitPrice || item.price) * item.quantity,
-    0
+    0,
   );
 
   // Update cart counter and total
@@ -583,7 +620,7 @@ function updateCartDisplay() {
         <div class="item-details">
           <h6 class="item-name mb-1">${item.title}</h6>
           <span class="item-unit-price text-muted">$${unitPrice.toFixed(
-            2
+            2,
           )} each</span>
           ${
             optionsHtml
@@ -714,7 +751,7 @@ function changeQuantity(itemId, delta) {
   } else {
     updateCartDisplay();
     announceToScreenReader(
-      `Updated ${item.title} quantity from ${oldQuantity} to ${item.quantity}`
+      `Updated ${item.title} quantity from ${oldQuantity} to ${item.quantity}`,
     );
   }
 }
@@ -726,7 +763,7 @@ function addToCart(itemId, title, price) {
   if (existingItem) {
     existingItem.quantity += 1;
     announceToScreenReader(
-      `Added another ${title} to cart. Total: ${existingItem.quantity}`
+      `Added another ${title} to cart. Total: ${existingItem.quantity}`,
     );
   } else {
     cart.push({
@@ -805,9 +842,8 @@ function closeOptionsModal() {
 function renderOptionsModal(item) {
   // Update item info
   document.getElementById("optionsItemTitle").textContent = item.title;
-  document.getElementById(
-    "optionsBasePrice"
-  ).textContent = `$${item.price.toFixed(2)}`;
+  document.getElementById("optionsBasePrice").textContent =
+    `$${item.price.toFixed(2)}`;
 
   const container = document.getElementById("optionGroupsContainer");
   container.innerHTML = "";
@@ -851,18 +887,14 @@ function renderOptionItem(group, option) {
   const isChecked = currentSelections[group.id]?.includes(option.id) || false;
 
   const priceText =
-    option.priceDelta > 0
-      ? `+$${option.priceDelta.toFixed(2)}`
-      : option.priceDelta < 0
-      ? `-$${Math.abs(option.priceDelta).toFixed(2)}`
-      : "Free";
+    option.priceDelta > 0 ? `+$${option.priceDelta.toFixed(2)}` : "";
 
   const priceClass = option.priceDelta === 0 ? "free" : "";
 
   return `
     <div class="option-item" onclick="toggleOption('${group.id}', '${
-    option.id
-  }', '${group.type}', ${group.max})">
+      option.id
+    }', '${group.type}', ${group.max})">
       <input type="${inputType}" 
              ${inputName ? `name="${inputName}"` : ""} 
              value="${option.id}"
@@ -926,7 +958,7 @@ function updateOptionsTotal() {
 
   const total = currentOptionsItem.price + extraCost;
   document.getElementById("optionsTotalPrice").textContent = `$${total.toFixed(
-    2
+    2,
   )}`;
 }
 
@@ -1001,7 +1033,7 @@ function confirmOptions() {
     if (existingItemIndex > -1) {
       cart[existingItemIndex].quantity += 1;
       announceToScreenReader(
-        `Added another ${lineItem.title} to cart. Total: ${cart[existingItemIndex].quantity}`
+        `Added another ${lineItem.title} to cart. Total: ${cart[existingItemIndex].quantity}`,
       );
     } else {
       cart.push(lineItem);
@@ -1033,7 +1065,7 @@ function editCartItem(cartItemIndex) {
   if (menuData && menuData.categories) {
     menuData.categories.forEach((category) => {
       const foundItem = category.items.find(
-        (item) => item.title === cartItem.title
+        (item) => item.title === cartItem.title,
       );
       if (foundItem) {
         menuItem = foundItem;
@@ -1093,7 +1125,7 @@ function sendOrderToWhatsApp() {
     total += itemTotal;
 
     message += `- ${item.title} × ${item.quantity} ($${itemTotal.toFixed(
-      2
+      2,
     )})\n`;
 
     // Add options if they exist
@@ -1126,7 +1158,7 @@ function sendOrderToWhatsApp() {
 
   const phoneNumber = menuData.restaurant.contact.phone;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message
+    message,
   )}`;
 
   window.open(whatsappUrl, "_blank");

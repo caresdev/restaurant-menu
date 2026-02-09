@@ -68,7 +68,7 @@
             <div class="header-slogan text-white text-center mt-4">
               <h2 class="slogan text-uppercase mb-2" id="restaurantSlogan"> Captivating Message! </h2>
               <h4 class="slogan-txt mb-4" id="restaurantDescription"> A captivating message describing your products.</h4>
-              <a href="#menuContainer" class="btn rounded-pill text-uppercase py-1"> Peça Agora </a> 
+              <a href="#menuContainer" id="ctaText" class="btn rounded-pill text-uppercase py-1"> Peça Agora </a> 
             </div>
 
           </div>
@@ -150,7 +150,7 @@
       <div class="options-overlay" onclick="closeOptionsModal()"></div>
       <div class="options-content">
         <div class="options-header">
-          <h5 id="optionsModalTitle" class="options-title">Customize Your Order</h5>
+          <h5 id="optionsModalTitle" class="options-title">Customize</h5>
           <button class="btn-close-options" onclick="closeOptionsModal()" aria-label="Close options">
             <i class="fas fa-times"></i>
           </button>
@@ -195,7 +195,7 @@
           <!-- Hours Section -->
           <div class="col-sm-5 hours-section">
             <h4 class="text-uppercase mb-3 text-white">
-              Hours
+              Horário
             </h4>
             
             <div class="contact-info">
@@ -206,9 +206,9 @@
           </div>
 
           <!-- Contact Section -->
-          <div class="col-sm-5 contact-section">
+          <div class="col-sm-5 contact-section" id="contact">
             <h4 class="text-uppercase mb-3 text-white">
-              Contact
+              Contato
             </h4>
             
             <div class="contact-info">
@@ -230,37 +230,26 @@
           <!-- Social Media Section -->
           <div class="col-sm-5 social-section">
             <h4 class="text-uppercase mb-3 text-white">
-              Follow Us
+              Social
             </h4>
             
-            <div class="social-links">
-              <a href="#" class="btn btn-outline-light btn-floating m-1" title="Facebook">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="btn btn-outline-light btn-floating m-1" title="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#" class="btn btn-outline-light btn-floating m-1" title="YouTube">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a href="#" class="btn btn-outline-light btn-floating m-1" title="Twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
+            <div id="socialLinks" class="social-links">
+              <!-- Social links will be populated by JavaScript -->
             </div>
           </div>
 
           <!-- Location Section -->
           <div class="col-sm-5 location-section">
             <h4 class="text-uppercase mb-3 text-white">
-              Location
+              Endereço
             </h4>
             
             <!-- Google Maps Embed -->
             <div class="map-container mb-2">
-              <iframe 
+              <iframe
                 id="googleMap"
                 class="google-map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.4037!2d-74.0059413!3d40.7589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzMyLjAiTiA3NMKwMDAnMjEuNCJX!5e0!3m2!1sen!2sus!4v1635000000000"
+                src=""
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade"
