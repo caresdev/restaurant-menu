@@ -50,66 +50,66 @@
       "name": "Risoles",
       "items": [
         {
-          "id": "item-001",
+          "id": "risoles-item-001",
           "title": "Risoles de Carne",
           "description": "8 deliciosos risoles de carne feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (448g)",
-          "price": 22.5,
+          "price": 21.9,
           "image": "images/menu-items/risoles-de-carne.png",
           "available": true
         },
         {
-          "id": "item-002",
+          "id": "risoles-item-002",
           "title": "Risoles de Frango",
           "description": "8 deliciosos risoles de frango feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal!",
-          "price": 14.99,
+          "price": 21.9,
           "image": "images/menu-items/risoles-de-frango.png",
           "available": true
         },
         {
-          "id": "item-003",
+          "id": "risoles-item-003",
           "title": "Risoles de Presunto e Queijo",
           "description": "8 deliciosos risoles de presunto e queijo muçarela feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal!",
-          "price": 14.99,
+          "price": 21.9,
           "image": "images/menu-items/risoles-de-presunto-e-queijo.png",
           "available": true
         },
         {
-          "id": "item-004",
+          "id": "risoles-item-004",
           "title": "Risoles Margherita",
           "description": "Clássico recheio italiano com queijo muçarela, tomate seco e manjericão fresquinho. Feitos com massa pré-cozida, e preparo totalmente artesanal!",
-          "price": 14.99,
+          "price": 24.9,
           "image": "images/menu-items/risoles-margherita.png",
           "available": true
         },
         {
-          "id": "item-005",
+          "id": "risoles-item-005",
           "title": "Risoles de Alho-Poró com Queijo",
           "description": "8 risoles de massa tradicional pré-cozida recheados com alho-poró e queijo muçarela.",
-          "price": 14.99,
+          "price": 21.9,
           "image": "images/menu-items/risoles-de-alho-poro-com-queijo.jpeg",
           "available": true
         },
         {
-          "id": "item-006",
+          "id": "risoles-item-006",
           "title": "Risoles de Queijo",
           "description": "8 risoles de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal!",
-          "price": 14.99,
+          "price": 21.9,
           "image": "images/menu-items/risoles-de-queijo.png",
           "available": true
         },
         {
-          "id": "item-007",
+          "id": "risoles-item-007",
           "title": "Risoles de Cogumelos(Vegano)",
           "description": "8 deliciosos risoles veganos recheados com cogumelos Portobello, massa pré-cozida, e preparo totalmente artesanal!",
-          "price": 14.99,
+          "price": 24.9,
           "image": "images/menu-items/risoles-de-cogumelos.png",
           "available": true
         },
         {
-          "id": "item-008",
+          "id": "risoles-item-008",
           "title": "Risoles de Alho-Poró",
           "description": "8 deliciosos risoles veganos feitos com massa pré-cozida e recheados com alho-poró.",
-          "price": 14.99,
+          "price": 24.9,
           "image": "images/menu-items/risoles-de-alho-poro.jpeg",
           "available": true
         }
@@ -120,11 +120,11 @@
       "name": "Coxinhas",
       "items": [
         {
-          "id": "item-001",
+          "id": "coxinhas-item-001",
           "title": "Coxinhas de Frango",
           "description": "Coxinhas de frango feitas com uma deliciosa massa de mandioca. Preparo totalmente artesanal. Contém 6 unidades médias.",
-          "price": 24.99,
-          "image": "images/menu-item.png",
+          "price": 22.9,
+          "image": "images/menu-items/coxinhas-frango.png",
           "available": true,
           "optionGroups": [
             {
@@ -196,11 +196,11 @@
           ]
         },
         {
-          "id": "item-004",
+          "id": "coxinhas-item-002",
           "title": "Coxinhas de Frango com Catupiry",
           "description": "6 coxinhas de frango com recheio cremoso de queijo Catupiry envoltas em uma massa de mandioca incrivelmente macia e saborosa.",
-          "price": 32.99,
-          "image": "images/menu-item.png",
+          "price": 25.9,
+          "image": "images/menu-items/coxinhas-frango-catupiry.png",
           "available": true,
           "optionGroups": [
             {
@@ -272,11 +272,19 @@
           ]
         },
         {
-          "id": "item-005",
+          "id": "coxinhas-item-003",
           "title": "Coxinhas de Carne",
-          "description": "Fresh Atlantic salmon fillet with lemon herb butter, served with rice pilaf and steamed broccoli.",
-          "price": 28.99,
-          "image": "images/menu-item.png",
+          "description": "6 coxinhas de carne feitas com uma deliciosa massa de mandioca. Preparo totalmente artesanal.",
+          "price": 24.9,
+          "image": "images/menu-items/coxinhas-carne.png",
+          "available": true
+        },
+        {
+          "id": "coxinhas-item-004",
+          "title": "Coxinhas de Cogumelos (Vegano)",
+          "description": "6 Coxinhas veganas feitas com uma massa de mandioca deliciosamente macia e um recheio cremoso de cogumelos Portobello. Totalmente livre de ingredientes de origem animal.",
+          "price": 26.9,
+          "image": "images/menu-items/coxinhas-cogumelos.png",
           "available": true
         }
       ]
@@ -286,19 +294,51 @@
       "name": "Empadão",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "empadao-item-001",
+          "title": "Empadão de Frango com Catupiry",
+          "description": "Combinação perfeita de frango cremoso e queijo Catupiry envolto em uma massa crocante que derrete na boca.",
+          "price": 79.9,
+          "image": "images/menu-items/empadao-frango-catupiry.png",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "id": "empadao-item-002",
+          "title": "Empadão de Frango com Palmito",
+          "description": "Combinação clássica e deliciosa de frango, palmito e requeijão em nossa irresistível massa crocante que derrete na boca.",
+          "price": 74.9,
+          "image": "images/menu-items/empadao-frango-palmito.png",
+          "available": true
+        },
+        {
+          "id": "empadao-item-003",
+          "title": "Empadão de Camarão",
+          "description": "Deliciosa combinação de camarão, leite de coco, e queijo Catupiry. Feito artesanalmente com os melhores ingredientes com massa crocante, recheio cremoso, e um sabor irresistível.",
+          "price": 92.9,
+          "image": "images/menu-items/empadao-camarao.jpeg",
+          "available": true
+        },
+        {
+          "id": "empadao-item-004",
+          "title": "Empadão de Palmito Cremoso",
+          "description": "Empadão com massa clássica e delicada que derrete na boca. Recheio cremoso de palmito, tomates frescos, e requeijão.",
+          "price": 79.9,
+          "image": "images/menu-items/empadao-palmito-cremoso.jpeg",
+          "available": true
+        },
+        {
+          "id": "empadao-item-005",
+          "title": "Empadão de Palmito com Alho-Poró (Vegano)",
+          "description": "Empadão vegano com massa delicada que derrete na boca. Recheio cremoso de palmito, alho-poró, e livre de qualquer produto de origem animal.",
+          "price": 79.9,
+          "image": "images/menu-items/empadao-palmito-vegano.png",
+          "available": true
+        },
+        {
+          "id": "empadao-item-006",
+          "title": "Empadão de Grão-de-Bico",
+          "description": "Empadão vegano com recheio cremoso de grão-de-bico, tomates fresquinhos, e leite de coco. Massa crocante que derrete na boca e livre de qualquer produto de origem animal.",
+          "price": 77.9,
+          "image": "images/menu-items/empadao-grao-de-bico-vegano.jpeg",
           "available": true
         }
       ]
@@ -308,19 +348,51 @@
       "name": "Empadinhas",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "empadinhas-item-001",
+          "title": "Empadinhas de Frango com Catupiry",
+          "description": "2 deliciosas empadinhas com clássica combinação de frango com Catupiry! Feitas com um recheio cremoso e envoltas em uma massa crocante que derrete na boca.",
+          "price": 19.9,
+          "image": "images/menu-items/empadinhas-frango-catupiry.png",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "id": "empadinhas-item-002",
+          "title": "Empadinhas de Frango com Palmito",
+          "description": "2 deliciosas empadinhas com recheio cremoso de frango, palmito, e requeijão. Envoltas em uma massa crocante que derrete na boca.",
+          "price": 19.9,
+          "image": "images/menu-items/empadinhas-frango-palmito.jpg",
+          "available": true
+        },
+        {
+          "id": "empadinhas-item-003",
+          "title": "Empadinhas de Camarão",
+          "description": "2 deliciosas empadinhas com recheio cremoso de camarão, leite de coco, tomates frescos, e requeijão. Envoltas em uma massa crocante que derrete na boca.",
+          "price": 24.9,
+          "image": "images/menu-items/empadinhas-camarao.png",
+          "available": true
+        },
+        {
+          "id": "empadinhas-item-004",
+          "title": "Empadinhas de Pamito",
+          "description": "2 empadinhas vegetarianas com recheio cremoso de palmito, tomates frescos, e requeijão.",
+          "price": 19.9,
+          "image": "images/menu-items/empadinhas-palmito.jpeg",
+          "available": true
+        },
+        {
+          "id": "empadinhas-item-005",
+          "title": "Empadinhas de Palmito com Alho-Poró (Vegano)",
+          "description": "2 deliciosas empadinhas veganas com recheio cremoso de palmito com alho-poró, e tomates fresquinhos envoltas em uma massa crocante que derrete na boca.",
+          "price": 21.9,
+          "image": "images/menu-items/empadinhas-palmito-vegano.png",
+          "available": true
+        },
+        {
+          "id": "empadinhas-item-006",
+          "title": "Empadinhas de Grão-de-Bico (Vegano)",
+          "description": "2 empadinhas veganas com recheio cremoso de grão de bico, tomates fresquinhos, e leite de coco envoltas em uma massa crocante que derrete na boca.",
+          "price": 21.9,
+          "image": "images/menu-items/empadinhas-grao-de-bico.jpeg",
           "available": true
         }
       ]
@@ -330,41 +402,27 @@
       "name": "Bolinhas de Queijo",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "bolinhas-queijo-item-001",
+          "title": "Bolinhas de Queijo Tradicional",
+          "description": "10 deliciosas bolinhas de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal!",
+          "price": 19.9,
+          "image": "images/menu-items/bolinhas-queijo-tradicional.png",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
-          "available": true
-        }
-      ]
-    },
-    {
-      "id": "pao-de-queijo",
-      "name": "Pão de Queijo Artesanal (5/10/15)",
-      "items": [
-        {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "bolinhas-queijo-item-002",
+          "title": "Bolinhas de Queijo com Calabresa",
+          "description": "10 deliciosas bolinhas de queijo super recheadas com queijo muçarela e linguiça calabresa.",
+          "price": 22.9,
+          "image": "images/menu-items/bolinhas-queijo-calabresa.png",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "id": "bolinhas-queijo-item-003",
+          "title": "Bolinhas de Queijo com Bacon",
+          "description": "10 deliciosas bolinhas de queijo feitas com massa pré-cozida e super recheadas com queijo muçarela e bacon.",
+          "price": 24.9,
+          "image": "images/menu-items/bolinhas-queijo-bacon.jpeg",
           "available": true
         }
       ]
@@ -374,19 +432,65 @@
       "name": "Combos & Mini Salgados",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "combos-item-001",
+          "title": "25 Mini Salgados",
+          "description": "Escolha de até 5 sabores para criar sua caixa com 25 deliciosos salgadinhos (450g).",
+          "price": 33.9,
+          "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "id": "combos-item-002",
+          "title": "50 Mini Salgados",
+          "description": "Escolha de até 5 sabores para criar sua caixa com 50 deliciosos salgadinhos (1kg).",
+          "price": 59.9,
+          "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
+          "available": true
+        },
+        {
+          "id": "combos-item-003",
+          "title": "25 Mini Salgados Veganos/Vegetarianos",
+          "description": "Escolha de até 5 sabores para criar sua caixa com 25 deliciosos salgadinhos (450g).",
+          "price": 35.9,
+          "image": "images/menu-items/salgadinhos-veganos.png",
+          "available": true
+        },
+        {
+          "id": "combos-item-004",
+          "title": "50 Mini Salgados Veganos/Vegetarianos",
+          "description": "Escolha de até 5 sabores para criar sua caixa com 50 deliciosos salgadinhos (450g).",
+          "price": 63.9,
+          "image": "images/menu-items/salgadinhos-veganos.png",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "pao-de-queijo",
+      "name": "Pão de Queijo Artesanal (5/10/15)",
+      "items": [
+        {
+          "id": "pao-de-queijo-item-001",
+          "title": "Pão de Queijo Tradicional - 5 unidades",
+          "description": "Massa levinha, crocante por fora e muito queijo por dentro. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia.",
+          "price": 11.9,
+          "image": "images/menu-items/pao-de-queijo.jpg",
+          "available": true
+        },
+        {
+          "id": "pao-de-queijo-item-001",
+          "title": "Pão de Queijo Tradicional - 10 unidades",
+          "description": "Massa levinha, crocante por fora e muito queijo por dentro. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia.",
+          "price": 21.9,
+          "image": "images/menu-items/pao-de-queijo.jpg",
+          "available": true
+        },
+        {
+          "id": "pao-de-queijo-item-001",
+          "title": "Pão de Queijo Tradicional - 15 unidades",
+          "description": "Massa levinha, crocante por fora e muito queijo por dentro. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia.",
+          "price": 29.9,
+          "image": "images/menu-items/pao-de-queijo.jpg",
           "available": true
         }
       ]
@@ -396,19 +500,11 @@
       "name": "Petiscos Varidados",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
+          "id": "petiscos-item-001",
+          "title": "Faláfel de Grão-de-Bico (Vegano)",
           "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
-          "available": true
-        },
-        {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "price": 21.9,
+          "image": "images/menu-items/falafel.png",
           "available": true
         }
       ]
@@ -418,19 +514,19 @@
       "name": "Bolos & Doces",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "bolos-item-001",
+          "title": "Bolo de Mandioca Catedral - G",
+          "description": "Experimente nosso Bolo de Mandioca Catedral – inspirado no cartão-postal de Maringá! Uma receita de família com massa fofinha e coberto com leite condensado e coco ralado. Assado em forma especial com design gótico, este bolo grande serve até 8 pessoas.",
+          "price": 60.9,
+          "image": "images/menu-items/bolo-mandioca-grande.jpeg",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "id": "bolos-item-002",
+          "title": "Bolo de Mandioca Catedral - M",
+          "description": "Experimente nosso Bolo de Mandioca – uma receita de família cuidadosamente preparada para encantar seu paladar. Massa fofinha e cobertura irresistível de leite condensado e coco ralado.",
+          "price": 39.9,
+          "image": "images/menu-items/bolo-mandioca-medio.jpeg",
           "available": true
         }
       ]
@@ -440,19 +536,59 @@
       "name": "Bebidas",
       "items": [
         {
-          "id": "item-006",
-          "title": "Chocolate Cake",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
-          "price": 8.99,
-          "image": "images/menu-item.png",
+          "id": "bebidas-item-001",
+          "title": "Coca-Cola Zero 350ml",
+          "description": "Lata 350ml",
+          "price": 6.49,
+          "image": "images/menu-items/coca-zero-350.png",
           "available": true
         },
         {
-          "id": "item-007",
-          "title": "Tiramisu",
-          "description": "Classic Italian dessert with coffee-soaked ladyfingers, mascarpone cream, and cocoa powder.",
-          "price": 9.99,
-          "image": "images/menu-item.png",
+          "id": "bebidas-item-002",
+          "title": "Coca-Cola Original 350ml",
+          "description": "Lata 350ml",
+          "price": 6.49,
+          "image": "images/menu-items/coca-350.png",
+          "available": true
+        },
+        {
+          "id": "bebidas-item-003",
+          "title": "Coca-Cola Zero 600ml",
+          "description": "Garrafa Pet 600ml",
+          "price": 8.9,
+          "image": "images/menu-items/coca-zero-600.webp",
+          "available": true
+        },
+        {
+          "id": "bebidas-item-004",
+          "title": "Coca-Cola Original 600ml",
+          "description": "Garrafa Pet 600ml",
+          "price": 8.9,
+          "image": "images/menu-items/coca-600.png",
+          "available": true
+        },
+        {
+          "id": "bebidas-item-005",
+          "title": "Coca-Cola Zero 2l",
+          "description": "Garrafa Pet 2l",
+          "price": 19.9,
+          "image": "images/menu-items/coca-zero-2l.webp",
+          "available": true
+        },
+        {
+          "id": "bebidas-item-006",
+          "title": "Coca-Cola Original 2l",
+          "description": "Garrafa Pet 2l",
+          "price": 19.9,
+          "image": "images/menu-items/coca-2l.webp",
+          "available": true
+        },
+        {
+          "id": "bebidas-item-007",
+          "title": "Guaraná Antarctica 2l",
+          "description": "Garrafa Pet 2l",
+          "price": 17.9,
+          "image": "images/menu-items/guarana-2l.jpg",
           "available": true
         }
       ]
