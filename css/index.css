@@ -107,11 +107,12 @@ body{
 
 /* Main */
 
-/* Filtering Menu */
+/* Category Navigation */
 #categoryFilters {
     position: sticky;
     overflow-x: auto;
     top: 71px;
+    z-index: 1020;
     background-color: var(--primary-background-color);
     padding: 1rem 0;
 
@@ -144,6 +145,7 @@ body{
     font-weight: 500;
     white-space: nowrap;
     flex-shrink: 0;
+    text-decoration: none;
 }
 
 .filter-btn:hover, .filter-btn.active{
@@ -617,7 +619,7 @@ body{
     border-bottom: 1px solid #f8f9fa;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    justify-content: space-between;
     transition: all 200ms ease-out;
 }
 
@@ -629,16 +631,67 @@ body{
     background: #f8f9fa;
 }
 
-.option-item input {
-    margin-right: 12px;
-    cursor: pointer;
-}
-
 .option-details {
     flex: 1;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Option quantity controls (+/- buttons) */
+.option-qty-controls {
+    display: flex;
     align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.option-qty-controls .qty-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--primary-red-color);
+    background: white;
+    color: var(--primary-red-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms ease-out;
+    padding: 0;
+}
+
+.option-qty-controls .qty-btn:hover:not(:disabled) {
+    background: var(--primary-red-color);
+    color: white;
+}
+
+.option-qty-controls .qty-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.option-qty-controls .option-qty {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    font-family: var(--secondary-font);
+    font-size: 1.1em;
+}
+
+/* Single add button when qty is 0 */
+.option-qty-controls .qty-btn.add-only {
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+.option-qty-controls .qty-btn.add-only:hover {
+    border-color: var(--primary-red-color);
+    color: var(--primary-red-color);
+    background: white;
 }
 
 .option-info {
@@ -675,30 +728,56 @@ body{
     flex-shrink: 0;
 }
 
-.total-section {
-    margin-bottom: 12px;
-}
-
-.total-display {
+.options-footer-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 12px;
 }
 
-.total-label {
-    font-family: var(--secondary-font);
-    font-size: 1.1em;
-    font-weight: 600;
-    color: var(--primary-text-color);
-    text-transform: uppercase;
-    letter-spacing: var(--slight-spacing);
+/* Item quantity controls in modal footer */
+.item-qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    border-radius: 25px;
+    padding: 6px 8px;
+    flex-shrink: 0;
 }
 
-.total-amount {
-    font-family: var(--secondary-font);
-    font-size: 1.1em;
+.item-qty-controls button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--primary-red-color);
+    background: white;
+    color: var(--primary-red-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
     font-weight: 600;
-    color: var(--primary-text-color);
+    cursor: pointer;
+    transition: all 200ms ease-out;
+    padding: 0;
+}
+
+.item-qty-controls button:hover:not(:disabled) {
+    background: var(--primary-red-color);
+    color: white;
+}
+
+.item-qty-controls button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.item-qty-controls .item-qty-display {
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+    font-family: var(--secondary-font);
+    font-size: 1.2em;
 }
 
 .btn-add-to-cart-options {
@@ -709,12 +788,16 @@ body{
     border-radius: 25px;
     font-size: 1em;
     font-weight: 600;
-    width: 100%;
+    flex: 1;
     transition: all 200ms ease-out;
     box-shadow: 0 4px 16px rgba(22, 148, 12, 0.3);
     font-family: var(--secondary-font);
     text-transform: uppercase;
     letter-spacing: var(--slight-spacing);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .btn-add-to-cart-options:hover:not(:disabled) {
@@ -730,6 +813,14 @@ body{
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+}
+
+/* Group selection counter */
+.option-group-counter {
+    font-size: 0.85em;
+    color: #6c757d;
+    font-weight: 400;
+    margin-left: 8px;
 }
 
 /* Desktop responsive */
@@ -835,8 +926,8 @@ main {
 
 .menu-img {
     object-fit: cover;
-    height: 10em;
-    width: auto;
+    width: 100%;
+    aspect-ratio: 4/3;
     border-radius: 10px;
 }
 
@@ -906,9 +997,6 @@ main {
 /* Media Queries */
 
 @media screen and (min-width: 375px){
-    .menu-img{
-        height: 12em;
-    }
 }
 
 @media  screen and (min-width: 425px) {
@@ -923,10 +1011,6 @@ main {
     }
     h4 {
         font-size: 1.05em;
-    }
-
-    .menu-img{
-        height: 14em;
     }
 
     .item-description{
@@ -944,9 +1028,6 @@ main {
         top: 53%
     }
 
-    .menu-img{
-        height: 12em;
-    }
 }
 
 @media  screen and (min-width: 1024px) and (max-width: 1300px){
@@ -963,9 +1044,6 @@ main {
 
     .item-description{
         font-size: var(--tertiary-text-size);
-    }
-    .menu-img{
-        height: 16em;
     }
 
 }

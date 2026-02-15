@@ -170,15 +170,21 @@
         </div>
         
         <div class="options-footer">
-          <div class="total-section">
-            <div class="total-display">
-              <span class="total-label">Total:</span>
-              <span id="optionsTotalPrice" class="total-amount">$0.00</span>
+          <div class="options-footer-row">
+            <div class="item-qty-controls">
+              <button id="itemQtyDecrease" aria-label="Diminuir quantidade">
+                <i class="fas fa-minus"></i>
+              </button>
+              <span id="itemQtyDisplay" class="item-qty-display">1</span>
+              <button id="itemQtyIncrease" aria-label="Aumentar quantidade">
+                <i class="fas fa-plus"></i>
+              </button>
             </div>
+            <button id="confirmOptionsBtn" class="btn btn-success btn-add-to-cart-options">
+              <span>Adicionar</span>
+              <span id="optionsTotalPrice">R$0,00</span>
+            </button>
           </div>
-          <button id="confirmOptionsBtn" class="btn btn-success btn-add-to-cart-options" disabled>
-            <i class="fas fa-plus me-1"></i>Add to Cart
-          </button>
         </div>
       </div>
     </div>

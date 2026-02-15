@@ -1,7 +1,6 @@
 // Global variables
 let menuData = null;
 let cart = [];
-let currentCategory = "all";
 
 // DOM elements
 let restaurantNameEl,
@@ -134,8 +133,8 @@ function initializeApp() {
   try {
     updateRestaurantInfo();
     updateCopyright();
-    renderCategoryFilters();
     renderMenu();
+    renderCategoryNav();
     setupEventListeners();
     console.log("Application initialized successfully!");
   } catch (error) {
@@ -165,8 +164,8 @@ function updateRestaurantInfo() {
     const contact = restaurant.contact || {};
     const street = contact.address || "";
     const cityState = [contact.city, contact.state].filter(Boolean).join(" - ");
-    const secondLine = contact.zip
-      ? [cityState, contact.zip].filter(Boolean).join(", ")
+    const secondLine = contact.country
+      ? [cityState, contact.country].filter(Boolean).join(", ")
       : cityState;
     restaurantAddressEl.innerHTML = street
       ? `${street}<br>${secondLine}`
@@ -196,7 +195,13 @@ function updateRestaurantInfo() {
 
   // Update Google Maps embed URL with full address
   const contact = restaurant.contact || {};
-  const mapAddress = [contact.address, contact.city, contact.state, contact.zip]
+  const mapAddress = [
+    contact.address,
+    contact.city,
+    contact.state,
+    contact.zip,
+    contact.country,
+  ]
     .filter(Boolean)
     .join(", ");
   updateGoogleMapsEmbed(mapAddress);
@@ -318,46 +323,8 @@ function updateSocialLinks(socialLinks) {
     .join("");
 }
 
-// Render category filter buttons
-function renderCategoryFilters() {
-  if (!categoryFiltersEl) {
-    console.warn("Category filters element not found");
-    return;
-  }
-
-  const nav = categoryFiltersEl.querySelector("nav");
-  if (!nav) {
-    console.warn("Navigation element not found in category filters");
-    return;
-  }
-
-  // Clear existing buttons
-  nav.innerHTML = "";
-
-  // Create "All" button
-  const allButton = document.createElement("button");
-  allButton.className = "btn filter-btn rounded-pill me-2 mb-2 active";
-  allButton.textContent = "All";
-  allButton.dataset.category = "all";
-  nav.appendChild(allButton);
-
-  // Create category buttons
-  if (menuData && menuData.categories) {
-    menuData.categories.forEach((category) => {
-      const button = document.createElement("button");
-      button.className = "btn filter-btn rounded-pill me-2 mb-2";
-      button.textContent = category.name;
-      button.dataset.category = category.id;
-      nav.appendChild(button);
-    });
-    console.log("Category filters rendered");
-  } else {
-    console.warn("No categories found in menu data");
-  }
-}
-
-// Render menu based on current category filter
-function renderMenu(categoryFilter = "all") {
+// Render menu — always shows all categories with section IDs
+function renderMenu() {
   if (!menuContainerEl) {
     console.warn("Menu container element not found");
     return;
@@ -370,8 +337,6 @@ function renderMenu(categoryFilter = "all") {
     return;
   }
 
-  console.log("Rendering menu with filter:", categoryFilter);
-
   // Remove loading fallback
   const loadingFallback = document.getElementById("loadingFallback");
   if (loadingFallback) {
@@ -380,30 +345,16 @@ function renderMenu(categoryFilter = "all") {
 
   menuContainerEl.innerHTML = "";
 
-  const categoriesToShow =
-    categoryFilter === "all"
-      ? menuData.categories
-      : menuData.categories.filter((cat) => cat.id === categoryFilter);
-
-  if (categoriesToShow.length === 0) {
-    menuContainerEl.innerHTML =
-      '<p class="text-center text-warning">No categories match the selected filter</p>';
-    return;
-  }
-
-  categoriesToShow.forEach((category) => {
-    if (!category.items) {
-      console.warn(`Category ${category.name} has no items`);
-      return;
-    }
+  menuData.categories.forEach((category) => {
+    if (!category.items) return;
 
     const availableItems = category.items.filter((item) => item.available);
-
     if (availableItems.length === 0) return;
 
-    // Create category section
+    // Create category section with ID for anchor navigation
     const section = document.createElement("section");
     section.className = "container menu-category";
+    section.id = category.id;
 
     // Category title
     const title = document.createElement("h2");
@@ -440,10 +391,8 @@ function renderMenu(categoryFilter = "all") {
               }</p>
 
               <div class="text-end mt-3">
-                <button class="btn btn-success rounded-pill add-to-cart" 
-                  data-item-id="${item.id}"
-                  data-title="${item.title}" 
-                  data-price="${item.price || 0}">
+                <button class="btn btn-success rounded-pill add-to-cart"
+                  data-item-id="${item.id}">
                   <i class="fas fa-plus me-1"></i>Adicionar
                 </button>
               </div>
@@ -461,6 +410,88 @@ function renderMenu(categoryFilter = "all") {
   console.log("Menu rendered successfully");
 }
 
+// Render category navigation bar with scroll-to-section links
+function renderCategoryNav() {
+  if (!categoryFiltersEl) return;
+
+  const nav = categoryFiltersEl.querySelector("nav");
+  if (!nav) return;
+
+  nav.innerHTML = "";
+
+  if (!menuData || !menuData.categories) return;
+
+  // Calculate scroll offset (navbar + nav bar heights)
+  const scrollOffset = 130;
+
+  menuData.categories.forEach((category, index) => {
+    const link = document.createElement("a");
+    link.className = `btn filter-btn rounded-pill${index === 0 ? " active" : ""}`;
+    link.textContent = category.name;
+    link.href = `#${category.id}`;
+    link.dataset.category = category.id;
+
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = document.getElementById(category.id);
+      if (target) {
+        const y =
+          target.getBoundingClientRect().top + window.scrollY - scrollOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+
+      // Update active state
+      nav
+        .querySelectorAll(".filter-btn")
+        .forEach((btn) => btn.classList.remove("active"));
+      link.classList.add("active");
+    });
+
+    nav.appendChild(link);
+  });
+
+  // Setup Intersection Observer to highlight active section on scroll
+  setupScrollSpy(scrollOffset);
+}
+
+// Intersection Observer for scroll-based active nav highlighting
+function setupScrollSpy(offset) {
+  const sections = document.querySelectorAll(".menu-category[id]");
+  if (sections.length === 0) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          const nav = categoryFiltersEl.querySelector("nav");
+          if (!nav) return;
+
+          nav
+            .querySelectorAll(".filter-btn")
+            .forEach((btn) => btn.classList.remove("active"));
+          const activeLink = nav.querySelector(`[data-category="${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add("active");
+            // Scroll nav to show active button
+            activeLink.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+          }
+        }
+      });
+    },
+    {
+      rootMargin: `-${offset}px 0px -60% 0px`,
+      threshold: 0,
+    },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 // Setup event listeners
 function setupEventListeners() {
   // Navigation menu toggle
@@ -475,22 +506,7 @@ function setupEventListeners() {
     });
   });
 
-  // Category filter buttons
-  categoryFiltersEl.addEventListener("click", (e) => {
-    if (e.target.classList.contains("filter-btn")) {
-      // Update active button
-      document
-        .querySelectorAll(".filter-btn")
-        .forEach((btn) => btn.classList.remove("active"));
-      e.target.classList.add("active");
-
-      // Update current category and render menu
-      currentCategory = e.target.dataset.category;
-      renderMenu(currentCategory);
-    }
-  });
-
-  // Add to cart buttons with options support
+  // Add to cart buttons — always open modal
   menuContainerEl.addEventListener("click", (e) => {
     if (
       e.target.classList.contains("add-to-cart") ||
@@ -499,11 +515,7 @@ function setupEventListeners() {
       const button = e.target.classList.contains("add-to-cart")
         ? e.target
         : e.target.parentElement;
-      addToCartWithOptions(
-        button.dataset.itemId,
-        button.dataset.title,
-        parseFloat(button.dataset.price),
-      );
+      addToCartWithOptions(button.dataset.itemId);
     }
   });
 
@@ -517,6 +529,14 @@ function setupEventListeners() {
   const confirmOptionsBtn = document.getElementById("confirmOptionsBtn");
   if (confirmOptionsBtn)
     confirmOptionsBtn.addEventListener("click", confirmOptions);
+
+  // Item quantity controls in modal
+  const itemQtyDecrease = document.getElementById("itemQtyDecrease");
+  const itemQtyIncrease = document.getElementById("itemQtyIncrease");
+  if (itemQtyDecrease)
+    itemQtyDecrease.addEventListener("click", () => changeItemQuantity(-1));
+  if (itemQtyIncrease)
+    itemQtyIncrease.addEventListener("click", () => changeItemQuantity(1));
 
   // Keyboard support for cart
   if (cartSummaryEl) {
@@ -564,18 +584,15 @@ function updateCartDisplay() {
   cartItemsEl.innerHTML = "";
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const total = cart.reduce(
-    (sum, item) => sum + (item.unitPrice || item.price) * item.quantity,
-    0,
-  );
+  const total = cart.reduce((sum, item) => sum + calculateLineTotal(item), 0);
 
   // Update cart counter and total
   if (cartItemCountExpandedEl) cartItemCountExpandedEl.textContent = totalItems;
-  if (cartTotalEl) cartTotalEl.textContent = `$${total.toFixed(2)}`;
+  if (cartTotalEl) cartTotalEl.textContent = formatBRL(total);
 
   if (cart.length === 0) {
     cartItemsEl.innerHTML =
-      '<p class="text-muted text-center py-4">Your cart is empty</p>';
+      '<p class="text-muted text-center py-4">Seu carrinho está vazio</p>';
     hideCartSummary();
     return;
   }
@@ -584,29 +601,29 @@ function updateCartDisplay() {
   showCartSummary();
 
   cart.forEach((item, index) => {
-    const unitPrice = item.unitPrice || item.price;
-    const itemTotal = unitPrice * item.quantity;
+    const lineTotal = calculateLineTotal(item);
+    const basePrice = item.basePrice || item.price;
 
     // Build options display
     let optionsHtml = "";
     if (item.options && item.options.length > 0) {
       const optionsByGroup = {};
-      item.options.forEach((option) => {
-        if (!optionsByGroup[option.groupName]) {
-          optionsByGroup[option.groupName] = [];
+      item.options.forEach((opt) => {
+        if (!optionsByGroup[opt.groupName]) {
+          optionsByGroup[opt.groupName] = [];
         }
-        optionsByGroup[option.groupName].push(option);
+        optionsByGroup[opt.groupName].push(opt);
       });
 
       Object.keys(optionsByGroup).forEach((groupName) => {
         const groupOptions = optionsByGroup[groupName];
         const optionNames = groupOptions
           .map((opt) => {
-            let optionText = opt.name;
-            if (opt.priceDelta > 0) {
-              optionText += ` (+$${opt.priceDelta.toFixed(2)})`;
-            }
-            return optionText;
+            let text = opt.name;
+            if (opt.quantity > 1) text += ` ×${opt.quantity}`;
+            if (opt.priceDelta > 0)
+              text += ` (+${formatBRL(opt.priceDelta * opt.quantity)})`;
+            return text;
           })
           .join(", ");
         optionsHtml += `<div class="item-option"><strong>${groupName}:</strong> ${optionNames}</div>`;
@@ -619,43 +636,31 @@ function updateCartDisplay() {
       <div class="cart-item-content">
         <div class="item-details">
           <h6 class="item-name mb-1">${item.title}</h6>
-          <span class="item-unit-price text-muted">$${unitPrice.toFixed(
-            2,
-          )} each</span>
-          ${
-            optionsHtml
-              ? `<div class="item-options mt-1">${optionsHtml}</div>`
-              : ""
-          }
+          <span class="item-unit-price text-muted">${formatBRL(basePrice)} cada</span>
+          ${optionsHtml ? `<div class="item-options mt-1">${optionsHtml}</div>` : ""}
         </div>
-        
+
         <div class="item-controls">
           <div class="quantity-controls">
-            <button class="btn btn-sm btn-outline-secondary qty-decrease" data-item-id="${
-              item.id
-            }" ${item.quantity <= 1 ? "disabled" : ""}>
+            <button class="btn btn-sm btn-outline-secondary qty-decrease" data-item-id="${item.id}" ${item.quantity <= 1 ? "disabled" : ""}>
               <i class="fas fa-minus"></i>
             </button>
             <span class="qty-display">${item.quantity}</span>
-            <button class="btn btn-sm btn-outline-secondary qty-increase" data-item-id="${
-              item.id
-            }">
+            <button class="btn btn-sm btn-outline-secondary qty-increase" data-item-id="${item.id}">
               <i class="fas fa-plus"></i>
             </button>
           </div>
-          
+
           <div class="item-total-section">
-            <span class="item-total">$${itemTotal.toFixed(2)}</span>
+            <span class="item-total">${formatBRL(lineTotal)}</span>
             ${
               item.options && item.options.length > 0
-                ? `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Edit options">
-                <i class="fas fa-edit"></i>
-              </button>`
+                ? `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Editar opções">
+                  <i class="fas fa-edit"></i>
+                </button>`
                 : ""
             }
-            <button class="btn btn-sm btn-outline-danger remove-item" data-item-id="${
-              item.id
-            }" title="Remove item">
+            <button class="btn btn-sm btn-outline-danger remove-item" data-item-id="${item.id}" title="Remover item">
               <i class="fas fa-times"></i>
             </button>
           </div>
@@ -756,27 +761,9 @@ function changeQuantity(itemId, delta) {
   }
 }
 
-// Add to cart with announcement
-function addToCart(itemId, title, price) {
-  const existingItem = cart.find((item) => item.id === itemId);
-
-  if (existingItem) {
-    existingItem.quantity += 1;
-    announceToScreenReader(
-      `Added another ${title} to cart. Total: ${existingItem.quantity}`,
-    );
-  } else {
-    cart.push({
-      id: itemId,
-      title: title,
-      price: price,
-      quantity: 1,
-    });
-    announceToScreenReader(`Added ${title} to cart`);
-  }
-
-  updateCartDisplay();
-  showCartSummary();
+// Format price in BRL
+function formatBRL(value) {
+  return `R$${value.toFixed(2).replace(".", ",")}`;
 }
 
 // Screen reader announcements
@@ -799,200 +786,305 @@ function updateToggleIcon(isCollapsed) {
   }
 }
 
+// ==========================================
 // Options Modal Variables
+// ==========================================
 let currentOptionsItem = null;
-let currentSelections = {};
+let currentOptionGroups = null; // Category-level option groups
+let currentSelections = {}; // { groupId: { optionId: quantity, ... } }
+let currentItemQuantity = 1;
 let isEditingCartItem = false;
 let editingCartItemIndex = -1;
 
-// Options Modal Functions
-function openOptionsModal(item, isEdit = false, cartItemIndex = -1) {
+// Find menu item and its category-level optionGroups
+function findMenuItemWithOptions(itemId) {
+  let menuItem = null;
+  let categoryOptionGroups = null;
+
+  if (menuData && menuData.categories) {
+    menuData.categories.forEach((category) => {
+      const found = category.items.find((item) => item.id === itemId);
+      if (found) {
+        menuItem = found;
+        categoryOptionGroups = category.optionGroups || null;
+      }
+    });
+  }
+
+  return { menuItem, categoryOptionGroups };
+}
+
+// All items open the modal (with or without options)
+function addToCartWithOptions(itemId) {
+  const { menuItem, categoryOptionGroups } = findMenuItemWithOptions(itemId);
+
+  if (!menuItem) {
+    console.error("Menu item not found:", itemId);
+    return;
+  }
+
+  openOptionsModal(menuItem, categoryOptionGroups);
+}
+
+// Open options modal
+function openOptionsModal(
+  item,
+  optionGroups = null,
+  isEdit = false,
+  cartItemIndex = -1,
+) {
   currentOptionsItem = item;
+  currentOptionGroups = optionGroups;
+  currentItemQuantity = 1;
   isEditingCartItem = isEdit;
   editingCartItemIndex = cartItemIndex;
   currentSelections = {};
 
-  // If editing, pre-populate selections
+  // If editing, pre-populate selections and quantity
   if (isEdit && cartItemIndex >= 0) {
     const cartItem = cart[cartItemIndex];
+    currentItemQuantity = cartItem.quantity || 1;
     if (cartItem.options) {
-      cartItem.options.forEach((option) => {
-        if (!currentSelections[option.groupId]) {
-          currentSelections[option.groupId] = [];
+      cartItem.options.forEach((opt) => {
+        if (!currentSelections[opt.groupId]) {
+          currentSelections[opt.groupId] = {};
         }
-        currentSelections[option.groupId].push(option.id);
+        currentSelections[opt.groupId][opt.id] = opt.quantity || 1;
       });
     }
   }
 
-  renderOptionsModal(item);
+  renderOptionsModal();
   document.getElementById("optionsModal").style.display = "flex";
   document.body.style.overflow = "hidden";
 }
 
+// Close options modal
 function closeOptionsModal() {
   document.getElementById("optionsModal").style.display = "none";
   document.body.style.overflow = "auto";
   currentOptionsItem = null;
+  currentOptionGroups = null;
   currentSelections = {};
+  currentItemQuantity = 1;
   isEditingCartItem = false;
   editingCartItemIndex = -1;
 }
 
-function renderOptionsModal(item) {
-  // Update item info
+// Render options modal content
+function renderOptionsModal() {
+  const item = currentOptionsItem;
+  if (!item) return;
+
   document.getElementById("optionsItemTitle").textContent = item.title;
-  document.getElementById("optionsBasePrice").textContent =
-    `$${item.price.toFixed(2)}`;
+  document.getElementById("optionsBasePrice").textContent = formatBRL(
+    item.price,
+  );
+
+  // Update item quantity display
+  document.getElementById("itemQtyDisplay").textContent = currentItemQuantity;
 
   const container = document.getElementById("optionGroupsContainer");
   container.innerHTML = "";
 
-  if (!item.optionGroups || item.optionGroups.length === 0) {
-    container.innerHTML =
-      '<p class="text-muted">No customization options available.</p>';
-    return;
+  if (currentOptionGroups && currentOptionGroups.length > 0) {
+    currentOptionGroups.forEach((group) => {
+      const groupDiv = document.createElement("div");
+      groupDiv.className = "option-group";
+
+      const effectiveMax = group.perItemMax * currentItemQuantity;
+      const groupTotal = getGroupTotal(group.id);
+
+      groupDiv.innerHTML = `
+        <div class="option-group-header">
+          <h6 class="option-group-title">${group.name}</h6>
+          <span class="option-group-counter">${groupTotal}/${effectiveMax}</span>
+        </div>
+        <div class="option-group-body" data-group-id="${group.id}">
+          ${group.options.map((option) => renderOptionItem(group, option)).join("")}
+        </div>
+      `;
+
+      container.appendChild(groupDiv);
+    });
   }
 
-  item.optionGroups.forEach((group) => {
-    const groupDiv = document.createElement("div");
-    groupDiv.className = "option-group";
-
-    const isRequired = group.min > 0;
-    const groupTitle = group.name + (isRequired ? " *" : "");
-
-    groupDiv.innerHTML = `
-      <div class="option-group-header">
-        <h6 class="option-group-title${
-          isRequired ? " required" : ""
-        }">${groupTitle}</h6>
-      </div>
-      <div class="option-group-body" data-group-id="${group.id}">
-        ${group.options
-          .map((option) => renderOptionItem(group, option))
-          .join("")}
-      </div>
-    `;
-
-    container.appendChild(groupDiv);
-  });
-
   updateOptionsTotal();
-  validateOptionsSelection();
 }
 
+// Get total selected quantity for a group
+function getGroupTotal(groupId) {
+  const groupSelections = currentSelections[groupId] || {};
+  return Object.values(groupSelections).reduce((sum, qty) => sum + qty, 0);
+}
+
+// Render a single option item with +/- qty controls
 function renderOptionItem(group, option) {
-  const inputType = group.type === "single" ? "radio" : "checkbox";
-  const inputName = group.type === "single" ? `option-${group.id}` : "";
-  const isChecked = currentSelections[group.id]?.includes(option.id) || false;
+  const qty =
+    (currentSelections[group.id] && currentSelections[group.id][option.id]) ||
+    0;
+  const effectiveMax = group.perItemMax * currentItemQuantity;
+  const groupTotal = getGroupTotal(group.id);
+  const canIncrease = groupTotal < effectiveMax;
 
   const priceText =
-    option.priceDelta > 0 ? `+$${option.priceDelta.toFixed(2)}` : "";
+    option.priceDelta > 0 ? `+ ${formatBRL(option.priceDelta)}` : "";
 
-  const priceClass = option.priceDelta === 0 ? "free" : "";
+  // Show full controls when qty > 0, otherwise just the + button
+  const qtyControls =
+    qty > 0
+      ? `<div class="option-qty-controls">
+        <button class="qty-btn minus" onclick="changeOptionQty('${group.id}','${option.id}',-1)">
+          <i class="fas fa-minus"></i>
+        </button>
+        <span class="option-qty">${qty}</span>
+        <button class="qty-btn plus" onclick="changeOptionQty('${group.id}','${option.id}',1)" ${!canIncrease ? "disabled" : ""}>
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>`
+      : `<div class="option-qty-controls">
+        <button class="qty-btn plus" onclick="changeOptionQty('${group.id}','${option.id}',1)" ${!canIncrease ? "disabled" : ""}>
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>`;
 
   return `
-    <div class="option-item" onclick="toggleOption('${group.id}', '${
-      option.id
-    }', '${group.type}', ${group.max})">
-      <input type="${inputType}" 
-             ${inputName ? `name="${inputName}"` : ""} 
-             value="${option.id}"
-             ${isChecked ? "checked" : ""}
-             onchange="event.stopPropagation()">
-      <div class="option-details">
-        <div class="option-info">
-          <div class="option-name">${option.name}</div>
-          ${
-            option.description
-              ? `<div class="option-description">${option.description}</div>`
-              : ""
-          }
-        </div>
-        <div class="option-price ${priceClass}">${priceText}</div>
+    <div class="option-item${qty > 0 ? " selected" : ""}">
+      <div class="option-info">
+        <div class="option-name">${option.name}</div>
+        ${option.description ? `<div class="option-description">${option.description}</div>` : ""}
+        ${priceText ? `<div class="option-price">${priceText}</div>` : ""}
       </div>
+      ${qtyControls}
     </div>
   `;
 }
 
-function toggleOption(groupId, optionId, groupType, maxSelections) {
+// Change option quantity (+/- delta)
+function changeOptionQty(groupId, optionId, delta) {
   if (!currentSelections[groupId]) {
-    currentSelections[groupId] = [];
+    currentSelections[groupId] = {};
   }
 
-  if (groupType === "single") {
-    // Single selection: replace current selection
-    currentSelections[groupId] = [optionId];
-  } else {
-    // Multi selection: toggle
-    const currentIndex = currentSelections[groupId].indexOf(optionId);
-    if (currentIndex > -1) {
-      currentSelections[groupId].splice(currentIndex, 1);
-    } else {
-      if (currentSelections[groupId].length < maxSelections) {
-        currentSelections[groupId].push(optionId);
-      } else {
-        return; // Max reached, don't add
-      }
+  const currentQty = currentSelections[groupId][optionId] || 0;
+  const newQty = currentQty + delta;
+
+  // Clamp to 0 minimum
+  if (newQty < 0) return;
+
+  // Check group max
+  if (delta > 0) {
+    const group = currentOptionGroups.find((g) => g.id === groupId);
+    if (group) {
+      const effectiveMax = group.perItemMax * currentItemQuantity;
+      const groupTotal = getGroupTotal(groupId);
+      if (groupTotal + delta > effectiveMax) return;
     }
   }
 
-  // Re-render to update UI
-  renderOptionsModal(currentOptionsItem);
+  if (newQty === 0) {
+    delete currentSelections[groupId][optionId];
+    if (Object.keys(currentSelections[groupId]).length === 0) {
+      delete currentSelections[groupId];
+    }
+  } else {
+    currentSelections[groupId][optionId] = newQty;
+  }
+
+  renderOptionsModal();
 }
 
-function updateOptionsTotal() {
-  let extraCost = 0;
+// Change item quantity in modal
+function changeItemQuantity(delta) {
+  const newQty = currentItemQuantity + delta;
+  if (newQty < 1) return;
+
+  currentItemQuantity = newQty;
+
+  // Trim option selections if they exceed new effective max
+  if (currentOptionGroups) {
+    currentOptionGroups.forEach((group) => {
+      const effectiveMax = group.perItemMax * currentItemQuantity;
+      const groupSelections = currentSelections[group.id];
+      if (!groupSelections) return;
+
+      let groupTotal = Object.values(groupSelections).reduce(
+        (s, q) => s + q,
+        0,
+      );
+
+      // Trim from the end until within limit
+      if (groupTotal > effectiveMax) {
+        const optionIds = Object.keys(groupSelections);
+        for (
+          let i = optionIds.length - 1;
+          i >= 0 && groupTotal > effectiveMax;
+          i--
+        ) {
+          const optId = optionIds[i];
+          const reduce = Math.min(
+            groupSelections[optId],
+            groupTotal - effectiveMax,
+          );
+          groupSelections[optId] -= reduce;
+          groupTotal -= reduce;
+          if (groupSelections[optId] <= 0) {
+            delete groupSelections[optId];
+          }
+        }
+        if (Object.keys(groupSelections).length === 0) {
+          delete currentSelections[group.id];
+        }
+      }
+    });
+  }
+
+  renderOptionsModal();
+}
+
+// Calculate options extra cost
+function calculateOptionsCost() {
+  let cost = 0;
+  if (!currentOptionGroups) return cost;
 
   Object.keys(currentSelections).forEach((groupId) => {
-    const group = currentOptionsItem.optionGroups.find((g) => g.id === groupId);
-    if (group) {
-      currentSelections[groupId].forEach((optionId) => {
-        const option = group.options.find((o) => o.id === optionId);
-        if (option && option.priceDelta) {
-          extraCost += option.priceDelta;
-        }
-      });
-    }
+    const group = currentOptionGroups.find((g) => g.id === groupId);
+    if (!group) return;
+    Object.entries(currentSelections[groupId]).forEach(([optionId, qty]) => {
+      const option = group.options.find((o) => o.id === optionId);
+      if (option && option.priceDelta) {
+        cost += option.priceDelta * qty;
+      }
+    });
   });
 
-  const total = currentOptionsItem.price + extraCost;
-  document.getElementById("optionsTotalPrice").textContent = `$${total.toFixed(
-    2,
-  )}`;
+  return cost;
 }
 
-function validateOptionsSelection() {
-  let isValid = true;
+// Update total price display in modal
+function updateOptionsTotal() {
+  if (!currentOptionsItem) return;
 
-  if (!currentOptionsItem.optionGroups) {
-    document.getElementById("confirmOptionsBtn").disabled = false;
-    return;
-  }
+  const optionsCost = calculateOptionsCost();
+  const total = currentOptionsItem.price * currentItemQuantity + optionsCost;
 
-  currentOptionsItem.optionGroups.forEach((group) => {
-    const selected = currentSelections[group.id] || [];
-    const min = group.min || 0;
-    const max = group.max || selected.length;
+  document.getElementById("optionsTotalPrice").textContent = formatBRL(total);
 
-    if (selected.length < min || selected.length > max) {
-      isValid = false;
-    }
-  });
-
-  document.getElementById("confirmOptionsBtn").disabled = !isValid;
+  // Always enable confirm button (no required options in current data)
+  document.getElementById("confirmOptionsBtn").disabled = false;
 }
 
+// Confirm and add to cart
 function confirmOptions() {
   if (!currentOptionsItem) return;
 
   const chosenOptions = [];
-  let extraCost = 0;
 
-  Object.keys(currentSelections).forEach((groupId) => {
-    const group = currentOptionsItem.optionGroups.find((g) => g.id === groupId);
-    if (group) {
-      currentSelections[groupId].forEach((optionId) => {
+  if (currentOptionGroups) {
+    Object.keys(currentSelections).forEach((groupId) => {
+      const group = currentOptionGroups.find((g) => g.id === groupId);
+      if (!group) return;
+      Object.entries(currentSelections[groupId]).forEach(([optionId, qty]) => {
         const option = group.options.find((o) => o.id === optionId);
         if (option) {
           chosenOptions.push({
@@ -1000,40 +1092,31 @@ function confirmOptions() {
             groupName: group.name,
             id: option.id,
             name: option.name,
-            description: option.description,
             priceDelta: option.priceDelta || 0,
+            quantity: qty,
           });
-          if (option.priceDelta) {
-            extraCost += option.priceDelta;
-          }
         }
       });
-    }
-  });
+    });
+  }
 
   const lineItem = {
     id: generateLineId(currentOptionsItem.id, chosenOptions),
     title: currentOptionsItem.title,
     basePrice: currentOptionsItem.price,
     options: chosenOptions,
-    unitPrice: +(currentOptionsItem.price + extraCost).toFixed(2),
-    quantity: 1,
+    quantity: currentItemQuantity,
   };
 
   if (isEditingCartItem && editingCartItemIndex >= 0) {
-    // Update existing cart item
-    cart[editingCartItemIndex] = {
-      ...lineItem,
-      quantity: cart[editingCartItemIndex].quantity,
-    };
+    cart[editingCartItemIndex] = lineItem;
     announceToScreenReader(`Updated ${lineItem.title} in cart`);
   } else {
-    // Add new item to cart
-    const existingItemIndex = cart.findIndex((item) => item.id === lineItem.id);
-    if (existingItemIndex > -1) {
-      cart[existingItemIndex].quantity += 1;
+    const existingIndex = cart.findIndex((item) => item.id === lineItem.id);
+    if (existingIndex > -1) {
+      cart[existingIndex].quantity += currentItemQuantity;
       announceToScreenReader(
-        `Added another ${lineItem.title} to cart. Total: ${cart[existingItemIndex].quantity}`,
+        `Added ${currentItemQuantity} more ${lineItem.title} to cart.`,
       );
     } else {
       cart.push(lineItem);
@@ -1047,11 +1130,11 @@ function confirmOptions() {
 }
 
 function generateLineId(itemId, options) {
-  const optionIds = options
-    .map((o) => `${o.groupId}:${o.id}`)
+  const optionKey = options
+    .map((o) => `${o.groupId}:${o.id}:${o.quantity}`)
     .sort()
     .join("|");
-  return `${itemId}${optionIds ? "|" + optionIds : ""}`;
+  return `${itemId}${optionKey ? "|" + optionKey : ""}`;
 }
 
 // Edit existing cart item
@@ -1060,8 +1143,10 @@ function editCartItem(cartItemIndex) {
 
   const cartItem = cart[cartItemIndex];
 
-  // Find the original menu item
+  // Find the original menu item and its category-level optionGroups
   let menuItem = null;
+  let categoryOptionGroups = null;
+
   if (menuData && menuData.categories) {
     menuData.categories.forEach((category) => {
       const foundItem = category.items.find(
@@ -1069,6 +1154,7 @@ function editCartItem(cartItemIndex) {
       );
       if (foundItem) {
         menuItem = foundItem;
+        categoryOptionGroups = category.optionGroups || null;
       }
     });
   }
@@ -1078,75 +1164,56 @@ function editCartItem(cartItemIndex) {
     return;
   }
 
-  openOptionsModal(menuItem, true, cartItemIndex);
+  openOptionsModal(menuItem, categoryOptionGroups, true, cartItemIndex);
 }
 
-// Modify existing addToCart function to handle options
-function addToCartWithOptions(itemId, title, price) {
-  // Find the menu item
-  let menuItem = null;
-  if (menuData && menuData.categories) {
-    menuData.categories.forEach((category) => {
-      const foundItem = category.items.find((item) => item.id === itemId);
-      if (foundItem) {
-        menuItem = foundItem;
-      }
-    });
-  }
-
-  if (!menuItem) {
-    console.error("Menu item not found:", itemId);
-    return;
-  }
-
-  // Check if item has options
-  if (!menuItem.optionGroups || menuItem.optionGroups.length === 0) {
-    // No options, add directly to cart as before
-    addToCart(itemId, title, price);
-    return;
-  }
-
-  // Has options, open modal
-  openOptionsModal(menuItem);
+// ==========================================
+// Cart line total calculation
+// ==========================================
+function calculateLineTotal(item) {
+  const optionsCost = item.options
+    ? item.options.reduce(
+        (sum, opt) => sum + (opt.priceDelta || 0) * (opt.quantity || 1),
+        0,
+      )
+    : 0;
+  return (item.basePrice || item.price) * item.quantity + optionsCost;
 }
 
-// Send order to WhatsApp with updated format
+// Send order to WhatsApp
 function sendOrderToWhatsApp() {
   if (cart.length === 0) {
     alert("Seu carrinho está vazio!");
     return;
   }
 
-  let message = `Olá! Gostaria de fazer um pedido na ${menuData.restaurant.name}:\n\nPedido:\n`;
+  let message = `Olá! Gostaria de fazer um pedido na ${menuData.restaurant.name}:\n\n*Pedido:*\n`;
 
   let total = 0;
   cart.forEach((item) => {
-    const itemTotal = (item.unitPrice || item.price) * item.quantity;
-    total += itemTotal;
+    const lineTotal = calculateLineTotal(item);
+    total += lineTotal;
 
-    message += `- ${item.title} × ${item.quantity} ($${itemTotal.toFixed(
-      2,
-    )})\n`;
+    message += `\n- *${item.title}* × ${item.quantity} (${formatBRL(lineTotal)})\n`;
 
-    // Add options if they exist
     if (item.options && item.options.length > 0) {
       const optionsByGroup = {};
-      item.options.forEach((option) => {
-        if (!optionsByGroup[option.groupName]) {
-          optionsByGroup[option.groupName] = [];
+      item.options.forEach((opt) => {
+        if (!optionsByGroup[opt.groupName]) {
+          optionsByGroup[opt.groupName] = [];
         }
-        optionsByGroup[option.groupName].push(option);
+        optionsByGroup[opt.groupName].push(opt);
       });
 
       Object.keys(optionsByGroup).forEach((groupName) => {
         const groupOptions = optionsByGroup[groupName];
         const optionNames = groupOptions
           .map((opt) => {
-            let optionText = opt.name;
-            if (opt.priceDelta > 0) {
-              optionText += ` (+R$${opt.priceDelta.toFixed(2)})`;
-            }
-            return optionText;
+            let text = opt.name;
+            if (opt.quantity > 1) text += ` ×${opt.quantity}`;
+            if (opt.priceDelta > 0)
+              text += ` (+${formatBRL(opt.priceDelta * opt.quantity)})`;
+            return text;
           })
           .join(", ");
         message += `  • ${groupName}: ${optionNames}\n`;
@@ -1154,12 +1221,9 @@ function sendOrderToWhatsApp() {
     }
   });
 
-  message += `\nTotal: $${total.toFixed(2)}\n\nObrigada!`;
+  message += `\n*Total: ${formatBRL(total)}*\n\nObrigada!`;
 
   const phoneNumber = menuData.restaurant.contact.phone;
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message,
-  )}`;
-
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, "_blank");
 }

@@ -15,11 +15,11 @@
     },
     "contact": {
       "phone": "5544998663351",
-      "address": "Rua Pioneiro José Fernandes, 227, Conjunto João de Barro I",
+      "address": "",
       "city": "Maringá",
       "state": "PR",
-      "zip": "87053-100",
-      "country": "",
+      "zip": "",
+      "country": "Brasil",
       "email": "contato@sandrasalgados.com"
     },
     "name": "Sandra Salgados",
@@ -48,6 +48,70 @@
     {
       "id": "risoles",
       "name": "Risoles",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "risoles-item-001",
@@ -118,6 +182,70 @@
     {
       "id": "coxinhas",
       "name": "Coxinhas",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "coxinhas-item-001",
@@ -125,75 +253,7 @@
           "description": "Coxinhas de frango feitas com uma deliciosa massa de mandioca. Preparo totalmente artesanal. Contém 6 unidades médias.",
           "price": 22.9,
           "image": "images/menu-items/coxinhas-frango.png",
-          "available": true,
-          "optionGroups": [
-            {
-              "id": "sauce",
-              "name": "Escolha Seu Molho Grátis",
-              "type": "single",
-              "min": 0,
-              "max": 1,
-              "options": [
-                {
-                  "id": "mostarda-picante",
-                  "name": "Molho de Mostarda Picante",
-                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "maionese-verde",
-                  "name": "Maionese Verde com Alho Assado",
-                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "pimenta-defumado",
-                  "name": "Molho de Pimenta Defumado",
-                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "especial-defumado",
-                  "name": "Molho Especial Defumado",
-                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-                  "priceDelta": 0
-                }
-              ]
-            },
-            {
-              "id": "extras",
-              "name": "Molhos Extras (Adicionais)",
-              "type": "multi",
-              "min": 0,
-              "max": 5,
-              "options": [
-                {
-                  "id": "mostarda-picante",
-                  "name": "Molho de Mostarda Picante",
-                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "maionese-verde",
-                  "name": "Maionese Verde com Alho Assado",
-                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "pimenta-defumado",
-                  "name": "Molho de Pimenta Defumado",
-                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "especial-defumado",
-                  "name": "Molho Especial Defumado",
-                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-                  "priceDelta": 0
-                }
-              ]
-            }
-          ]
+          "available": true
         },
         {
           "id": "coxinhas-item-002",
@@ -201,75 +261,7 @@
           "description": "6 coxinhas de frango com recheio cremoso de queijo Catupiry envoltas em uma massa de mandioca incrivelmente macia e saborosa.",
           "price": 25.9,
           "image": "images/menu-items/coxinhas-frango-catupiry.png",
-          "available": true,
-          "optionGroups": [
-            {
-              "id": "sauce",
-              "name": "Escolha Seu Molho Grátis",
-              "type": "single",
-              "min": 0,
-              "max": 1,
-              "options": [
-                {
-                  "id": "mostarda-picante",
-                  "name": "Molho de Mostarda Picante",
-                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "maionese-verde",
-                  "name": "Maionese Verde com Alho Assado",
-                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "pimenta-defumado",
-                  "name": "Molho de Pimenta Defumado",
-                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "especial-defumado",
-                  "name": "Molho Especial Defumado",
-                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-                  "priceDelta": 0
-                }
-              ]
-            },
-            {
-              "id": "extras",
-              "name": "Molhos Extras (Adicionais)",
-              "type": "multi",
-              "min": 0,
-              "max": 5,
-              "options": [
-                {
-                  "id": "mostarda-picante",
-                  "name": "Molho de Mostarda Picante",
-                  "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "maionese-verde",
-                  "name": "Maionese Verde com Alho Assado",
-                  "description": "Maionese verde temperada com cheiro verde e alho assado.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "pimenta-defumado",
-                  "name": "Molho de Pimenta Defumado",
-                  "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-                  "priceDelta": 0
-                },
-                {
-                  "id": "especial-defumado",
-                  "name": "Molho Especial Defumado",
-                  "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-                  "priceDelta": 0
-                }
-              ]
-            }
-          ]
+          "available": true
         },
         {
           "id": "coxinhas-item-003",
@@ -292,6 +284,70 @@
     {
       "id": "empadao",
       "name": "Empadão",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 2,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "empadao-item-001",
@@ -346,6 +402,70 @@
     {
       "id": "empadinhas",
       "name": "Empadinhas",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "empadinhas-item-001",
@@ -400,6 +520,70 @@
     {
       "id": "bolinhas-de-queijo",
       "name": "Bolinhas de Queijo",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "bolinhas-queijo-item-001",
@@ -430,6 +614,70 @@
     {
       "id": "combos-mini-salgados",
       "name": "Combos & Mini Salgados",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "combos-item-001",
@@ -468,6 +716,70 @@
     {
       "id": "pao-de-queijo",
       "name": "Pão de Queijo Artesanal (5/10/15)",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "pao-de-queijo-item-001",
@@ -498,6 +810,70 @@
     {
       "id": "petiscos-variados",
       "name": "Petiscos Varidados",
+      "optionGroups": [
+        {
+          "id": "sauce",
+          "name": "Escolha Seu Molho Grátis",
+          "perItemMax": 1,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "name": "Molhos Extras (Adicionais)",
+          "perItemMax": 5,
+          "options": [
+            {
+              "id": "mostarda-picante",
+              "name": "Molho de Mostarda Picante",
+              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "maionese-verde",
+              "name": "Maionese Verde com Alho Assado",
+              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "priceDelta": 0.6
+            },
+            {
+              "id": "pimenta-defumado",
+              "name": "Molho de Pimenta Defumado",
+              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
+              "priceDelta": 0.8
+            },
+            {
+              "id": "especial-defumado",
+              "name": "Molho Especial Defumado",
+              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
+              "priceDelta": 0.8
+            }
+          ]
+        }
+      ],
       "items": [
         {
           "id": "petiscos-item-001",
