@@ -909,7 +909,14 @@ function openOptionsModal(
   cartItemIndex = -1,
 ) {
   currentOptionsItem = item;
-  currentOptionGroups = optionGroups;
+  // Filter option groups by item's optionGroupIds if specified
+  if (optionGroups && item.optionGroupIds) {
+    currentOptionGroups = optionGroups.filter((g) =>
+      item.optionGroupIds.includes(g.id),
+    );
+  } else {
+    currentOptionGroups = optionGroups;
+  }
   currentItemQuantity = 1;
   currentSelectedVariant = null;
   isEditingCartItem = isEdit;
@@ -1389,8 +1396,9 @@ function sendOrderToWhatsApp() {
     const lineTotal = calculateLineTotal(item);
     total += lineTotal;
 
+    const baseCost = (item.basePrice || item.price) * item.quantity;
     const variantSuffix = item.variantLabel ? ` (${item.variantLabel})` : "";
-    message += `\n- *${item.title}${variantSuffix}* × ${item.quantity} (${formatBRL(lineTotal)})\n`;
+    message += `\n- *${item.title}${variantSuffix}* × ${item.quantity} (${formatBRL(baseCost)})\n`;
 
     if (item.options && item.options.length > 0) {
       const optionsByGroup = {};

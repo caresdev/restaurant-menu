@@ -796,13 +796,14 @@
           "description": "Monte sua caixa com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
           "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
           "available": true,
+          "optionGroupIds": ["traditional-flavors", "sauce", "extras"],
           "variants": [
             {
               "id": "25-units",
               "label": "25 unidades",
               "price": 33.9,
               "optionOverrides": {
-                "flavors": { "perItemMax": 5, "minSelect": 2 },
+                "traditional-flavors": { "perItemMax": 5, "minSelect": 2 },
                 "sauce": { "perItemMax": 1 },
                 "extras": { "perItemMax": 3 }
               }
@@ -812,7 +813,7 @@
               "label": "50 unidades",
               "price": 59.9,
               "optionOverrides": {
-                "flavors": { "perItemMax": 5, "minSelect": 3 },
+                "traditional-flavors": { "perItemMax": 5, "minSelect": 3 },
                 "sauce": { "perItemMax": 2 },
                 "extras": { "perItemMax": 5 }
               }
@@ -822,7 +823,7 @@
               "label": "100 unidades",
               "price": 99.9,
               "optionOverrides": {
-                "flavors": { "perItemMax": 10, "minSelect": 5 },
+                "traditional-flavors": { "perItemMax": 10, "minSelect": 5 },
                 "sauce": { "perItemMax": 3 },
                 "extras": { "perItemMax": 8 }
               }
@@ -835,13 +836,14 @@
           "description": "Monte sua caixa vegana/vegetariana com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
           "image": "images/menu-items/salgadinhos-veganos.png",
           "available": true,
+          "optionGroupIds": ["vegan-vegetarian-flavors", "sauce", "extras"],
           "variants": [
             {
               "id": "25-units",
               "label": "25 unidades",
               "price": 35.9,
               "optionOverrides": {
-                "flavors": { "perItemMax": 5, "minSelect": 2 },
+                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 2 },
                 "sauce": { "perItemMax": 1 },
                 "extras": { "perItemMax": 3 }
               }
@@ -851,7 +853,7 @@
               "label": "50 unidades",
               "price": 63.9,
               "optionOverrides": {
-                "flavors": { "perItemMax": 5, "minSelect": 3 },
+                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 3 },
                 "sauce": { "perItemMax": 2 },
                 "extras": { "perItemMax": 5 }
               }
@@ -861,7 +863,7 @@
               "label": "100 unidades",
               "price": 109.9,
               "optionOverrides": {
-                "flavors": { "perItemMax": 10, "minSelect": 5 },
+                "vegan-vegetarian-flavors": { "perItemMax": 10, "minSelect": 5 },
                 "sauce": { "perItemMax": 3 },
                 "extras": { "perItemMax": 8 }
               }

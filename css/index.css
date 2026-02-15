@@ -1071,6 +1071,12 @@ main {
     border-radius: 10px;
 }
 
+#bebidas .menu-img {
+    object-fit: contain;
+    aspect-ratio: 1/1;
+    background: #f8f8f8;
+}
+
 
 
 
