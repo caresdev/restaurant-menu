@@ -8,8 +8,9 @@ let restaurantNameEl,
   restaurantSloganEl,
   restaurantDescriptionEl;
 let categoryFiltersEl, menuContainerEl, cartSummaryEl, cartItemsEl, cartTotalEl;
-let sendWhatsAppBtn, clearCartBtn, toggleCartBtn;
+let sendWhatsAppBtn, toggleCartBtn;
 let cartItemCountExpandedEl, cartToggleIconEl, cartAnnouncementsEl;
+let floatingCartBtn, floatingCartBadge, cartOverlayEl;
 let restaurantAddressEl,
   restaurantEmailEl,
   restaurantPhoneEl,
@@ -82,11 +83,13 @@ function initializeDOMElements() {
   cartItemsEl = document.getElementById("cartItems");
   cartTotalEl = document.getElementById("cartTotal");
   sendWhatsAppBtn = document.getElementById("sendWhatsApp");
-  clearCartBtn = document.getElementById("clearCart");
   toggleCartBtn = document.getElementById("toggleCart");
   cartItemCountExpandedEl = document.getElementById("cartItemCountExpanded");
   cartToggleIconEl = document.getElementById("cartToggleIcon");
   cartAnnouncementsEl = document.getElementById("cartAnnouncements");
+  floatingCartBtn = document.getElementById("floatingCartBtn");
+  floatingCartBadge = document.getElementById("floatingCartBadge");
+  cartOverlayEl = document.getElementById("cartOverlay");
   restaurantAddressEl = document.getElementById("restaurantAddress");
   restaurantEmailEl = document.getElementById("restaurantEmail");
   restaurantPhoneEl = document.getElementById("restaurantPhone");
@@ -106,7 +109,6 @@ function initializeDOMElements() {
     cartItemsEl,
     cartTotalEl,
     sendWhatsAppBtn,
-    clearCartBtn,
     toggleCartBtn,
     cartItemCountExpandedEl,
     cartToggleIconEl,
@@ -372,6 +374,16 @@ function renderMenu() {
       const article = document.createElement("article");
       article.className = "menu-item col-xl-6";
 
+      // Price display: "A partir de R$XX,XX" for variant items, "R$XX,XX" for regular
+      let priceDisplay;
+      if (item.variants && item.variants.length > 0) {
+        const lowestPrice = Math.min(...item.variants.map((v) => v.price));
+        const highestPrice = Math.max(...item.variants.map((v) => v.price));
+        priceDisplay = `${formatBRL(lowestPrice)} - ${formatBRL(highestPrice)}`;
+      } else {
+        priceDisplay = formatBRL(item.price || 0);
+      }
+
       article.innerHTML = `
         <div class="row justify-content-md-around">
             <div class="col-md-6 col-lg-5 text-center">
@@ -382,9 +394,7 @@ function renderMenu() {
             <div class="col-md-6 col-lg-5 item-info mt-3 px-4">
               <div class="row justify-content-between">
                 <h4 class="col-8 item-title text-uppercase">${item.title}</h4>
-                <h4 class="col-4 item-price">R$${(item.price || 0).toFixed(
-                  2,
-                )}</h4>
+                <h4 class="col-4 item-price">${priceDisplay}</h4>
               </div>
               <p class="item-description">${
                 item.description || "No description available"
@@ -519,11 +529,17 @@ function setupEventListeners() {
     }
   });
 
+  // Floating cart button — opens the drawer
+  if (floatingCartBtn)
+    floatingCartBtn.addEventListener("click", openCartDrawer);
+
+  // Cart overlay — closes the drawer
+  if (cartOverlayEl) cartOverlayEl.addEventListener("click", closeCartDrawer);
+
   // Cart management
-  if (clearCartBtn) clearCartBtn.addEventListener("click", clearCart);
   if (sendWhatsAppBtn)
     sendWhatsAppBtn.addEventListener("click", sendOrderToWhatsApp);
-  if (toggleCartBtn) toggleCartBtn.addEventListener("click", toggleCart);
+  if (toggleCartBtn) toggleCartBtn.addEventListener("click", closeCartDrawer);
 
   // Options modal
   const confirmOptionsBtn = document.getElementById("confirmOptionsBtn");
@@ -538,16 +554,16 @@ function setupEventListeners() {
   if (itemQtyIncrease)
     itemQtyIncrease.addEventListener("click", () => changeItemQuantity(1));
 
-  // Keyboard support for cart
-  if (cartSummaryEl) {
-    cartSummaryEl.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        if (!cartSummaryEl.classList.contains("collapsed")) {
-          toggleCart();
-        }
-      }
-    });
-  }
+  // Keyboard support — Escape closes the drawer
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.key === "Escape" &&
+      cartSummaryEl &&
+      !cartSummaryEl.classList.contains("collapsed")
+    ) {
+      closeCartDrawer();
+    }
+  });
 
   // Cart item removal
   if (cartItemsEl) {
@@ -566,15 +582,17 @@ function removeFromCart(itemId) {
   updateCartDisplay();
 
   if (cart.length === 0) {
-    hideCartSummary();
+    closeCartDrawer();
   }
 }
 
-// Clear entire cart
-function clearCart() {
+// Clear cart with confirmation
+function confirmClearCart() {
+  if (cart.length === 0) return;
+  if (!window.confirm("Tem certeza que deseja limpar o carrinho?")) return;
   cart = [];
   updateCartDisplay();
-  hideCartSummary();
+  closeCartDrawer();
 }
 
 // Update cart display
@@ -635,7 +653,7 @@ function updateCartDisplay() {
     cartItem.innerHTML = `
       <div class="cart-item-content">
         <div class="item-details">
-          <h6 class="item-name mb-1">${item.title}</h6>
+          <h6 class="item-name mb-1">${item.title}${item.variantLabel ? ` — ${item.variantLabel}` : ""}</h6>
           <span class="item-unit-price text-muted">${formatBRL(basePrice)} cada</span>
           ${optionsHtml ? `<div class="item-options mt-1">${optionsHtml}</div>` : ""}
         </div>
@@ -654,7 +672,7 @@ function updateCartDisplay() {
           <div class="item-total-section">
             <span class="item-total">${formatBRL(lineTotal)}</span>
             ${
-              item.options && item.options.length > 0
+              (item.options && item.options.length > 0) || item.variantId
                 ? `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Editar opções">
                   <i class="fas fa-edit"></i>
                 </button>`
@@ -671,47 +689,74 @@ function updateCartDisplay() {
     cartItemsEl.appendChild(cartItem);
   });
 
+  // Add clear cart button at the bottom
+  const clearRow = document.createElement("div");
+  clearRow.className = "text-start mt-2 mb-1";
+  clearRow.innerHTML = `
+    <button class="btn-clear-cart-inline" data-action="clear-cart">
+      <i class="fas fa-trash-alt me-1"></i>Limpar carrinho
+    </button>
+  `;
+  cartItemsEl.appendChild(clearRow);
+
   // Setup quantity control event listeners
   setupQuantityControls();
 }
 
-// Show cart summary
-function showCartSummary() {
-  if (cartSummaryEl) {
-    cartSummaryEl.style.display = "block";
+// Update the floating cart button badge and visibility
+function updateFloatingCartButton() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    // Start with cart items collapsed on first show
-    if (!cartSummaryEl.hasAttribute("data-initialized")) {
-      cartSummaryEl.classList.add("collapsed");
-      cartSummaryEl.setAttribute("data-initialized", "true");
-      updateToggleIcon(true); // Chevron up for collapsed state
+  if (floatingCartBtn) {
+    if (totalItems > 0) {
+      floatingCartBtn.style.display = "flex";
+      if (floatingCartBadge) floatingCartBadge.textContent = totalItems;
+
+      // Pulse animation on update
+      floatingCartBtn.classList.remove("pulse");
+      void floatingCartBtn.offsetWidth; // trigger reflow
+      floatingCartBtn.classList.add("pulse");
+    } else {
+      floatingCartBtn.style.display = "none";
     }
   }
 }
 
-// Hide cart summary
-function hideCartSummary() {
-  if (cartSummaryEl) {
-    cartSummaryEl.style.display = "none";
-    cartSummaryEl.removeAttribute("data-initialized");
-  }
+// Open the cart drawer (expanded)
+function openCartDrawer() {
+  if (!cartSummaryEl || cart.length === 0) return;
+
+  cartSummaryEl.style.display = "block";
+  cartSummaryEl.classList.remove("collapsed");
+  if (cartOverlayEl) cartOverlayEl.classList.add("active");
+  updateToggleIcon(false);
+  document.body.style.overflow = "hidden";
+
+  // Hide floating button while drawer is open
+  if (floatingCartBtn) floatingCartBtn.style.display = "none";
 }
 
-// Toggle cart items visibility
-function toggleCart() {
+// Close the cart drawer
+function closeCartDrawer() {
   if (!cartSummaryEl) return;
 
-  const isCollapsed = cartSummaryEl.classList.contains("collapsed");
+  cartSummaryEl.classList.add("collapsed");
+  cartSummaryEl.style.display = "none";
+  if (cartOverlayEl) cartOverlayEl.classList.remove("active");
+  updateToggleIcon(true);
+  document.body.style.overflow = "auto";
 
-  if (isCollapsed) {
-    // Expand: show cart items
-    cartSummaryEl.classList.remove("collapsed");
-    updateToggleIcon(false); // Chevron down for expanded state
-  } else {
-    // Collapse: hide cart items
-    cartSummaryEl.classList.add("collapsed");
-    updateToggleIcon(true); // Chevron up for collapsed state
-  }
+  // Restore floating button
+  updateFloatingCartButton();
+}
+
+// Legacy aliases used by updateCartDisplay / confirmOptions
+function showCartSummary() {
+  updateFloatingCartButton();
+}
+
+function hideCartSummary() {
+  closeCartDrawer();
 }
 
 // Setup quantity control event listeners
@@ -737,6 +782,8 @@ function setupQuantityControls() {
       itemIndex !== undefined
     ) {
       editCartItem(parseInt(itemIndex));
+    } else if (button.dataset.action === "clear-cart") {
+      confirmClearCart();
     }
   });
 
@@ -793,8 +840,36 @@ let currentOptionsItem = null;
 let currentOptionGroups = null; // Category-level option groups
 let currentSelections = {}; // { groupId: { optionId: quantity, ... } }
 let currentItemQuantity = 1;
+let currentSelectedVariant = null; // For combo variant items
 let isEditingCartItem = false;
 let editingCartItemIndex = -1;
+
+// Get effective perItemMax and minSelect for a group, applying variant overrides
+function getEffectiveGroupRules(group) {
+  let perItemMax = group.perItemMax;
+  let minSelect = group.minSelect || 0;
+
+  if (currentSelectedVariant && currentSelectedVariant.optionOverrides) {
+    const override = currentSelectedVariant.optionOverrides[group.id];
+    if (override) {
+      if (override.perItemMax !== undefined) perItemMax = override.perItemMax;
+      if (override.minSelect !== undefined) minSelect = override.minSelect;
+    }
+  }
+  return { perItemMax, minSelect };
+}
+
+// Validate all required groups meet their minSelect
+function validateAllGroups() {
+  if (!currentOptionGroups) return true;
+  return currentOptionGroups.every((group) => {
+    const { minSelect } = getEffectiveGroupRules(group);
+    const effectiveMin = minSelect * currentItemQuantity;
+    if (effectiveMin <= 0) return true;
+    const groupTotal = getGroupTotal(group.id);
+    return groupTotal >= effectiveMin;
+  });
+}
 
 // Find menu item and its category-level optionGroups
 function findMenuItemWithOptions(itemId) {
@@ -836,14 +911,26 @@ function openOptionsModal(
   currentOptionsItem = item;
   currentOptionGroups = optionGroups;
   currentItemQuantity = 1;
+  currentSelectedVariant = null;
   isEditingCartItem = isEdit;
   editingCartItemIndex = cartItemIndex;
   currentSelections = {};
 
-  // If editing, pre-populate selections and quantity
+  // Set default variant if item has variants
+  if (item.variants && item.variants.length > 0) {
+    currentSelectedVariant = item.variants[0];
+    currentItemQuantity = 1; // Variants don't use item qty
+  }
+
+  // If editing, pre-populate selections, quantity, and variant
   if (isEdit && cartItemIndex >= 0) {
     const cartItem = cart[cartItemIndex];
     currentItemQuantity = cartItem.quantity || 1;
+    if (cartItem.variantId && item.variants) {
+      currentSelectedVariant =
+        item.variants.find((v) => v.id === cartItem.variantId) ||
+        item.variants[0];
+    }
     if (cartItem.options) {
       cartItem.options.forEach((opt) => {
         if (!currentSelections[opt.groupId]) {
@@ -867,6 +954,7 @@ function closeOptionsModal() {
   currentOptionGroups = null;
   currentSelections = {};
   currentItemQuantity = 1;
+  currentSelectedVariant = null;
   isEditingCartItem = false;
   editingCartItemIndex = -1;
 }
@@ -876,28 +964,67 @@ function renderOptionsModal() {
   const item = currentOptionsItem;
   if (!item) return;
 
+  const activePrice = currentSelectedVariant
+    ? currentSelectedVariant.price
+    : item.price;
+
   document.getElementById("optionsItemTitle").textContent = item.title;
-  document.getElementById("optionsBasePrice").textContent = formatBRL(
-    item.price,
-  );
+  document.getElementById("optionsBasePrice").textContent =
+    formatBRL(activePrice);
 
   // Update item quantity display
   document.getElementById("itemQtyDisplay").textContent = currentItemQuantity;
 
+  // Hide item quantity controls for variant items (variant = size, not quantity)
+  const itemQtyControls = document.querySelector(".item-qty-controls");
+  if (itemQtyControls) {
+    itemQtyControls.style.display = item.variants ? "none" : "flex";
+  }
+
   const container = document.getElementById("optionGroupsContainer");
   container.innerHTML = "";
 
+  // Render variant selector if item has variants
+  if (item.variants && item.variants.length > 0) {
+    const variantDiv = document.createElement("div");
+    variantDiv.className = "variant-selector";
+    item.variants.forEach((variant) => {
+      const isSelected =
+        currentSelectedVariant && currentSelectedVariant.id === variant.id;
+      variantDiv.innerHTML += `
+        <div class="variant-option${isSelected ? " selected" : ""}"
+             onclick="selectVariant('${variant.id}')">
+          <div class="variant-label">${variant.label}</div>
+          <div class="variant-price">${formatBRL(variant.price)}</div>
+        </div>
+      `;
+    });
+    container.appendChild(variantDiv);
+  }
+
   if (currentOptionGroups && currentOptionGroups.length > 0) {
     currentOptionGroups.forEach((group) => {
-      const groupDiv = document.createElement("div");
-      groupDiv.className = "option-group";
-
-      const effectiveMax = group.perItemMax * currentItemQuantity;
+      const { perItemMax, minSelect } = getEffectiveGroupRules(group);
+      const effectiveMax = perItemMax * currentItemQuantity;
+      const effectiveMin = minSelect * currentItemQuantity;
       const groupTotal = getGroupTotal(group.id);
+      const isInvalid = effectiveMin > 0 && groupTotal < effectiveMin;
+      const isRequired = minSelect > 0;
+
+      const groupDiv = document.createElement("div");
+      groupDiv.className = `option-group${isInvalid ? " invalid" : ""}`;
+
+      let validationMsg = "";
+      if (isRequired && groupTotal < effectiveMin) {
+        validationMsg = `<div class="validation-msg">Selecione pelo menos ${effectiveMin}</div>`;
+      }
 
       groupDiv.innerHTML = `
         <div class="option-group-header">
-          <h6 class="option-group-title">${group.name}</h6>
+          <div>
+            <h6 class="option-group-title${isRequired ? " required" : ""}">${group.name}</h6>
+            ${validationMsg}
+          </div>
           <span class="option-group-counter">${groupTotal}/${effectiveMax}</span>
         </div>
         <div class="option-group-body" data-group-id="${group.id}">
@@ -923,7 +1050,8 @@ function renderOptionItem(group, option) {
   const qty =
     (currentSelections[group.id] && currentSelections[group.id][option.id]) ||
     0;
-  const effectiveMax = group.perItemMax * currentItemQuantity;
+  const { perItemMax } = getEffectiveGroupRules(group);
+  const effectiveMax = perItemMax * currentItemQuantity;
   const groupTotal = getGroupTotal(group.id);
   const canIncrease = groupTotal < effectiveMax;
 
@@ -976,7 +1104,8 @@ function changeOptionQty(groupId, optionId, delta) {
   if (delta > 0) {
     const group = currentOptionGroups.find((g) => g.id === groupId);
     if (group) {
-      const effectiveMax = group.perItemMax * currentItemQuantity;
+      const { perItemMax } = getEffectiveGroupRules(group);
+      const effectiveMax = perItemMax * currentItemQuantity;
       const groupTotal = getGroupTotal(groupId);
       if (groupTotal + delta > effectiveMax) return;
     }
@@ -994,6 +1123,55 @@ function changeOptionQty(groupId, optionId, delta) {
   renderOptionsModal();
 }
 
+// Select a variant (for combo items)
+function selectVariant(variantId) {
+  if (!currentOptionsItem || !currentOptionsItem.variants) return;
+  const variant = currentOptionsItem.variants.find((v) => v.id === variantId);
+  if (
+    !variant ||
+    (currentSelectedVariant && currentSelectedVariant.id === variantId)
+  )
+    return;
+
+  currentSelectedVariant = variant;
+
+  // Trim option selections that exceed new effective max
+  if (currentOptionGroups) {
+    currentOptionGroups.forEach((group) => {
+      const { perItemMax } = getEffectiveGroupRules(group);
+      const effectiveMax = perItemMax * currentItemQuantity;
+      const groupSelections = currentSelections[group.id];
+      if (!groupSelections) return;
+
+      let groupTotal = Object.values(groupSelections).reduce(
+        (s, q) => s + q,
+        0,
+      );
+      if (groupTotal > effectiveMax) {
+        const optionIds = Object.keys(groupSelections);
+        for (
+          let i = optionIds.length - 1;
+          i >= 0 && groupTotal > effectiveMax;
+          i--
+        ) {
+          const optId = optionIds[i];
+          const reduce = Math.min(
+            groupSelections[optId],
+            groupTotal - effectiveMax,
+          );
+          groupSelections[optId] -= reduce;
+          groupTotal -= reduce;
+          if (groupSelections[optId] <= 0) delete groupSelections[optId];
+        }
+        if (Object.keys(groupSelections).length === 0)
+          delete currentSelections[group.id];
+      }
+    });
+  }
+
+  renderOptionsModal();
+}
+
 // Change item quantity in modal
 function changeItemQuantity(delta) {
   const newQty = currentItemQuantity + delta;
@@ -1004,7 +1182,8 @@ function changeItemQuantity(delta) {
   // Trim option selections if they exceed new effective max
   if (currentOptionGroups) {
     currentOptionGroups.forEach((group) => {
-      const effectiveMax = group.perItemMax * currentItemQuantity;
+      const { perItemMax } = getEffectiveGroupRules(group);
+      const effectiveMax = perItemMax * currentItemQuantity;
       const groupSelections = currentSelections[group.id];
       if (!groupSelections) return;
 
@@ -1065,13 +1244,18 @@ function calculateOptionsCost() {
 function updateOptionsTotal() {
   if (!currentOptionsItem) return;
 
+  const activePrice = currentSelectedVariant
+    ? currentSelectedVariant.price
+    : currentOptionsItem.price;
   const optionsCost = calculateOptionsCost();
-  const total = currentOptionsItem.price * currentItemQuantity + optionsCost;
+  const total = activePrice * currentItemQuantity + optionsCost;
 
-  document.getElementById("optionsTotalPrice").textContent = formatBRL(total);
+  const confirmBtn = document.getElementById("confirmOptionsBtn");
+  const totalPriceEl = document.getElementById("optionsTotalPrice");
+  const isValid = validateAllGroups();
 
-  // Always enable confirm button (no required options in current data)
-  document.getElementById("confirmOptionsBtn").disabled = false;
+  confirmBtn.disabled = !isValid;
+  totalPriceEl.textContent = formatBRL(total);
 }
 
 // Confirm and add to cart
@@ -1100,10 +1284,20 @@ function confirmOptions() {
     });
   }
 
+  const activePrice = currentSelectedVariant
+    ? currentSelectedVariant.price
+    : currentOptionsItem.price;
+
   const lineItem = {
-    id: generateLineId(currentOptionsItem.id, chosenOptions),
+    id: generateLineId(
+      currentOptionsItem.id,
+      chosenOptions,
+      currentSelectedVariant?.id,
+    ),
     title: currentOptionsItem.title,
-    basePrice: currentOptionsItem.price,
+    variantId: currentSelectedVariant ? currentSelectedVariant.id : null,
+    variantLabel: currentSelectedVariant ? currentSelectedVariant.label : null,
+    basePrice: activePrice,
     options: chosenOptions,
     quantity: currentItemQuantity,
   };
@@ -1129,12 +1323,13 @@ function confirmOptions() {
   closeOptionsModal();
 }
 
-function generateLineId(itemId, options) {
+function generateLineId(itemId, options, variantId = null) {
+  const variantPart = variantId ? `@${variantId}` : "";
   const optionKey = options
     .map((o) => `${o.groupId}:${o.id}:${o.quantity}`)
     .sort()
     .join("|");
-  return `${itemId}${optionKey ? "|" + optionKey : ""}`;
+  return `${itemId}${variantPart}${optionKey ? "|" + optionKey : ""}`;
 }
 
 // Edit existing cart item
@@ -1194,7 +1389,8 @@ function sendOrderToWhatsApp() {
     const lineTotal = calculateLineTotal(item);
     total += lineTotal;
 
-    message += `\n- *${item.title}* × ${item.quantity} (${formatBRL(lineTotal)})\n`;
+    const variantSuffix = item.variantLabel ? ` (${item.variantLabel})` : "";
+    message += `\n- *${item.title}${variantSuffix}* × ${item.quantity} (${formatBRL(lineTotal)})\n`;
 
     if (item.options && item.options.length > 0) {
       const optionsByGroup = {};

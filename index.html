@@ -103,43 +103,52 @@
 
     </main>
 
-    <!-- Sticky Cart Summary -->
-    <div id="cartSummary" class="sticky-cart collapsed" style="display: none;" role="region" aria-label="Shopping cart">
-      
-      <!-- Collapsable Cart Body  -->
+    <!-- Floating Cart Button -->
+    <button id="floatingCartBtn" class="floating-cart-btn" style="display: none;" aria-label="Abrir carrinho">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="floatingCartBadge" class="floating-cart-badge">0</span>
+    </button>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <!-- Cart Drawer -->
+    <div id="cartSummary" class="sticky-cart collapsed" style="display: none;" role="region" aria-label="Carrinho">
+
+      <!-- Cart Body  -->
       <div id="cartBody" class="cart-body">
 
-        <!-- Cart Header (always visible) -->
+        <!-- Cart Header -->
         <div class="cart-header-expanded">
           <div class="cart-header-content">
             <div class="cart-title-section">
-              <h5 class="cart-title">Your Order (<span id="cartItemCountExpanded">0</span> items)</h5>
+              <h5 class="cart-title">Seu pedido (<span id="cartItemCountExpanded">0</span> itens)</h5>
             </div>
             <div class="cart-header-actions">
-              <button id="toggleCart" class="btn btn-toggle" aria-label="Toggle cart items">
+              <button id="toggleCart" class="btn btn-toggle" aria-label="Fechar carrinho">
                 <i class="fas fa-chevron-down" id="cartToggleIcon"></i>
               </button>
             </div>
           </div>
         </div>
-        
-        <!-- Cart Items - Only visible when in expanded state -->
+
+        <!-- Cart Items -->
         <div class="cart-items-container">
           <div id="cartItems" class="cart-items-list">
-           
+
           </div>
         </div>
-        
-        <!-- Cart Footer with Total and CTA - (should be visible in both collapsed/expanded states) -->
+
+        <!-- Cart Footer with Total and CTA -->
         <div class="cart-footer">
           <div class="cart-total-section">
             <div class="total-display">
               <span class="total-label-large">Total:</span>
-              <span class="total-amount-large" id="cartTotal">$0.00</span>
+              <span class="total-amount-large" id="cartTotal">R$0,00</span>
             </div>
           </div>
           <button id="sendWhatsApp" class="btn btn-whatsapp-full">
-            <i class="fab fa-whatsapp me-2"></i>Send Order via WhatsApp
+            <i class="fab fa-whatsapp me-2"></i>Enviar pedido por WhatsApp
           </button>
         </div>
       </div>
@@ -160,7 +169,7 @@
           <div class="item-summary">
             <h6 id="optionsItemTitle">Item Name</h6>
             <div class="item-base-price">
-              Base price: <span id="optionsBasePrice">$0.00</span>
+              <span id="optionsBasePrice">$0.00</span>
             </div>
           </div>
           

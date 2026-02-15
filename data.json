@@ -616,6 +616,117 @@
       "name": "Combos & Mini Salgados",
       "optionGroups": [
         {
+          "id": "traditional-flavors",
+          "name": "Escolha Seus Sabores",
+          "perItemMax": 5,
+          "minSelect": 5,
+          "options": [
+            {
+              "id": "risoles-carne-option",
+              "name": "Risoles de Carne",
+              "priceDelta": 0
+            },
+            {
+              "id": "risoles-frango-option",
+              "name": "Risoles de Frango",
+              "priceDelta": 0
+            },
+            {
+              "id": "risoles-presunto-queijo-option",
+              "name": "Risoles de Presunto e Queijo",
+              "priceDelta": 0
+            },
+            {
+              "id": "coxinha-frango-catupiry-option",
+              "name": "Coxinha de Frango com Catupiry",
+              "priceDelta": 0
+            },
+            {
+              "id": "coxinha-carne-option",
+              "name": "Coxinha de Carne",
+              "priceDelta": 0
+            },
+            {
+              "id": "bolinhas-queijo-option",
+              "name": "Risoles de Carne",
+              "priceDelta": 0
+            },
+            {
+              "id": "bolinhas-queijo-calabresa-option",
+              "name": "Bolinhas de Queijo com Calabresa",
+              "priceDelta": 0
+            },
+            {
+              "id": "enroladinhos-salsicha-option",
+              "name": "Enroladinhos de Salsicha",
+              "priceDelta": 0
+            },
+            {
+              "id": "Quibes Recheados",
+              "name": "Quibes Recheados",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "vegan-vegetarian-flavors",
+          "name": "Escolha Seus Sabores",
+          "perItemMax": 5,
+          "minSelect": 5,
+          "options": [
+            {
+              "id": "risoles-alho-poro-option",
+              "name": "Risoles de Alho-Poró (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "risoles-alho-poro--queijo-option",
+              "name": "Risoles de Alho-Poró (Veetariano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "risoles-cogumelos-option",
+              "name": "Risoles de Cogumelos (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "risoles-queijo-option",
+              "name": "Risoles de Queijo (Vegetariano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "risoles-marguerita-option",
+              "name": "Risoles Marguerita (Vegetariano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "coxinhas-cogumelos-option",
+              "name": "Coxinhas de Cogumelos (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "coxinhas-grao-de-bico-option",
+              "name": "Coxinhas de Grão-de-bico (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "coxinhas-palmito-option",
+              "name": "Coxinhas de Palmito (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "bolinhas-mandioca-option",
+              "name": "Bolinhas de Mandioca (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "bolinhas-mandioca-queijo-option",
+              "name": "Bolinhas de Mandioca com Queijo (Vegetariano)",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
           "id": "sauce",
           "name": "Escolha Seu Molho Grátis",
           "perItemMax": 1,
@@ -681,41 +792,87 @@
       "items": [
         {
           "id": "combos-item-001",
-          "title": "25 Mini Salgados",
-          "description": "Escolha de até 5 sabores para criar sua caixa com 25 deliciosos salgadinhos (450g).",
-          "price": 33.9,
+          "title": "Mini Salgados Tradicionais",
+          "description": "Monte sua caixa com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
           "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
-          "available": true
+          "available": true,
+          "variants": [
+            {
+              "id": "25-units",
+              "label": "25 unidades",
+              "price": 33.9,
+              "optionOverrides": {
+                "flavors": { "perItemMax": 5, "minSelect": 2 },
+                "sauce": { "perItemMax": 1 },
+                "extras": { "perItemMax": 3 }
+              }
+            },
+            {
+              "id": "50-units",
+              "label": "50 unidades",
+              "price": 59.9,
+              "optionOverrides": {
+                "flavors": { "perItemMax": 5, "minSelect": 3 },
+                "sauce": { "perItemMax": 2 },
+                "extras": { "perItemMax": 5 }
+              }
+            },
+            {
+              "id": "100-units",
+              "label": "100 unidades",
+              "price": 99.9,
+              "optionOverrides": {
+                "flavors": { "perItemMax": 10, "minSelect": 5 },
+                "sauce": { "perItemMax": 3 },
+                "extras": { "perItemMax": 8 }
+              }
+            }
+          ]
         },
         {
           "id": "combos-item-002",
-          "title": "50 Mini Salgados",
-          "description": "Escolha de até 5 sabores para criar sua caixa com 50 deliciosos salgadinhos (1kg).",
-          "price": 59.9,
-          "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
-          "available": true
-        },
-        {
-          "id": "combos-item-003",
-          "title": "25 Mini Salgados Veganos/Vegetarianos",
-          "description": "Escolha de até 5 sabores para criar sua caixa com 25 deliciosos salgadinhos (450g).",
-          "price": 35.9,
+          "title": "Mini Salgados Veganos/Vegetarianos",
+          "description": "Monte sua caixa vegana/vegetariana com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
           "image": "images/menu-items/salgadinhos-veganos.png",
-          "available": true
-        },
-        {
-          "id": "combos-item-004",
-          "title": "50 Mini Salgados Veganos/Vegetarianos",
-          "description": "Escolha de até 5 sabores para criar sua caixa com 50 deliciosos salgadinhos (450g).",
-          "price": 63.9,
-          "image": "images/menu-items/salgadinhos-veganos.png",
-          "available": true
+          "available": true,
+          "variants": [
+            {
+              "id": "25-units",
+              "label": "25 unidades",
+              "price": 35.9,
+              "optionOverrides": {
+                "flavors": { "perItemMax": 5, "minSelect": 2 },
+                "sauce": { "perItemMax": 1 },
+                "extras": { "perItemMax": 3 }
+              }
+            },
+            {
+              "id": "50-units",
+              "label": "50 unidades",
+              "price": 63.9,
+              "optionOverrides": {
+                "flavors": { "perItemMax": 5, "minSelect": 3 },
+                "sauce": { "perItemMax": 2 },
+                "extras": { "perItemMax": 5 }
+              }
+            },
+            {
+              "id": "100-units",
+              "label": "100 unidades",
+              "price": 109.9,
+              "optionOverrides": {
+                "flavors": { "perItemMax": 10, "minSelect": 5 },
+                "sauce": { "perItemMax": 3 },
+                "extras": { "perItemMax": 8 }
+              }
+            }
+          ]
         }
       ]
     },
     {
       "id": "pao-de-queijo",
-      "name": "Pão de Queijo Artesanal (5/10/15)",
+      "name": "Pão de Queijo Artesanal",
       "optionGroups": [
         {
           "id": "sauce",
@@ -782,28 +939,40 @@
       ],
       "items": [
         {
-          "id": "pao-de-queijo-item-001",
-          "title": "Pão de Queijo Tradicional - 5 unidades",
-          "description": "Massa levinha, crocante por fora e muito queijo por dentro. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia.",
-          "price": 11.9,
+          "id": "pao-de-queijo-variant",
+          "title": "Pão de Queijo",
+          "description": "Experimente nosso delicioso pão de queijo! Massa levinha, crocante por fora e muito queijo. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia. Disponível em embalagens com 5, 10 e 15 unidades.",
           "image": "images/menu-items/pao-de-queijo.jpg",
-          "available": true
-        },
-        {
-          "id": "pao-de-queijo-item-001",
-          "title": "Pão de Queijo Tradicional - 10 unidades",
-          "description": "Massa levinha, crocante por fora e muito queijo por dentro. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia.",
-          "price": 21.9,
-          "image": "images/menu-items/pao-de-queijo.jpg",
-          "available": true
-        },
-        {
-          "id": "pao-de-queijo-item-001",
-          "title": "Pão de Queijo Tradicional - 15 unidades",
-          "description": "Massa levinha, crocante por fora e muito queijo por dentro. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia.",
-          "price": 29.9,
-          "image": "images/menu-items/pao-de-queijo.jpg",
-          "available": true
+          "available": true,
+          "variants": [
+            {
+              "id": "5-units",
+              "label": "5 unidades",
+              "price": 11.9,
+              "optionOverrides": {
+                "sauce": { "perItemMax": 1 },
+                "extras": { "perItemMax": 3 }
+              }
+            },
+            {
+              "id": "10-units",
+              "label": "10 unidades",
+              "price": 21.9,
+              "optionOverrides": {
+                "sauce": { "perItemMax": 1 },
+                "extras": { "perItemMax": 5 }
+              }
+            },
+            {
+              "id": "15-units",
+              "label": "15 unidades",
+              "price": 29.9,
+              "optionOverrides": {
+                "sauce": { "perItemMax": 2 },
+                "extras": { "perItemMax": 5 }
+              }
+            }
+          ]
         }
       ]
     },
@@ -878,7 +1047,7 @@
         {
           "id": "petiscos-item-001",
           "title": "Faláfel de Grão-de-Bico (Vegano)",
-          "description": "Rich chocolate layer cake with chocolate ganache frosting and fresh berries.",
+          "description": "Deliciosos bolinhos de origem árabe feitos com grão-de-bico, cebola, alho, salsinha, e um toque especial de páprica defumada. Contém 10 unidades. ",
           "price": 21.9,
           "image": "images/menu-items/falafel.png",
           "available": true
@@ -892,15 +1061,15 @@
         {
           "id": "bolos-item-001",
           "title": "Bolo de Mandioca Catedral - G",
-          "description": "Experimente nosso Bolo de Mandioca Catedral – inspirado no cartão-postal de Maringá! Uma receita de família com massa fofinha e coberto com leite condensado e coco ralado. Assado em forma especial com design gótico, este bolo grande serve até 8 pessoas.",
+          "description": "Experimente nosso Bolo de Mandioca Catedral – assado em forma especial com design gótico e inspirado no cartão-postal de Maringá! Uma receita de família com massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 8 pessoas.",
           "price": 60.9,
           "image": "images/menu-items/bolo-mandioca-grande.jpeg",
           "available": true
         },
         {
           "id": "bolos-item-002",
-          "title": "Bolo de Mandioca Catedral - M",
-          "description": "Experimente nosso Bolo de Mandioca – uma receita de família cuidadosamente preparada para encantar seu paladar. Massa fofinha e cobertura irresistível de leite condensado e coco ralado.",
+          "title": "Bolo de Mandioca - M",
+          "description": "Experimente nosso Bolo de Mandioca – uma receita de família cuidadosamente preparada para encantar seu paladar. Massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 4 pessoas.",
           "price": 39.9,
           "image": "images/menu-items/bolo-mandioca-medio.jpeg",
           "available": true
