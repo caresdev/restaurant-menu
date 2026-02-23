@@ -116,7 +116,7 @@
         {
           "id": "risoles-item-001",
           "title": "Risoles de Carne",
-          "description": "8 deliciosos risoles de carne feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (448g)",
+          "description": "Risoles de carne feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (8 unidades)",
           "price": 21.9,
           "image": "images/menu-items/risoles-de-carne.png",
           "available": true
@@ -124,7 +124,7 @@
         {
           "id": "risoles-item-002",
           "title": "Risoles de Frango",
-          "description": "8 deliciosos risoles de frango feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal!",
+          "description": "Risoles de frango feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (8 unidades)",
           "price": 21.9,
           "image": "images/menu-items/risoles-de-frango.png",
           "available": true
@@ -132,7 +132,7 @@
         {
           "id": "risoles-item-003",
           "title": "Risoles de Presunto e Queijo",
-          "description": "8 deliciosos risoles de presunto e queijo muçarela feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal!",
+          "description": "Risoles de presunto e queijo muçarela feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (8 unidades)",
           "price": 21.9,
           "image": "images/menu-items/risoles-de-presunto-e-queijo.png",
           "available": true
@@ -140,7 +140,7 @@
         {
           "id": "risoles-item-004",
           "title": "Risoles Margherita",
-          "description": "Clássico recheio italiano com queijo muçarela, tomate seco e manjericão fresquinho. Feitos com massa pré-cozida, e preparo totalmente artesanal!",
+          "description": "Clássico recheio italiano com queijo muçarela, tomate seco e manjericão fresquinho. Feitos com massa pré-cozida, e preparo totalmente artesanal! (8 unidades)",
           "price": 24.9,
           "image": "images/menu-items/risoles-margherita.png",
           "available": true
@@ -148,7 +148,7 @@
         {
           "id": "risoles-item-005",
           "title": "Risoles de Alho-Poró com Queijo",
-          "description": "8 risoles de massa tradicional pré-cozida recheados com alho-poró e queijo muçarela.",
+          "description": "Deliciosos risoles de massa tradicional pré-cozida recheados com alho-poró e queijo muçarela, uma combinação perfeita que encanta paladares. (8 unidades)",
           "price": 21.9,
           "image": "images/menu-items/risoles-de-alho-poro-com-queijo.jpeg",
           "available": true
@@ -156,7 +156,7 @@
         {
           "id": "risoles-item-006",
           "title": "Risoles de Queijo",
-          "description": "8 risoles de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal!",
+          "description": "Clássico risoles de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal! (8 unidades)",
           "price": 21.9,
           "image": "images/menu-items/risoles-de-queijo.png",
           "available": true
@@ -164,15 +164,15 @@
         {
           "id": "risoles-item-007",
           "title": "Risoles de Cogumelos(Vegano)",
-          "description": "8 deliciosos risoles veganos recheados com cogumelos Portobello, massa pré-cozida, e preparo totalmente artesanal!",
+          "description": "Risoles veganos recheados com cogumelos Portobello, massa pré-cozida, e preparo totalmente artesanal! (8 unidades)",
           "price": 24.9,
           "image": "images/menu-items/risoles-de-cogumelos.png",
           "available": true
         },
         {
           "id": "risoles-item-008",
-          "title": "Risoles de Alho-Poró",
-          "description": "8 deliciosos risoles veganos feitos com massa pré-cozida e recheados com alho-poró.",
+          "title": "Risoles de Alho-Poró (Vegano)",
+          "description": "Risoles veganos feitos com massa pré-cozida e recheados com alho-poró. (8 unidades)",
           "price": 24.9,
           "image": "images/menu-items/risoles-de-alho-poro.jpeg",
           "available": true
@@ -250,7 +250,7 @@
         {
           "id": "coxinhas-item-001",
           "title": "Coxinhas de Frango",
-          "description": "Coxinhas de frango feitas com uma deliciosa massa de mandioca. Preparo totalmente artesanal. Contém 6 unidades médias.",
+          "description": "Coxinhas de frango feitas com uma deliciosa massa de batata incrivelmente macia. Preparo totalmente artesanal. (6 unidades)",
           "price": 22.9,
           "image": "images/menu-items/coxinhas-frango.png",
           "available": true
@@ -258,7 +258,7 @@
         {
           "id": "coxinhas-item-002",
           "title": "Coxinhas de Frango com Catupiry",
-          "description": "6 coxinhas de frango com recheio cremoso de queijo Catupiry envoltas em uma massa de mandioca incrivelmente macia e saborosa.",
+          "description": "Coxinhas de frango com recheio cremoso de queijo Catupiry envoltas em uma massa de batata incrivelmente macia e saborosa. (6 unidades)",
           "price": 25.9,
           "image": "images/menu-items/coxinhas-frango-catupiry.png",
           "available": true
@@ -266,7 +266,7 @@
         {
           "id": "coxinhas-item-003",
           "title": "Coxinhas de Carne",
-          "description": "6 coxinhas de carne feitas com uma deliciosa massa de mandioca. Preparo totalmente artesanal.",
+          "description": "Clássica coxinhas de carne feitas com uma deliciosa massa de batata. Preparo totalmente artesanal. (6 unidades)",
           "price": 24.9,
           "image": "images/menu-items/coxinhas-carne.png",
           "available": true
@@ -274,7 +274,7 @@
         {
           "id": "coxinhas-item-004",
           "title": "Coxinhas de Cogumelos (Vegano)",
-          "description": "6 Coxinhas veganas feitas com uma massa de mandioca deliciosamente macia e um recheio cremoso de cogumelos Portobello. Totalmente livre de ingredientes de origem animal.",
+          "description": "Coxinhas veganas feitas com massa de batata e recheio cremoso de cogumelos Portobello. Totalmente livre de ingredientes de origem animal. (6 unidades)",
           "price": 26.9,
           "image": "images/menu-items/coxinhas-cogumelos.png",
           "available": true
@@ -352,7 +352,7 @@
         {
           "id": "empadao-item-001",
           "title": "Empadão de Frango com Catupiry",
-          "description": "Combinação perfeita de frango cremoso e queijo Catupiry envolto em uma massa crocante que derrete na boca.",
+          "description": "Combinação perfeita de frango cremoso e queijo Catupiry envolto em uma massa crocante que derrete na boca. (Aprox. 1kg)",
           "price": 79.9,
           "image": "images/menu-items/empadao-frango-catupiry.png",
           "available": true
@@ -360,7 +360,7 @@
         {
           "id": "empadao-item-002",
           "title": "Empadão de Frango com Palmito",
-          "description": "Combinação clássica e deliciosa de frango, palmito e requeijão em nossa irresistível massa crocante que derrete na boca.",
+          "description": "Combinação clássica e deliciosa de frango, palmito e requeijão em nossa irresistível massa crocante que derrete na boca. (Aprox. 1kg)",
           "price": 74.9,
           "image": "images/menu-items/empadao-frango-palmito.png",
           "available": true
@@ -368,7 +368,7 @@
         {
           "id": "empadao-item-003",
           "title": "Empadão de Camarão",
-          "description": "Deliciosa combinação de camarão, leite de coco, e queijo Catupiry. Feito artesanalmente com os melhores ingredientes com massa crocante, recheio cremoso, e um sabor irresistível.",
+          "description": "Deliciosa combinação de camarão, leite de coco, e queijo Catupiry. Massa crocante, recheio cremoso, e um sabor irresistível. (Aprox. 1kg)",
           "price": 92.9,
           "image": "images/menu-items/empadao-camarao.jpeg",
           "available": true
@@ -376,7 +376,7 @@
         {
           "id": "empadao-item-004",
           "title": "Empadão de Palmito Cremoso",
-          "description": "Empadão com massa clássica e delicada que derrete na boca. Recheio cremoso de palmito, tomates frescos, e requeijão.",
+          "description": "Empadão com massa clássica e delicada que derrete na boca. Recheio cremoso de palmito, tomates frescos, e requeijão. (Aprox. 1kg)",
           "price": 79.9,
           "image": "images/menu-items/empadao-palmito-cremoso.jpeg",
           "available": true
@@ -384,7 +384,7 @@
         {
           "id": "empadao-item-005",
           "title": "Empadão de Palmito com Alho-Poró (Vegano)",
-          "description": "Empadão vegano com massa delicada que derrete na boca. Recheio cremoso de palmito, alho-poró, e livre de qualquer produto de origem animal.",
+          "description": "Empadão vegano com massa delicada que derrete na boca. Recheio cremoso de palmito, alho-poró, e livre de qualquer produto de origem animal. (Aprox. 1kg)",
           "price": 79.9,
           "image": "images/menu-items/empadao-palmito-vegano.png",
           "available": true
@@ -392,7 +392,7 @@
         {
           "id": "empadao-item-006",
           "title": "Empadão de Grão-de-Bico",
-          "description": "Empadão vegano com recheio cremoso de grão-de-bico, tomates fresquinhos, e leite de coco. Massa crocante que derrete na boca e livre de qualquer produto de origem animal.",
+          "description": "Empadão vegano com recheio cremoso de grão-de-bico, tomates fresquinhos, e leite de coco. Massa crocante que derrete na boca e livre de qualquer produto de origem animal. (Aprox. 1kg)",
           "price": 77.9,
           "image": "images/menu-items/empadao-grao-de-bico-vegano.jpeg",
           "available": true
@@ -470,7 +470,7 @@
         {
           "id": "empadinhas-item-001",
           "title": "Empadinhas de Frango com Catupiry",
-          "description": "2 deliciosas empadinhas com clássica combinação de frango com Catupiry! Feitas com um recheio cremoso e envoltas em uma massa crocante que derrete na boca.",
+          "description": "Clássica combinação de frango com Catupiry! Recheio cremoso e massa crocante que derrete na boca. (2 unidades grandes)",
           "price": 19.9,
           "image": "images/menu-items/empadinhas-frango-catupiry.png",
           "available": true
@@ -478,7 +478,7 @@
         {
           "id": "empadinhas-item-002",
           "title": "Empadinhas de Frango com Palmito",
-          "description": "2 deliciosas empadinhas com recheio cremoso de frango, palmito, e requeijão. Envoltas em uma massa crocante que derrete na boca.",
+          "description": "Recheio cremoso de frango, palmito, e requeijão em uma massa crocante que derrete na boca. (2 unidades grandes)",
           "price": 19.9,
           "image": "images/menu-items/empadinhas-frango-palmito.jpg",
           "available": true
@@ -486,7 +486,7 @@
         {
           "id": "empadinhas-item-003",
           "title": "Empadinhas de Camarão",
-          "description": "2 deliciosas empadinhas com recheio cremoso de camarão, leite de coco, tomates frescos, e requeijão. Envoltas em uma massa crocante que derrete na boca.",
+          "description": "Recheio cremoso de camarão, leite de coco, tomates frescos, e requeijão em uma massa crocante que derrete na boca. (2 unidades grandes)",
           "price": 24.9,
           "image": "images/menu-items/empadinhas-camarao.png",
           "available": true
@@ -494,7 +494,7 @@
         {
           "id": "empadinhas-item-004",
           "title": "Empadinhas de Pamito",
-          "description": "2 empadinhas vegetarianas com recheio cremoso de palmito, tomates frescos, e requeijão.",
+          "description": "Empadinhas vegetarianas com recheio cremoso de palmito, tomates frescos, e requeijão. (2 unidades grandes)",
           "price": 19.9,
           "image": "images/menu-items/empadinhas-palmito.jpeg",
           "available": true
@@ -502,7 +502,7 @@
         {
           "id": "empadinhas-item-005",
           "title": "Empadinhas de Palmito com Alho-Poró (Vegano)",
-          "description": "2 deliciosas empadinhas veganas com recheio cremoso de palmito com alho-poró, e tomates fresquinhos envoltas em uma massa crocante que derrete na boca.",
+          "description": "Empadinhas veganas com recheio cremoso de palmito com alho-poró, e tomates fresquinhos. (2 unidades grandes)",
           "price": 21.9,
           "image": "images/menu-items/empadinhas-palmito-vegano.png",
           "available": true
@@ -510,7 +510,7 @@
         {
           "id": "empadinhas-item-006",
           "title": "Empadinhas de Grão-de-Bico (Vegano)",
-          "description": "2 empadinhas veganas com recheio cremoso de grão de bico, tomates fresquinhos, e leite de coco envoltas em uma massa crocante que derrete na boca.",
+          "description": "Empadinhas veganas com recheio cremoso de grão de bico, tomates fresquinhos, e leite de coco. (2 unidades grandes)",
           "price": 21.9,
           "image": "images/menu-items/empadinhas-grao-de-bico.jpeg",
           "available": true
@@ -588,7 +588,7 @@
         {
           "id": "bolinhas-queijo-item-001",
           "title": "Bolinhas de Queijo Tradicional",
-          "description": "10 deliciosas bolinhas de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal!",
+          "description": "Deliciosas bolinhas de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal! (10 unidades)",
           "price": 19.9,
           "image": "images/menu-items/bolinhas-queijo-tradicional.png",
           "available": true
@@ -596,7 +596,7 @@
         {
           "id": "bolinhas-queijo-item-002",
           "title": "Bolinhas de Queijo com Calabresa",
-          "description": "10 deliciosas bolinhas de queijo super recheadas com queijo muçarela e linguiça calabresa.",
+          "description": "Deliciosas bolinhas de queijo super recheadas com queijo muçarela e linguiça calabresa. (10 unidades)",
           "price": 22.9,
           "image": "images/menu-items/bolinhas-queijo-calabresa.png",
           "available": true
@@ -604,7 +604,7 @@
         {
           "id": "bolinhas-queijo-item-003",
           "title": "Bolinhas de Queijo com Bacon",
-          "description": "10 deliciosas bolinhas de queijo feitas com massa pré-cozida e super recheadas com queijo muçarela e bacon.",
+          "description": "Deliciosas bolinhas de queijo feitas com massa pré-cozida e super recheadas com queijo muçarela e bacon. (10 unidades)",
           "price": 24.9,
           "image": "images/menu-items/bolinhas-queijo-bacon.jpeg",
           "available": true
@@ -681,7 +681,7 @@
             },
             {
               "id": "risoles-alho-poro--queijo-option",
-              "name": "Risoles de Alho-Poró (Veetariano)",
+              "name": "Risoles de Alho-Poró com Queijo (Vegetariano)",
               "priceDelta": 0
             },
             {
@@ -863,7 +863,10 @@
               "label": "100 unidades",
               "price": 109.9,
               "optionOverrides": {
-                "vegan-vegetarian-flavors": { "perItemMax": 10, "minSelect": 5 },
+                "vegan-vegetarian-flavors": {
+                  "perItemMax": 10,
+                  "minSelect": 5
+                },
                 "sauce": { "perItemMax": 3 },
                 "extras": { "perItemMax": 8 }
               }
@@ -943,7 +946,7 @@
         {
           "id": "pao-de-queijo-variant",
           "title": "Pão de Queijo",
-          "description": "Experimente nosso delicioso pão de queijo! Massa levinha, crocante por fora e muito queijo. Feito com ingredientes premium, totalmente artesanal, e ideal para qualquer hora do dia. Disponível em embalagens com 5, 10 e 15 unidades.",
+          "description": "Massa levinha e super crocante por fora. Feito com ingredientes de alta qualidade, totalmente artesanal, e ideal para qualquer hora do dia. Disponível em embalagens com 5, 10 e 15 unidades.",
           "image": "images/menu-items/pao-de-queijo.jpg",
           "available": true,
           "variants": [
@@ -1049,7 +1052,7 @@
         {
           "id": "petiscos-item-001",
           "title": "Faláfel de Grão-de-Bico (Vegano)",
-          "description": "Deliciosos bolinhos de origem árabe feitos com grão-de-bico, cebola, alho, salsinha, e um toque especial de páprica defumada. Contém 10 unidades. ",
+          "description": "Deliciosos bolinhos de origem árabe feitos com grão-de-bico, cebola, alho, salsinha, e especiarias. (10 unidades)",
           "price": 21.9,
           "image": "images/menu-items/falafel.png",
           "available": true
@@ -1063,7 +1066,7 @@
         {
           "id": "bolos-item-001",
           "title": "Bolo de Mandioca Catedral - G",
-          "description": "Experimente nosso Bolo de Mandioca Catedral – assado em forma especial com design gótico e inspirado no cartão-postal de Maringá! Uma receita de família com massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 8 pessoas.",
+          "description": "Assado em forma especial com design gótico e inspirado no cartão-postal de Maringá! Receita de família com massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 8 pessoas. (Aprox. 1.2kg)",
           "price": 60.9,
           "image": "images/menu-items/bolo-mandioca-grande.jpeg",
           "available": true
@@ -1071,7 +1074,7 @@
         {
           "id": "bolos-item-002",
           "title": "Bolo de Mandioca - M",
-          "description": "Experimente nosso Bolo de Mandioca – uma receita de família cuidadosamente preparada para encantar seu paladar. Massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 4 pessoas.",
+          "description": "Receita de família cuidadosamente preparada para encantar seu paladar. Massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 4 pessoas. (Aprox. 600g)",
           "price": 39.9,
           "image": "images/menu-items/bolo-mandioca-medio.jpeg",
           "available": true
