@@ -198,6 +198,107 @@
       </div>
     </div>
 
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="checkout-modal" style="display: none;" role="dialog" aria-labelledby="checkoutModalTitle" aria-modal="true">
+      <div class="checkout-overlay" onclick="closeCheckoutModal()"></div>
+      <div class="checkout-content">
+        <div class="checkout-header">
+          <h5 id="checkoutModalTitle" class="checkout-title">Finalizar Pedido</h5>
+          <button class="btn-close-options" onclick="closeCheckoutModal()" aria-label="Fechar">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="checkout-body">
+          <!-- Name -->
+          <div class="checkout-section">
+            <label class="checkout-label" for="checkoutName">Nome <span class="required-mark">*</span></label>
+            <input type="text" id="checkoutName" class="checkout-input" placeholder="Seu nome" autocomplete="name" />
+          </div>
+
+          <!-- Address -->
+          <div class="checkout-section">
+            <h6 class="checkout-section-title">Endereço de entrega</h6>
+            <div class="checkout-field-group">
+              <div class="checkout-field checkout-field-street">
+                <label class="checkout-label" for="checkoutStreet">Rua / Avenida <span class="required-mark">*</span></label>
+                <input type="text" id="checkoutStreet" class="checkout-input" placeholder="Ex: Rua das Flores" autocomplete="street-address" />
+              </div>
+              <div class="checkout-field checkout-field-number">
+                <label class="checkout-label" for="checkoutNumber">Nº <span class="required-mark">*</span></label>
+                <input type="text" id="checkoutNumber" class="checkout-input" placeholder="123" autocomplete="off" />
+              </div>
+            </div>
+            <div class="checkout-field">
+              <label class="checkout-label" for="checkoutNeighborhood">Bairro <span class="required-mark">*</span></label>
+              <input type="text" id="checkoutNeighborhood" class="checkout-input" placeholder="Ex: Centro" autocomplete="off" />
+            </div>
+            <div class="checkout-field">
+              <label class="checkout-label" for="checkoutReference">Ponto de referência</label>
+              <input type="text" id="checkoutReference" class="checkout-input" placeholder="Ex: Próximo ao mercado (opcional)" autocomplete="off" />
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="checkout-section">
+            <h6 class="checkout-section-title">Forma de pagamento <span class="required-mark">*</span></h6>
+            <div class="payment-options">
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="pix" />
+                <span class="payment-option-label"><i class="fas fa-qrcode"></i> Pix</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="credito" />
+                <span class="payment-option-label"><i class="fas fa-credit-card"></i> Crédito</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="debito" />
+                <span class="payment-option-label"><i class="fas fa-credit-card"></i> Débito</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="dinheiro" />
+                <span class="payment-option-label"><i class="fas fa-money-bill-wave"></i> Dinheiro</span>
+              </label>
+            </div>
+
+            <!-- Card flag (conditional) -->
+            <div id="cardFlagSection" class="checkout-conditional" style="display: none;">
+              <label class="checkout-label" for="checkoutCardFlag">Bandeira do cartão <span class="required-mark">*</span></label>
+              <select id="checkoutCardFlag" class="checkout-input checkout-select">
+                <option value="">Selecione...</option>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="Elo">Elo</option>
+                <option value="Hipercard">Hipercard</option>
+                <option value="American Express">American Express</option>
+              </select>
+            </div>
+
+            <!-- Change field (conditional) -->
+            <div id="changeSection" class="checkout-conditional" style="display: none;">
+              <label class="checkout-label" for="checkoutChange">Troco pra quanto?</label>
+              <input type="text" id="checkoutChange" class="checkout-input" placeholder="Ex: R$50,00 (opcional)" autocomplete="off" />
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-footer">
+          <div class="checkout-total-section">
+            <div class="checkout-total-row">
+              <span class="checkout-total-label">Total dos itens:</span>
+              <span class="checkout-total-amount" id="checkoutTotal">R$0,00</span>
+            </div>
+            <p class="checkout-delivery-note">
+              <i class="fas fa-truck"></i> Taxa de entrega será informada após confirmação do endereço
+            </p>
+          </div>
+          <button id="confirmCheckoutBtn" class="btn btn-confirm-checkout" disabled>
+            <i class="fab fa-whatsapp me-2"></i>Confirmar e enviar
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Screen reader announcements -->
     <div id="cartAnnouncements" class="sr-only" aria-live="polite"></div>
 

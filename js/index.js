@@ -17,6 +17,7 @@ let restaurantAddressEl,
   restaurantNameFooterEl,
   restaurantHoursEl,
   currentYearEl;
+let checkoutModalEl;
 
 // Load menu data and initialize app
 document.addEventListener("DOMContentLoaded", async () => {
@@ -96,6 +97,7 @@ function initializeDOMElements() {
   restaurantNameFooterEl = document.getElementById("restaurantNameFooter");
   restaurantHoursEl = document.getElementById("restaurantHours");
   currentYearEl = document.getElementById("currentYear");
+  checkoutModalEl = document.getElementById("checkoutModal");
 
   // Log missing elements for debugging
   const elements = {
@@ -554,14 +556,45 @@ function setupEventListeners() {
   if (itemQtyIncrease)
     itemQtyIncrease.addEventListener("click", () => changeItemQuantity(1));
 
-  // Keyboard support — Escape closes the drawer
+  // Checkout modal
+  const confirmCheckoutBtn = document.getElementById("confirmCheckoutBtn");
+  if (confirmCheckoutBtn)
+    confirmCheckoutBtn.addEventListener("click", confirmCheckout);
+
+  // Payment method change handler
+  document.querySelectorAll('input[name="paymentMethod"]').forEach((radio) => {
+    radio.addEventListener("change", handlePaymentMethodChange);
+  });
+
+  // Checkout form validation on input
+  const checkoutInputs = [
+    "checkoutName",
+    "checkoutStreet",
+    "checkoutNumber",
+    "checkoutNeighborhood",
+  ];
+  checkoutInputs.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", validateCheckoutForm);
+  });
+
+  const cardFlagEl = document.getElementById("checkoutCardFlag");
+  if (cardFlagEl) cardFlagEl.addEventListener("change", validateCheckoutForm);
+
+  // Keyboard support — Escape closes the drawer or checkout modal
   document.addEventListener("keydown", (e) => {
-    if (
-      e.key === "Escape" &&
-      cartSummaryEl &&
-      !cartSummaryEl.classList.contains("collapsed")
-    ) {
-      closeCartDrawer();
+    if (e.key === "Escape") {
+      if (
+        checkoutModalEl &&
+        checkoutModalEl.style.display !== "none"
+      ) {
+        closeCheckoutModal();
+      } else if (
+        cartSummaryEl &&
+        !cartSummaryEl.classList.contains("collapsed")
+      ) {
+        closeCartDrawer();
+      }
     }
   });
 
@@ -1382,16 +1415,20 @@ function calculateLineTotal(item) {
   return (item.basePrice || item.price) * item.quantity + optionsCost;
 }
 
-// Send order to WhatsApp
+// Send order to WhatsApp — now opens checkout modal first
 function sendOrderToWhatsApp() {
   if (cart.length === 0) {
     alert("Seu carrinho está vazio!");
     return;
   }
+  openCheckoutModal();
+}
 
+// Build order items message (reused by confirmCheckout)
+function buildOrderItemsMessage() {
   let message = `Olá! Gostaria de fazer um pedido na ${menuData.restaurant.name}:\n\n*Pedido:*\n`;
-
   let total = 0;
+
   cart.forEach((item) => {
     const lineTotal = calculateLineTotal(item);
     total += lineTotal;
@@ -1425,9 +1462,209 @@ function sendOrderToWhatsApp() {
     }
   });
 
-  message += `\n*Total: ${formatBRL(total)}*\n\nObrigada!`;
+  return { message, total };
+}
+
+// Open checkout modal
+function openCheckoutModal() {
+  if (!checkoutModalEl) return;
+
+  // Update total display
+  const total = cart.reduce((sum, item) => sum + calculateLineTotal(item), 0);
+  const checkoutTotalEl = document.getElementById("checkoutTotal");
+  if (checkoutTotalEl) checkoutTotalEl.textContent = formatBRL(total);
+
+  checkoutModalEl.style.display = "flex";
+  document.body.style.overflow = "hidden";
+  validateCheckoutForm();
+}
+
+// Close checkout modal
+function closeCheckoutModal() {
+  if (!checkoutModalEl) return;
+  checkoutModalEl.style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+// Handle payment method change — show/hide conditional fields
+function handlePaymentMethodChange() {
+  const selected = document.querySelector(
+    'input[name="paymentMethod"]:checked'
+  );
+  const cardFlagSection = document.getElementById("cardFlagSection");
+  const changeSection = document.getElementById("changeSection");
+
+  if (!selected) {
+    if (cardFlagSection) cardFlagSection.style.display = "none";
+    if (changeSection) changeSection.style.display = "none";
+    validateCheckoutForm();
+    return;
+  }
+
+  const isCard =
+    selected.value === "credito" || selected.value === "debito";
+  const isCash = selected.value === "dinheiro";
+
+  if (cardFlagSection)
+    cardFlagSection.style.display = isCard ? "block" : "none";
+  if (changeSection)
+    changeSection.style.display = isCash ? "block" : "none";
+
+  // Reset hidden fields
+  if (!isCard) {
+    const flagEl = document.getElementById("checkoutCardFlag");
+    if (flagEl) flagEl.value = "";
+  }
+  if (!isCash) {
+    const changeEl = document.getElementById("checkoutChange");
+    if (changeEl) changeEl.value = "";
+  }
+
+  validateCheckoutForm();
+}
+
+// Validate checkout form
+function validateCheckoutForm() {
+  const name = document.getElementById("checkoutName");
+  const street = document.getElementById("checkoutStreet");
+  const number = document.getElementById("checkoutNumber");
+  const neighborhood = document.getElementById("checkoutNeighborhood");
+  const paymentSelected = document.querySelector(
+    'input[name="paymentMethod"]:checked'
+  );
+  const cardFlag = document.getElementById("checkoutCardFlag");
+  const confirmBtn = document.getElementById("confirmCheckoutBtn");
+
+  const requiredInputs = [name, street, number, neighborhood];
+  let isValid = requiredInputs.every(
+    (el) => el && el.value.trim() !== ""
+  );
+
+  // Payment must be selected
+  if (!paymentSelected) isValid = false;
+
+  // Card flag required if card is selected
+  if (
+    paymentSelected &&
+    (paymentSelected.value === "credito" ||
+      paymentSelected.value === "debito")
+  ) {
+    if (!cardFlag || cardFlag.value === "") isValid = false;
+  }
+
+  // Update invalid classes on required inputs
+  requiredInputs.forEach((el) => {
+    if (!el) return;
+    if (el.value.trim() === "" && el.dataset.touched === "true") {
+      el.classList.add("invalid");
+    } else {
+      el.classList.remove("invalid");
+    }
+  });
+
+  if (confirmBtn) confirmBtn.disabled = !isValid;
+  return isValid;
+}
+
+// Mark inputs as touched on blur for validation styling
+document.addEventListener("focusout", (e) => {
+  if (e.target && e.target.closest(".checkout-body")) {
+    e.target.dataset.touched = "true";
+    validateCheckoutForm();
+  }
+});
+
+// Confirm checkout and send to WhatsApp
+function confirmCheckout() {
+  if (!validateCheckoutForm()) return;
+
+  const name = document.getElementById("checkoutName").value.trim();
+  const street = document.getElementById("checkoutStreet").value.trim();
+  const number = document.getElementById("checkoutNumber").value.trim();
+  const neighborhood =
+    document.getElementById("checkoutNeighborhood").value.trim();
+  const reference =
+    document.getElementById("checkoutReference").value.trim();
+  const paymentSelected = document.querySelector(
+    'input[name="paymentMethod"]:checked'
+  );
+  const cardFlag = document.getElementById("checkoutCardFlag").value;
+  const change = document.getElementById("checkoutChange").value.trim();
+
+  // Build order items
+  const { message: orderMessage, total } = buildOrderItemsMessage();
+
+  // Build payment label
+  let paymentLabel = "";
+  switch (paymentSelected.value) {
+    case "pix":
+      paymentLabel = "Pix";
+      break;
+    case "credito":
+      paymentLabel = `Cartão de Crédito (${cardFlag})`;
+      break;
+    case "debito":
+      paymentLabel = `Cartão de Débito (${cardFlag})`;
+      break;
+    case "dinheiro":
+      paymentLabel = "Dinheiro";
+      if (change) paymentLabel += ` (Troco para ${change})`;
+      break;
+  }
+
+  // Build address line
+  let addressLine = `${street}, ${number} - ${neighborhood}`;
+  if (reference) addressLine += `\nPonto de referência: ${reference}`;
+
+  // Compose full message
+  let fullMessage = orderMessage;
+  fullMessage += `\n*Total dos itens: ${formatBRL(total)}*`;
+  fullMessage += `\n_(Taxa de entrega será informada após confirmação do endereço)_`;
+  fullMessage += `\n\n*Nome:* ${name}`;
+  fullMessage += `\n*Endereço:* ${addressLine}`;
+  fullMessage += `\n*Pagamento:* ${paymentLabel}`;
+  fullMessage += `\n\nObrigada!`;
 
   const phoneNumber = menuData.restaurant.contact.phone;
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
   window.open(whatsappUrl, "_blank");
+
+  // Clear cart and reset UI
+  cart = [];
+  updateCartDisplay();
+  closeCheckoutModal();
+  closeCartDrawer();
+  resetCheckoutForm();
+}
+
+// Reset checkout form fields and state
+function resetCheckoutForm() {
+  const fields = [
+    "checkoutName",
+    "checkoutStreet",
+    "checkoutNumber",
+    "checkoutNeighborhood",
+    "checkoutReference",
+    "checkoutChange",
+  ];
+  fields.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.value = "";
+      el.classList.remove("invalid");
+      delete el.dataset.touched;
+    }
+  });
+
+  const cardFlag = document.getElementById("checkoutCardFlag");
+  if (cardFlag) cardFlag.value = "";
+
+  document.querySelectorAll('input[name="paymentMethod"]').forEach((radio) => {
+    radio.checked = false;
+  });
+
+  const cardFlagSection = document.getElementById("cardFlagSection");
+  const changeSection = document.getElementById("changeSection");
+  if (cardFlagSection) cardFlagSection.style.display = "none";
+  if (changeSection) changeSection.style.display = "none";
 }
