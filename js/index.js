@@ -670,8 +670,11 @@ function updateCartDisplay() {
         const groupOptions = optionsByGroup[groupName];
         const optionNames = groupOptions
           .map((opt) => {
+            const displayQty = opt.unitsPerSelection
+              ? opt.quantity * opt.unitsPerSelection
+              : opt.quantity;
             let text = opt.name;
-            if (opt.quantity > 1) text += ` ×${opt.quantity}`;
+            if (displayQty > 1) text += ` ×${displayQty}`;
             if (opt.priceDelta > 0)
               text += ` (+${formatBRL(opt.priceDelta * opt.quantity)})`;
             return text;
@@ -881,15 +884,17 @@ let editingCartItemIndex = -1;
 function getEffectiveGroupRules(group) {
   let perItemMax = group.perItemMax;
   let minSelect = group.minSelect || 0;
+  let unitsPerSelection = group.unitsPerSelection || 0;
 
   if (currentSelectedVariant && currentSelectedVariant.optionOverrides) {
     const override = currentSelectedVariant.optionOverrides[group.id];
     if (override) {
       if (override.perItemMax !== undefined) perItemMax = override.perItemMax;
       if (override.minSelect !== undefined) minSelect = override.minSelect;
+      if (override.unitsPerSelection !== undefined) unitsPerSelection = override.unitsPerSelection;
     }
   }
-  return { perItemMax, minSelect };
+  return { perItemMax, minSelect, unitsPerSelection };
 }
 
 // Validate all required groups meet their minSelect
@@ -1090,13 +1095,15 @@ function renderOptionItem(group, option) {
   const qty =
     (currentSelections[group.id] && currentSelections[group.id][option.id]) ||
     0;
-  const { perItemMax } = getEffectiveGroupRules(group);
+  const { perItemMax, unitsPerSelection } = getEffectiveGroupRules(group);
   const effectiveMax = perItemMax * currentItemQuantity;
   const groupTotal = getGroupTotal(group.id);
   const canIncrease = groupTotal < effectiveMax;
 
   const priceText =
     option.priceDelta > 0 ? `+ ${formatBRL(option.priceDelta)}` : "";
+
+  const displayQty = unitsPerSelection > 0 ? `${qty * unitsPerSelection} un.` : `${qty}`;
 
   // Show full controls when qty > 0, otherwise just the + button
   const qtyControls =
@@ -1105,7 +1112,7 @@ function renderOptionItem(group, option) {
         <button class="qty-btn minus" onclick="changeOptionQty('${group.id}','${option.id}',-1)">
           <i class="fas fa-minus"></i>
         </button>
-        <span class="option-qty">${qty}</span>
+        <span class="option-qty">${displayQty}</span>
         <button class="qty-btn plus" onclick="changeOptionQty('${group.id}','${option.id}',1)" ${!canIncrease ? "disabled" : ""}>
           <i class="fas fa-plus"></i>
         </button>
@@ -1308,17 +1315,22 @@ function confirmOptions() {
     Object.keys(currentSelections).forEach((groupId) => {
       const group = currentOptionGroups.find((g) => g.id === groupId);
       if (!group) return;
+      const { unitsPerSelection } = getEffectiveGroupRules(group);
       Object.entries(currentSelections[groupId]).forEach(([optionId, qty]) => {
         const option = group.options.find((o) => o.id === optionId);
         if (option) {
-          chosenOptions.push({
+          const optionData = {
             groupId: groupId,
             groupName: group.name,
             id: option.id,
             name: option.name,
             priceDelta: option.priceDelta || 0,
             quantity: qty,
-          });
+          };
+          if (unitsPerSelection > 0) {
+            optionData.unitsPerSelection = unitsPerSelection;
+          }
+          chosenOptions.push(optionData);
         }
       });
     });
@@ -1450,8 +1462,11 @@ function buildOrderItemsMessage() {
         const groupOptions = optionsByGroup[groupName];
         const optionNames = groupOptions
           .map((opt) => {
+            const displayQty = opt.unitsPerSelection
+              ? opt.quantity * opt.unitsPerSelection
+              : opt.quantity;
             let text = opt.name;
-            if (opt.quantity > 1) text += ` ×${opt.quantity}`;
+            if (displayQty > 1) text += ` ×${displayQty}`;
             if (opt.priceDelta > 0)
               text += ` (+${formatBRL(opt.priceDelta * opt.quantity)})`;
             return text;

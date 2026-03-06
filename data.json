@@ -803,7 +803,7 @@
               "label": "25 unidades",
               "price": 33.9,
               "optionOverrides": {
-                "traditional-flavors": { "perItemMax": 5, "minSelect": 2 },
+                "traditional-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
                 "sauce": { "perItemMax": 1 },
                 "extras": { "perItemMax": 3 }
               }
@@ -813,7 +813,7 @@
               "label": "50 unidades",
               "price": 59.9,
               "optionOverrides": {
-                "traditional-flavors": { "perItemMax": 5, "minSelect": 3 },
+                "traditional-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
                 "sauce": { "perItemMax": 2 },
                 "extras": { "perItemMax": 5 }
               }
@@ -823,7 +823,7 @@
               "label": "100 unidades",
               "price": 99.9,
               "optionOverrides": {
-                "traditional-flavors": { "perItemMax": 10, "minSelect": 5 },
+                "traditional-flavors": { "perItemMax": 10, "minSelect": 5, "unitsPerSelection": 10 },
                 "sauce": { "perItemMax": 3 },
                 "extras": { "perItemMax": 8 }
               }
@@ -843,7 +843,7 @@
               "label": "25 unidades",
               "price": 35.9,
               "optionOverrides": {
-                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 2 },
+                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
                 "sauce": { "perItemMax": 1 },
                 "extras": { "perItemMax": 3 }
               }
@@ -853,7 +853,7 @@
               "label": "50 unidades",
               "price": 63.9,
               "optionOverrides": {
-                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 3 },
+                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
                 "sauce": { "perItemMax": 2 },
                 "extras": { "perItemMax": 5 }
               }
@@ -865,7 +865,8 @@
               "optionOverrides": {
                 "vegan-vegetarian-flavors": {
                   "perItemMax": 10,
-                  "minSelect": 5
+                  "minSelect": 5,
+                  "unitsPerSelection": 10
                 },
                 "sauce": { "perItemMax": 3 },
                 "extras": { "perItemMax": 8 }
