@@ -369,7 +369,7 @@ function renderMenu() {
     // Items container
     const itemsContainer = document.createElement("div");
     itemsContainer.className =
-      "section-items row row-cols-1 justify-content-center mb-5";
+      "section-items row row-cols-1 mb-5";
 
     // Render items
     availableItems.forEach((item) => {
@@ -393,7 +393,7 @@ function renderMenu() {
                 item.title
               }" class="menu-img"/>
             </div>
-            <div class="col-md-6 col-lg-5 item-info mt-3 px-4">
+            <div class="col-md-6 col-lg-6 item-info mt-3 px-4">
               <div class="row justify-content-between">
                 <h4 class="col-8 item-title text-uppercase">${item.title}</h4>
                 <h4 class="col-4 item-price">${priceDisplay}</h4>

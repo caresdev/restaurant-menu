@@ -514,6 +514,14 @@
           "price": 21.9,
           "image": "images/menu-items/empadinhas-grao-de-bico.jpeg",
           "available": true
+        },
+        {
+          "id": "empadinhas-item-007",
+          "title": "Empadinhas de Espinafre com Ricota",
+          "description": "Empadinhas vegetarianas com recheio cremoso de espinafre fresco e creme de ricota. (2 unidades grandes)",
+          "price": 19.9,
+          "image": "images/menu-items/empadinhas-espinafre-ricota.jpeg",
+          "available": true
         }
       ]
     },
@@ -616,7 +624,7 @@
       "name": "Combos & Mini Salgados",
       "optionGroups": [
         {
-          "id": "traditional-flavors",
+          "id": "salgadinhos-traditional-flavors",
           "name": "Escolha Seus Sabores",
           "perItemMax": 5,
           "minSelect": 5,
@@ -669,7 +677,7 @@
           ]
         },
         {
-          "id": "vegan-vegetarian-flavors",
+          "id": "salgadinhos-vegan-flavors",
           "name": "Escolha Seus Sabores",
           "perItemMax": 5,
           "minSelect": 5,
@@ -722,6 +730,87 @@
             {
               "id": "bolinhas-mandioca-queijo-option",
               "name": "Bolinhas de Mandioca com Queijo (Vegetariano)",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "pasteizinhos-traditional-flavors",
+          "name": "Escolha Seus Sabores",
+          "perItemMax": 5,
+          "minSelect": 5,
+          "options": [
+            {
+              "id": "pasteizinhos-carne-option",
+              "name": "Carne",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-frango-option",
+              "name": "Frango",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-queijo-option",
+              "name": "Queijo",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-presunto-queijo-option",
+              "name": "Presunto e Queijo",
+              "priceDelta": 0
+            },
+            {
+              "id": "bolinhas-queijo-calabresa-option",
+              "name": "Queijo com Calabresa",
+              "priceDelta": 0
+            },
+            {
+              "id": "bolinhas-queijo-bacon-option",
+              "name": "Queijo com Bacon",
+              "priceDelta": 0
+            }
+          ]
+        },
+        {
+          "id": "pasteizinhos-vegan-flavors",
+          "name": "Escolha Seus Sabores",
+          "perItemMax": 5,
+          "minSelect": 5,
+          "options": [
+            {
+              "id": "pasteizinhos-veganos-alho-poro-option",
+              "name": "Alho-Poró (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-veganos-alho-poro-queijo-option",
+              "name": "Alho-Poró com Queijo (Vegetariano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-veganos-cogumelos-option",
+              "name": "Cogumelos (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-veganos-queijo-option",
+              "name": "Queijo (Vegetariano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-veganos-marguerita-option",
+              "name": "Marguerita (Vegetariano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-veganos-grao-de-bico-option",
+              "name": "Grão-de-bico (Vegano)",
+              "priceDelta": 0
+            },
+            {
+              "id": "pasteizinhos-veganos-palmito-option",
+              "name": "Palmito (Vegano)",
               "priceDelta": 0
             }
           ]
@@ -796,14 +885,14 @@
           "description": "Monte sua caixa com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
           "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
           "available": true,
-          "optionGroupIds": ["traditional-flavors", "sauce", "extras"],
+          "optionGroupIds": ["salgadinhos-traditional-flavors", "sauce", "extras"],
           "variants": [
             {
               "id": "25-units",
               "label": "25 unidades",
               "price": 33.9,
               "optionOverrides": {
-                "traditional-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
+                "salgadinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
                 "sauce": { "perItemMax": 1 },
                 "extras": { "perItemMax": 3 }
               }
@@ -813,7 +902,7 @@
               "label": "50 unidades",
               "price": 59.9,
               "optionOverrides": {
-                "traditional-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
+                "salgadinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
                 "sauce": { "perItemMax": 2 },
                 "extras": { "perItemMax": 5 }
               }
@@ -823,7 +912,7 @@
               "label": "100 unidades",
               "price": 99.9,
               "optionOverrides": {
-                "traditional-flavors": { "perItemMax": 10, "minSelect": 5, "unitsPerSelection": 10 },
+                "salgadinhos-traditional-flavors": { "perItemMax": 10, "minSelect": 5, "unitsPerSelection": 10 },
                 "sauce": { "perItemMax": 3 },
                 "extras": { "perItemMax": 8 }
               }
@@ -836,14 +925,14 @@
           "description": "Monte sua caixa vegana/vegetariana com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
           "image": "images/menu-items/salgadinhos-veganos.png",
           "available": true,
-          "optionGroupIds": ["vegan-vegetarian-flavors", "sauce", "extras"],
+          "optionGroupIds": ["salgadinhos-vegan-flavors", "sauce", "extras"],
           "variants": [
             {
               "id": "25-units",
               "label": "25 unidades",
               "price": 35.9,
               "optionOverrides": {
-                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
+                "salgadinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
                 "sauce": { "perItemMax": 1 },
                 "extras": { "perItemMax": 3 }
               }
@@ -853,7 +942,7 @@
               "label": "50 unidades",
               "price": 63.9,
               "optionOverrides": {
-                "vegan-vegetarian-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
+                "salgadinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
                 "sauce": { "perItemMax": 2 },
                 "extras": { "perItemMax": 5 }
               }
@@ -863,7 +952,95 @@
               "label": "100 unidades",
               "price": 109.9,
               "optionOverrides": {
-                "vegan-vegetarian-flavors": {
+                "salgadinhos-vegan-flavors": {
+                  "perItemMax": 10,
+                  "minSelect": 5,
+                  "unitsPerSelection": 10
+                },
+                "sauce": { "perItemMax": 3 },
+                "extras": { "perItemMax": 8 }
+              }
+            }
+          ]
+        },
+        {
+          "id": "combos-item-003",
+          "title": "Pasteizinhos Tradicionais",
+          "description": "Monte sua caixa com seus pasteizinhos de feira favoritos! Escolha a quantidade e os sabores.",
+          "image": "images/menu-items/pasteizinhos-tradicionais.webp",
+          "available": true,
+          "optionGroupIds": ["pasteizinhos-traditional-flavors", "sauce", "extras"],
+          "variants": [
+            {
+              "id": "25-units",
+              "label": "25 unidades",
+              "price": 29.9,
+              "optionOverrides": {
+                "pasteizinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
+                "sauce": { "perItemMax": 1 },
+                "extras": { "perItemMax": 3 }
+              }
+            },
+            {
+              "id": "50-units",
+              "label": "50 unidades",
+              "price": 52.9,
+              "optionOverrides": {
+                "pasteizinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
+                "sauce": { "perItemMax": 2 },
+                "extras": { "perItemMax": 5 }
+              }
+            },
+            {
+              "id": "100-units",
+              "label": "100 unidades",
+              "price": 92.9,
+              "optionOverrides": {
+                "pasteizinhos-traditional-flavors": {
+                  "perItemMax": 10,
+                  "minSelect": 5,
+                  "unitsPerSelection": 10
+                },
+                "sauce": { "perItemMax": 3 },
+                "extras": { "perItemMax": 8 }
+              }
+            }
+          ]
+        },
+        {
+          "id": "combos-item-004",
+          "title": "Pasteizinhos Veganos/Vegetarianos",
+          "description": "Monte sua caixa vegana/vegetariano com seus pasteizinhos de feira favoritos! Escolha a quantidade e os sabores.",
+          "image": "images/menu-items/pasteizinhos-veganos.jpg",
+          "available": true,
+          "optionGroupIds": ["pasteizinhos-vegan-flavors", "sauce", "extras"],
+          "variants": [
+            {
+              "id": "25-units",
+              "label": "25 unidades",
+              "price": 32.9,
+              "optionOverrides": {
+                "pasteizinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
+                "sauce": { "perItemMax": 1 },
+                "extras": { "perItemMax": 3 }
+              }
+            },
+            {
+              "id": "50-units",
+              "label": "50 unidades",
+              "price": 57.9,
+              "optionOverrides": {
+                "pasteizinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
+                "sauce": { "perItemMax": 2 },
+                "extras": { "perItemMax": 5 }
+              }
+            },
+            {
+              "id": "100-units",
+              "label": "100 unidades",
+              "price": 99.9,
+              "optionOverrides": {
+                "pasteizinhos-vegan-flavors": {
                   "perItemMax": 10,
                   "minSelect": 5,
                   "unitsPerSelection": 10
@@ -1088,7 +1265,7 @@
       "items": [
         {
           "id": "bebidas-item-001",
-          "title": "Coca-Cola Zero 350ml",
+          "title": "Coca-Cola Zero",
           "description": "Lata 350ml",
           "price": 6.49,
           "image": "images/menu-items/coca-zero-350.png",
@@ -1096,7 +1273,7 @@
         },
         {
           "id": "bebidas-item-002",
-          "title": "Coca-Cola Original 350ml",
+          "title": "Coca-Cola Original",
           "description": "Lata 350ml",
           "price": 6.49,
           "image": "images/menu-items/coca-350.png",
@@ -1104,7 +1281,7 @@
         },
         {
           "id": "bebidas-item-003",
-          "title": "Coca-Cola Zero 600ml",
+          "title": "Coca-Cola Zero",
           "description": "Garrafa Pet 600ml",
           "price": 8.9,
           "image": "images/menu-items/coca-zero-600.webp",
@@ -1112,7 +1289,7 @@
         },
         {
           "id": "bebidas-item-004",
-          "title": "Coca-Cola Original 600ml",
+          "title": "Coca-Cola Original",
           "description": "Garrafa Pet 600ml",
           "price": 8.9,
           "image": "images/menu-items/coca-600.png",
@@ -1120,7 +1297,7 @@
         },
         {
           "id": "bebidas-item-005",
-          "title": "Coca-Cola Zero 2l",
+          "title": "Coca-Cola Zero",
           "description": "Garrafa Pet 2l",
           "price": 19.9,
           "image": "images/menu-items/coca-zero-2l.webp",
@@ -1128,7 +1305,7 @@
         },
         {
           "id": "bebidas-item-006",
-          "title": "Coca-Cola Original 2l",
+          "title": "Coca-Cola Original",
           "description": "Garrafa Pet 2l",
           "price": 19.9,
           "image": "images/menu-items/coca-2l.webp",
@@ -1136,10 +1313,18 @@
         },
         {
           "id": "bebidas-item-007",
-          "title": "Guaraná Antarctica 2l",
+          "title": "Guaraná Antarctica Original",
           "description": "Garrafa Pet 2l",
           "price": 17.9,
           "image": "images/menu-items/guarana-2l.jpg",
+          "available": true
+        },
+        {
+          "id": "bebidas-item-009",
+          "title": "Sprite Original",
+          "description": "Garrafa Pet 2l",
+          "price": 18.5,
+          "image": "images/menu-items/sprite-2l.webp",
           "available": true
         }
       ]
