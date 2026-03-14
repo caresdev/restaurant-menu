@@ -393,7 +393,7 @@ function renderMenu() {
                 item.title
               }" class="menu-img"/>
             </div>
-            <div class="col-md-6 col-lg-6 item-info mt-3 px-4">
+            <div class="col-md-6 col-lg-7 item-info mt-3 px-4">
               <div class="row justify-content-between">
                 <h4 class="col-8 item-title text-uppercase">${item.title}</h4>
                 <h4 class="col-4 item-price">${priceDisplay}</h4>
