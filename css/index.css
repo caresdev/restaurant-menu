@@ -23,11 +23,6 @@
 
 
 /**** Global Styles ****/
-
-h3{
-  letter-spacing: var(--slight-spacing);
-}
-
 h1 {
   font-size: 1.8em;
 }
@@ -61,47 +56,134 @@ body{
 
 
 /* Banner */
-#hero{
-    width: 100vw;
-    height: 100vh;
+#hero {
+    width: 100dvw;
+    min-height: 100vh;
     font-family: var(--primary-font);
+    position: relative;
+    overflow: hidden;
 }
 
-
-.header-bg{
-    height: inherit;
-    object-fit: cover;
-}
-
-.header-overlay{
+.header-bg {
     position: absolute;
-    top: 48%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 35% center;
+    z-index: 0;
 }
 
-
-.header-title h1, .slogan{
-    font-weight: 600;
+/* Hero Content - mobile first (stacked) */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 80px 24px 40px;
+    gap: 16px;
+    justify-content: center;
 }
 
-.slogan-txt{
-    font-weight: 200;
+/* Text column — on mobile it uses flexbox ordering internally */
+.hero-text-col {
+    display: contents;
 }
 
-.header-img img{
-    width: 18em;
-    height: auto;
-    object-fit: contain; 
+/* Branding block (name + tagline) */
+.hero-branding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    order: 1;
 }
 
-.header-slogan .btn{
+/* CTA block (slogan + description + button) */
+.hero-cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    max-width: 500px;
+    order: 3;
+}
+
+/* Food image — between branding and CTA on mobile */
+.hero-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 2;
+}
+
+/* Typography hierarchy */
+.hero-tagline {
+    font-family: var(--tertiary-font);
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: var(--greater-spacing);
+    text-transform: uppercase;
+    color: var(--primary-text-color);
+    opacity: 0.7;
+}
+
+.hero-name {
+    font-family: var(--primary-font);
+    font-weight: 700;
+    color: var(--primary-text-color);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.hero-slogan {
+    font-family: var(--primary-font);
+    font-weight: 700;
+    color: var(--primary-text-color);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.hero-description {
+    font-family: var(--tertiary-font);
+    font-weight: 400;
+    color: var(--primary-text-color);
+    opacity: 0.7;
+    margin-bottom: 12px;
+}
+
+.hero-cta {
     color: var(--secondary-text-color);
     background-color: var(--primary-green-color);
     font-family: var(--secondary-font);
-    font-weight: 200;
-    width: 10em;
-    letter-spacing: var(--spacing);
+    font-weight: 300;
+    font-size: 1em;
+    letter-spacing: var(--greater-spacing);
+    padding: 8px 28px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 200ms ease-out;
+    box-shadow: 0 4px 16px rgba(22, 148, 12, 0.3);
+}
+
+.hero-cta:hover {
+    background-color: #14811a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22, 148, 12, 0.4);
+    color: var(--secondary-text-color);
+}
+
+.hero-img img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
 }
 
 
@@ -388,6 +470,7 @@ body{
 
 .item-name {
     font-family: var(--secondary-font);
+    letter-spacing: var(--slight-spacing);
     font-size: 1em;
     font-weight: 600;
     color: var(--primary-text-color);
@@ -1416,7 +1499,11 @@ main {
 
 /* Media Queries */
 
-@media screen and (min-width: 375px){
+@media screen and (min-width: 375px) {
+    .hero-img img {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 @media  screen and (min-width: 425px) {
@@ -1436,70 +1523,117 @@ main {
     .item-description{
         font-size: var(--secondary-text-size);
     }
+
+    .hero-img img {
+        width: 100%;
+        max-width: 450px;
+    }
 }
 
-@media  screen and (min-width: 768px) {
-    
-    .header-img img{
-        width: 22em;
+@media screen and (min-width: 768px) {
+
+    .header-bg {
+        object-position: 15% center;
     }
 
-    .header-overlay{
-        top: 53%
+    .hero-img img {
+        width: 100%;
+        max-width: 500px;
     }
-
 }
 
-@media  screen and (min-width: 1024px) and (max-width: 1300px){
-    .header-img img{
-        width: 32em;
+@media screen and (min-width: 1024px) {
+    /* Hero: two-column layout */
+    .hero-content {
+        flex-direction: row;
+        text-align: left;
+        padding: 0 5%;
+        gap: 40px;
+        align-items: center;
     }
 
+    /* Text column becomes a real column on desktop */
+    .hero-text-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        flex: 1;
+        max-width: 550px;
+    }
+
+    .hero-branding {
+        align-items: flex-start;
+        order: unset;
+    }
+
+    .hero-cta-block {
+        align-items: flex-start;
+        order: unset;
+    }
+
+    .hero-img {
+        flex: 1;
+        order: unset;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1300px) {
     h1 {
         font-size: 2.5em;
     }
+    h2 {
+        font-size: 1.8em;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
     h4 {
-        font-size: 1.15em;
+        font-size: 1em;
     }
 
-    .item-description{
+    .item-description {
         font-size: var(--tertiary-text-size);
     }
 
+    .hero-img img {
+        width: 100%;
+        max-width: 700px;
+    }
 }
 
-@media  screen and (min-width: 1200px) and (max-width: 1499px) {
-    .header-img img{
-        width: 35em;
+@media screen and (min-width: 1200px) and (max-width: 1499px) {
+    .hero-img img {
+        max-width: 650px;
+    }
+
+    h1 {
+        font-size: 3.6em;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
+    h4 {
+        font-size: 1em;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .hero-img img {
+        max-width: 800px;
     }
 
     h1 {
         font-size: 3.8em;
     }
     h2 {
-        font-size: 2.3em;
-    }
-    h3 {
-        font-size: 1.8em;
-    }
-    h4 {
-        font-size: 1.15em;
-    }
-
-}
-
-@media  screen and (min-width: 1500px) {
-    .header-img img{
-        width: 38em;
-    }
-    h1 {
-        font-size: 4.2em;
-    }
-    h2 {
-        font-size: 2.5em;
-    }
-    h3 {
         font-size: 2em;
+    }
+    h3 {
+        font-size: 1.6em;
     }
     h4 {
         font-size: 1.2em;

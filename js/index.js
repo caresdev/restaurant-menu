@@ -254,13 +254,13 @@ function updateHoursDisplay(hours) {
     "sunday",
   ];
   const dayNames = {
-    monday: "Segunda",
-    tuesday: "Terça-feira",
-    wednesday: "Quarta-feira",
-    thursday: "Quinta-feira",
-    friday: "Sexta-feira",
-    saturday: "Sábado",
-    sunday: "Domingo",
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    thursday: "Thursday",
+    friday: "Friday",
+    saturday: "Saturday",
+    sunday: "Sunday",
   };
 
   // Group consecutive days with same hours
@@ -376,7 +376,7 @@ function renderMenu() {
       const article = document.createElement("article");
       article.className = "menu-item col-xl-6";
 
-      // Price display: "A partir de R$XX,XX" for variant items, "R$XX,XX" for regular
+      // Price display: range for variant items, single price for regular
       let priceDisplay;
       if (item.variants && item.variants.length > 0) {
         const lowestPrice = Math.min(...item.variants.map((v) => v.price));
@@ -405,7 +405,7 @@ function renderMenu() {
               <div class="text-end mt-3">
                 <button class="btn btn-success rounded-pill add-to-cart"
                   data-item-id="${item.id}">
-                  <i class="fas fa-plus me-1"></i>Adicionar
+                  <i class="fas fa-plus me-1"></i>Add
                 </button>
               </div>
             </div>
@@ -622,7 +622,7 @@ function removeFromCart(itemId) {
 // Clear cart with confirmation
 function confirmClearCart() {
   if (cart.length === 0) return;
-  if (!window.confirm("Tem certeza que deseja limpar o carrinho?")) return;
+  if (!window.confirm("Are you sure you want to clear your cart?")) return;
   cart = [];
   updateCartDisplay();
   closeCartDrawer();
@@ -643,7 +643,7 @@ function updateCartDisplay() {
 
   if (cart.length === 0) {
     cartItemsEl.innerHTML =
-      '<p class="text-muted text-center py-4">Seu carrinho está vazio</p>';
+      '<p class="text-muted text-center py-4">Your cart is empty</p>';
     hideCartSummary();
     return;
   }
@@ -690,7 +690,7 @@ function updateCartDisplay() {
       <div class="cart-item-content">
         <div class="item-details">
           <h6 class="item-name mb-1">${item.title}${item.variantLabel ? ` — ${item.variantLabel}` : ""}</h6>
-          <span class="item-unit-price text-muted">${formatBRL(basePrice)} cada</span>
+          <span class="item-unit-price text-muted">${formatBRL(basePrice)} each</span>
           ${optionsHtml ? `<div class="item-options mt-1">${optionsHtml}</div>` : ""}
         </div>
 
@@ -709,12 +709,12 @@ function updateCartDisplay() {
             <span class="item-total">${formatBRL(lineTotal)}</span>
             ${
               (item.options && item.options.length > 0) || item.variantId
-                ? `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Editar opções">
+                ? `<button class="btn btn-sm btn-outline-primary edit-item me-1" data-item-index="${index}" title="Edit options">
                   <i class="fas fa-edit"></i>
                 </button>`
                 : ""
             }
-            <button class="btn btn-sm btn-outline-danger remove-item" data-item-id="${item.id}" title="Remover item">
+            <button class="btn btn-sm btn-outline-danger remove-item" data-item-id="${item.id}" title="Remove item">
               <i class="fas fa-times"></i>
             </button>
           </div>
@@ -730,7 +730,7 @@ function updateCartDisplay() {
   clearRow.className = "text-start mt-2 mb-1";
   clearRow.innerHTML = `
     <button class="btn-clear-cart-inline" data-action="clear-cart">
-      <i class="fas fa-trash-alt me-1"></i>Limpar carrinho
+      <i class="fas fa-trash-alt me-1"></i>Clear cart
     </button>
   `;
   cartItemsEl.appendChild(clearRow);
@@ -844,10 +844,19 @@ function changeQuantity(itemId, delta) {
   }
 }
 
-// Format price in BRL
-function formatBRL(value) {
-  return `R$${value.toFixed(2).replace(".", ",")}`;
+// Format price using restaurant currency settings (defaults to USD)
+function formatCurrency(value) {
+  const symbol = (menuData && menuData.restaurant && menuData.restaurant.currency && menuData.restaurant.currency.symbol) || "$";
+  const decimal = (menuData && menuData.restaurant && menuData.restaurant.currency && menuData.restaurant.currency.decimal) || ".";
+  const thousands = (menuData && menuData.restaurant && menuData.restaurant.currency && menuData.restaurant.currency.thousands) || ",";
+  const fixed = value.toFixed(2);
+  const [intPart, decPart] = fixed.split(".");
+  const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousands);
+  return `${symbol}${formattedInt}${decimal}${decPart}`;
 }
+
+// Keep backward-compatible alias
+const formatBRL = formatCurrency;
 
 // Screen reader announcements
 function announceToScreenReader(message) {
@@ -1061,7 +1070,7 @@ function renderOptionsModal() {
 
       let validationMsg = "";
       if (isRequired && groupTotal < effectiveMin) {
-        validationMsg = `<div class="validation-msg">Selecione pelo menos ${effectiveMin}</div>`;
+        validationMsg = `<div class="validation-msg">Select at least ${effectiveMin}</div>`;
       }
 
       groupDiv.innerHTML = `
@@ -1430,7 +1439,7 @@ function calculateLineTotal(item) {
 // Send order to WhatsApp — now opens checkout modal first
 function sendOrderToWhatsApp() {
   if (cart.length === 0) {
-    alert("Seu carrinho está vazio!");
+    alert("Your cart is empty!");
     return;
   }
   openCheckoutModal();
@@ -1438,7 +1447,7 @@ function sendOrderToWhatsApp() {
 
 // Build order items message (reused by confirmCheckout)
 function buildOrderItemsMessage() {
-  let message = `Olá! Gostaria de fazer um pedido na ${menuData.restaurant.name}:\n\n*Pedido:*\n`;
+  let message = `Hi! I'd like to place an order at ${menuData.restaurant.name}:\n\n*Order:*\n`;
   let total = 0;
 
   cart.forEach((item) => {
@@ -1517,8 +1526,8 @@ function handlePaymentMethodChange() {
   }
 
   const isCard =
-    selected.value === "credito" || selected.value === "debito";
-  const isCash = selected.value === "dinheiro";
+    selected.value === "credit" || selected.value === "debit";
+  const isCash = selected.value === "cash";
 
   if (cardFlagSection)
     cardFlagSection.style.display = isCard ? "block" : "none";
@@ -1561,8 +1570,8 @@ function validateCheckoutForm() {
   // Card flag required if card is selected
   if (
     paymentSelected &&
-    (paymentSelected.value === "credito" ||
-      paymentSelected.value === "debito")
+    (paymentSelected.value === "credit" ||
+      paymentSelected.value === "debit")
   ) {
     if (!cardFlag || cardFlag.value === "") isValid = false;
   }
@@ -1612,33 +1621,30 @@ function confirmCheckout() {
   // Build payment label
   let paymentLabel = "";
   switch (paymentSelected.value) {
-    case "pix":
-      paymentLabel = "Pix";
+    case "credit":
+      paymentLabel = `Credit Card (${cardFlag})`;
       break;
-    case "credito":
-      paymentLabel = `Cartão de Crédito (${cardFlag})`;
+    case "debit":
+      paymentLabel = `Debit Card (${cardFlag})`;
       break;
-    case "debito":
-      paymentLabel = `Cartão de Débito (${cardFlag})`;
-      break;
-    case "dinheiro":
-      paymentLabel = "Dinheiro";
-      if (change) paymentLabel += ` (Troco para ${change})`;
+    case "cash":
+      paymentLabel = "Cash";
+      if (change) paymentLabel += ` (Change for ${change})`;
       break;
   }
 
   // Build address line
   let addressLine = `${street}, ${number} - ${neighborhood}`;
-  if (reference) addressLine += `\nPonto de referência: ${reference}`;
+  if (reference) addressLine += `\nDelivery note: ${reference}`;
 
   // Compose full message
   let fullMessage = orderMessage;
-  fullMessage += `\n*Total dos itens: ${formatBRL(total)}*`;
-  fullMessage += `\n_(Taxa de entrega será informada após confirmação do endereço)_`;
-  fullMessage += `\n\n*Nome:* ${name}`;
-  fullMessage += `\n*Endereço:* ${addressLine}`;
-  fullMessage += `\n*Pagamento:* ${paymentLabel}`;
-  fullMessage += `\n\nObrigada!`;
+  fullMessage += `\n*Item total: ${formatCurrency(total)}*`;
+  fullMessage += `\n_(Delivery fee will be confirmed after address verification)_`;
+  fullMessage += `\n\n*Name:* ${name}`;
+  fullMessage += `\n*Address:* ${addressLine}`;
+  fullMessage += `\n*Payment:* ${paymentLabel}`;
+  fullMessage += `\n\nThank you!`;
 
   const phoneNumber = menuData.restaurant.contact.phone;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;

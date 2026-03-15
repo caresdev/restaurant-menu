@@ -1,6 +1,6 @@
 {
-  "name": "sandra-salgados",
-  "private": true,
+  "name": "digital-menu-template",
+  "private": false,
   "scripts": {
     "build": "node js/make-config.js"
   },

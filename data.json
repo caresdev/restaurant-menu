@@ -1,44 +1,49 @@
 {
   "restaurant": {
-    "tagline": "Cardápio Digital",
-    "slogan": "Fome de Coxinha? A gente resolve!",
-    "description": "Sabores tradicionais, vegetarianos e veganos, temos sempre o melhor para você!",
-    "ctaText": "Entre em contato",
+    "tagline": "Digital Menu",
+    "slogan": "Fresh food, made with love!",
+    "description": "Explore our menu and order your favorites for delivery.",
+    "ctaText": "Order Now",
     "hours": {
-      "monday": "7:00 - 22:00",
-      "tuesday": "7:00 - 22:00",
-      "wednesday": "7:00 - 22:00",
-      "thursday": "7:00 - 22:00",
-      "friday": "7:00 - 22:00",
-      "saturday": "16 - 23:00",
-      "sunday": "9:00 - 22:00"
+      "monday": "9:00 AM - 9:00 PM",
+      "tuesday": "9:00 AM - 9:00 PM",
+      "wednesday": "9:00 AM - 9:00 PM",
+      "thursday": "9:00 AM - 9:00 PM",
+      "friday": "9:00 AM - 10:00 PM",
+      "saturday": "10:00 AM - 10:00 PM",
+      "sunday": "10:00 AM - 8:00 PM"
     },
     "contact": {
-      "phone": "5544998663351",
-      "address": "",
-      "city": "Maringá",
-      "state": "PR",
-      "zip": "",
-      "country": "Brasil",
-      "email": "contato@sandrasalgados.com"
+      "phone": "15551234567",
+      "address": "123 Main Street",
+      "city": "Springfield",
+      "state": "IL",
+      "zip": "62701",
+      "country": "USA",
+      "email": "hello@example.com"
     },
-    "name": "Sandra Salgados",
+    "name": "Sample Restaurant",
+    "currency": {
+      "symbol": "$",
+      "decimal": ".",
+      "thousands": ","
+    },
     "social": [
       {
         "platform": "whatsapp",
-        "url": "https://wa.me/5544998663351",
+        "url": "https://wa.me/15551234567",
         "icon": "fab fa-whatsapp",
-        "label": "Whatsapp"
+        "label": "WhatsApp"
       },
       {
         "platform": "instagram",
-        "url": "https://www.instagram.com/sandrasalgadosmga",
+        "url": "https://www.instagram.com/yourrestaurant",
         "icon": "fab fa-instagram",
         "label": "Instagram"
       },
       {
         "platform": "facebook",
-        "url": "https://www.facebook.com/profile.php?id=100089738227856",
+        "url": "https://www.facebook.com/yourrestaurant",
         "icon": "fab fa-facebook-f",
         "label": "Facebook"
       }
@@ -46,1285 +51,416 @@
   },
   "categories": [
     {
-      "id": "risoles",
-      "name": "Risoles",
+      "id": "burgers",
+      "name": "Burgers",
       "optionGroups": [
         {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
-          "perItemMax": 1,
+          "id": "burger-extras",
+          "name": "Add Extras",
+          "perItemMax": 3,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0
+              "id": "extra-cheese",
+              "name": "Extra Cheese",
+              "priceDelta": 1.5
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0
+              "id": "bacon",
+              "name": "Bacon",
+              "priceDelta": 2.0
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
+              "id": "avocado",
+              "name": "Avocado",
+              "priceDelta": 1.75
             },
             {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
+              "id": "fried-egg",
+              "name": "Fried Egg",
+              "priceDelta": 1.5
             }
           ]
         },
         {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
+          "id": "burger-sauce",
+          "name": "Choose Your Sauce",
+          "perItemMax": 1,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
+              "id": "ketchup",
+              "name": "Ketchup",
+              "priceDelta": 0
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
+              "id": "mustard",
+              "name": "Mustard",
+              "priceDelta": 0
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
+              "id": "bbq",
+              "name": "BBQ Sauce",
+              "priceDelta": 0
             },
             {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
+              "id": "special-sauce",
+              "name": "Special Sauce",
+              "priceDelta": 0.5
             }
           ]
         }
       ],
       "items": [
         {
-          "id": "risoles-item-001",
-          "title": "Risoles de Carne",
-          "description": "Risoles de carne feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (8 unidades)",
-          "price": 21.9,
-          "image": "images/menu-items/risoles-de-carne.png",
+          "id": "classic-burger",
+          "description": "Juicy beef patty with lettuce, tomato, onion, and pickles on a toasted bun.",
+          "price": 9.99,
+          "image": "images/menu-items/burgers.jpg",
+          "optionGroupIds": [
+            "burger-extras",
+            "burger-sauce"
+          ],
+          "title": "Classic Burger",
           "available": true
         },
         {
-          "id": "risoles-item-002",
-          "title": "Risoles de Frango",
-          "description": "Risoles de frango feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (8 unidades)",
-          "price": 21.9,
-          "image": "images/menu-items/risoles-de-frango.png",
+          "id": "cheese-burger",
+          "description": "Our classic burger topped with melted cheddar cheese.",
+          "price": 10.99,
+          "image": "images/menu-items/burgers.jpg",
+          "optionGroupIds": [
+            "burger-extras",
+            "burger-sauce"
+          ],
+          "title": "Cheeseburger",
           "available": true
         },
         {
-          "id": "risoles-item-003",
-          "title": "Risoles de Presunto e Queijo",
-          "description": "Risoles de presunto e queijo muçarela feitos com massa pré-cozida, recheio de primeira qualidade, e preparo totalmente artesanal! (8 unidades)",
-          "price": 21.9,
-          "image": "images/menu-items/risoles-de-presunto-e-queijo.png",
-          "available": true
-        },
-        {
-          "id": "risoles-item-004",
-          "title": "Risoles Margherita",
-          "description": "Clássico recheio italiano com queijo muçarela, tomate seco e manjericão fresquinho. Feitos com massa pré-cozida, e preparo totalmente artesanal! (8 unidades)",
-          "price": 24.9,
-          "image": "images/menu-items/risoles-margherita.png",
-          "available": true
-        },
-        {
-          "id": "risoles-item-005",
-          "title": "Risoles de Alho-Poró com Queijo",
-          "description": "Deliciosos risoles de massa tradicional pré-cozida recheados com alho-poró e queijo muçarela, uma combinação perfeita que encanta paladares. (8 unidades)",
-          "price": 21.9,
-          "image": "images/menu-items/risoles-de-alho-poro-com-queijo.jpeg",
-          "available": true
-        },
-        {
-          "id": "risoles-item-006",
-          "title": "Risoles de Queijo",
-          "description": "Clássico risoles de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal! (8 unidades)",
-          "price": 21.9,
-          "image": "images/menu-items/risoles-de-queijo.png",
-          "available": true
-        },
-        {
-          "id": "risoles-item-007",
-          "title": "Risoles de Cogumelos(Vegano)",
-          "description": "Risoles veganos recheados com cogumelos Portobello, massa pré-cozida, e preparo totalmente artesanal! (8 unidades)",
-          "price": 24.9,
-          "image": "images/menu-items/risoles-de-cogumelos.png",
-          "available": true
-        },
-        {
-          "id": "risoles-item-008",
-          "title": "Risoles de Alho-Poró (Vegano)",
-          "description": "Risoles veganos feitos com massa pré-cozida e recheados com alho-poró. (8 unidades)",
-          "price": 24.9,
-          "image": "images/menu-items/risoles-de-alho-poro.jpeg",
+          "id": "veggie-burger",
+          "description": "Plant-based patty with fresh vegetables and house-made sauce.",
+          "price": 11.49,
+          "image": "images/menu-items/burgers.jpg",
+          "optionGroupIds": [
+            "burger-extras",
+            "burger-sauce"
+          ],
+          "title": "Veggie Burger",
           "available": true
         }
       ]
     },
     {
-      "id": "coxinhas",
-      "name": "Coxinhas",
+      "id": "pizzas",
+      "name": "Pizzas",
       "optionGroups": [
         {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
+          "id": "pizza-size",
+          "name": "Choose Size",
           "perItemMax": 1,
+          "minSelect": 1,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "id": "small",
+              "name": "Small (10\")",
               "priceDelta": 0
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0
+              "id": "medium",
+              "name": "Medium (12\")",
+              "priceDelta": 3.0
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
+              "id": "large",
+              "name": "Large (14\")",
+              "priceDelta": 5.0
             }
           ]
         },
         {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
+          "id": "pizza-extras",
+          "name": "Extra Toppings",
+          "perItemMax": 4,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
+              "id": "mushrooms",
+              "name": "Mushrooms",
+              "priceDelta": 1.5
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
+              "id": "peppers",
+              "name": "Bell Peppers",
+              "priceDelta": 1.5
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
+              "id": "olives",
+              "name": "Olives",
+              "priceDelta": 1.25
             },
             {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
+              "id": "extra-mozzarella",
+              "name": "Extra Mozzarella",
+              "priceDelta": 2.0
             }
           ]
         }
       ],
       "items": [
         {
-          "id": "coxinhas-item-001",
-          "title": "Coxinhas de Frango",
-          "description": "Coxinhas de frango feitas com uma deliciosa massa de batata incrivelmente macia. Preparo totalmente artesanal. (6 unidades)",
-          "price": 22.9,
-          "image": "images/menu-items/coxinhas-frango.png",
+          "id": "margherita",
+          "description": "Fresh mozzarella, tomato sauce, and basil on a crispy crust.",
+          "price": 12.99,
+          "image": "images/menu-items/pizzas.jpg",
+          "optionGroupIds": [
+            "pizza-size",
+            "pizza-extras"
+          ],
+          "title": "Margherita",
           "available": true
         },
         {
-          "id": "coxinhas-item-002",
-          "title": "Coxinhas de Frango com Catupiry",
-          "description": "Coxinhas de frango com recheio cremoso de queijo Catupiry envoltas em uma massa de batata incrivelmente macia e saborosa. (6 unidades)",
-          "price": 25.9,
-          "image": "images/menu-items/coxinhas-frango-catupiry.png",
+          "id": "pepperoni",
+          "description": "Loaded with pepperoni and melted mozzarella cheese.",
+          "price": 14.99,
+          "image": "images/menu-items/pizzas.jpg",
+          "optionGroupIds": [
+            "pizza-size",
+            "pizza-extras"
+          ],
+          "title": "Pepperoni",
           "available": true
         },
         {
-          "id": "coxinhas-item-003",
-          "title": "Coxinhas de Carne",
-          "description": "Clássica coxinhas de carne feitas com uma deliciosa massa de batata. Preparo totalmente artesanal. (6 unidades)",
-          "price": 24.9,
-          "image": "images/menu-items/coxinhas-carne.png",
-          "available": true
-        },
-        {
-          "id": "coxinhas-item-004",
-          "title": "Coxinhas de Cogumelos (Vegano)",
-          "description": "Coxinhas veganas feitas com massa de batata e recheio cremoso de cogumelos Portobello. Totalmente livre de ingredientes de origem animal. (6 unidades)",
-          "price": 26.9,
-          "image": "images/menu-items/coxinhas-cogumelos.png",
+          "id": "veggie-pizza",
+          "description": "Bell peppers, onions, mushrooms, and olives on tomato sauce.",
+          "price": 13.49,
+          "image": "images/menu-items/pizzas.jpg",
+          "optionGroupIds": [
+            "pizza-size",
+            "pizza-extras"
+          ],
+          "title": "Garden Veggie",
           "available": true
         }
       ]
     },
     {
-      "id": "empadao",
-      "name": "Empadão",
+      "id": "sides",
+      "name": "Sides",
       "optionGroups": [
         {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
-          "perItemMax": 2,
+          "id": "side-dip",
+          "name": "Choose a Dip",
+          "perItemMax": 1,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "id": "ranch",
+              "name": "Ranch",
               "priceDelta": 0
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "id": "honey-mustard",
+              "name": "Honey Mustard",
               "priceDelta": 0
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
+              "id": "sriracha-mayo",
+              "name": "Sriracha Mayo",
+              "priceDelta": 0.5
             }
           ]
         }
       ],
       "items": [
         {
-          "id": "empadao-item-001",
-          "title": "Empadão de Frango com Catupiry",
-          "description": "Combinação perfeita de frango cremoso e queijo Catupiry envolto em uma massa crocante que derrete na boca. (Aprox. 1kg)",
-          "price": 79.9,
-          "image": "images/menu-items/empadao-frango-catupiry.png",
+          "id": "fries",
+          "description": "Crispy golden fries seasoned with sea salt.",
+          "price": 4.99,
+          "image": "images/menu-items/sides.jpg",
+          "optionGroupIds": [
+            "side-dip"
+          ],
+          "title": "French Fries",
           "available": true
         },
         {
-          "id": "empadao-item-002",
-          "title": "Empadão de Frango com Palmito",
-          "description": "Combinação clássica e deliciosa de frango, palmito e requeijão em nossa irresistível massa crocante que derrete na boca. (Aprox. 1kg)",
-          "price": 74.9,
-          "image": "images/menu-items/empadao-frango-palmito.png",
+          "id": "onion-rings",
+          "description": "Beer-battered onion rings served golden and crunchy.",
+          "price": 5.99,
+          "image": "images/menu-items/sides.jpg",
+          "optionGroupIds": [
+            "side-dip"
+          ],
+          "title": "Onion Rings",
           "available": true
         },
         {
-          "id": "empadao-item-003",
-          "title": "Empadão de Camarão",
-          "description": "Deliciosa combinação de camarão, leite de coco, e queijo Catupiry. Massa crocante, recheio cremoso, e um sabor irresistível. (Aprox. 1kg)",
-          "price": 92.9,
-          "image": "images/menu-items/empadao-camarao.jpeg",
-          "available": true
-        },
-        {
-          "id": "empadao-item-004",
-          "title": "Empadão de Palmito Cremoso",
-          "description": "Empadão com massa clássica e delicada que derrete na boca. Recheio cremoso de palmito, tomates frescos, e requeijão. (Aprox. 1kg)",
-          "price": 79.9,
-          "image": "images/menu-items/empadao-palmito-cremoso.jpeg",
-          "available": true
-        },
-        {
-          "id": "empadao-item-005",
-          "title": "Empadão de Palmito com Alho-Poró (Vegano)",
-          "description": "Empadão vegano com massa delicada que derrete na boca. Recheio cremoso de palmito, alho-poró, e livre de qualquer produto de origem animal. (Aprox. 1kg)",
-          "price": 79.9,
-          "image": "images/menu-items/empadao-palmito-vegano.png",
-          "available": true
-        },
-        {
-          "id": "empadao-item-006",
-          "title": "Empadão de Grão-de-Bico",
-          "description": "Empadão vegano com recheio cremoso de grão-de-bico, tomates fresquinhos, e leite de coco. Massa crocante que derrete na boca e livre de qualquer produto de origem animal. (Aprox. 1kg)",
-          "price": 77.9,
-          "image": "images/menu-items/empadao-grao-de-bico-vegano.jpeg",
+          "id": "coleslaw",
+          "description": "Creamy house-made coleslaw with fresh cabbage and carrots.",
+          "price": 3.49,
+          "image": "images/menu-items/sides.jpg",
+          "optionGroupIds": [],
+          "title": "Coleslaw",
           "available": true
         }
       ]
     },
     {
-      "id": "empadinhas",
-      "name": "Empadinhas",
+      "id": "combos",
+      "name": "Combos & Specials",
       "optionGroups": [
         {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
+          "id": "combo-drink",
+          "name": "Choose Your Drink",
           "perItemMax": 1,
+          "minSelect": 1,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
+              "id": "soda",
+              "name": "Soda",
               "priceDelta": 0
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
+              "id": "iced-tea",
+              "name": "Iced Tea",
               "priceDelta": 0
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
+              "id": "lemonade",
+              "name": "Lemonade",
+              "priceDelta": 0.5
             }
           ]
         },
         {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
+          "id": "combo-side",
+          "name": "Choose Your Side",
+          "perItemMax": 1,
+          "minSelect": 1,
           "options": [
             {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
+              "id": "combo-fries",
+              "name": "French Fries",
+              "priceDelta": 0
             },
             {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
+              "id": "combo-onion-rings",
+              "name": "Onion Rings",
+              "priceDelta": 1.0
             },
             {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
+              "id": "combo-coleslaw",
+              "name": "Coleslaw",
+              "priceDelta": 0
             }
           ]
         }
       ],
       "items": [
         {
-          "id": "empadinhas-item-001",
-          "title": "Empadinhas de Frango com Catupiry",
-          "description": "Clássica combinação de frango com Catupiry! Recheio cremoso e massa crocante que derrete na boca. (2 unidades grandes)",
-          "price": 19.9,
-          "image": "images/menu-items/empadinhas-frango-catupiry.png",
-          "available": true
-        },
-        {
-          "id": "empadinhas-item-002",
-          "title": "Empadinhas de Frango com Palmito",
-          "description": "Recheio cremoso de frango, palmito, e requeijão em uma massa crocante que derrete na boca. (2 unidades grandes)",
-          "price": 19.9,
-          "image": "images/menu-items/empadinhas-frango-palmito.jpg",
-          "available": true
-        },
-        {
-          "id": "empadinhas-item-003",
-          "title": "Empadinhas de Camarão",
-          "description": "Recheio cremoso de camarão, leite de coco, tomates frescos, e requeijão em uma massa crocante que derrete na boca. (2 unidades grandes)",
-          "price": 24.9,
-          "image": "images/menu-items/empadinhas-camarao.png",
-          "available": true
-        },
-        {
-          "id": "empadinhas-item-004",
-          "title": "Empadinhas de Pamito",
-          "description": "Empadinhas vegetarianas com recheio cremoso de palmito, tomates frescos, e requeijão. (2 unidades grandes)",
-          "price": 19.9,
-          "image": "images/menu-items/empadinhas-palmito.jpeg",
-          "available": true
-        },
-        {
-          "id": "empadinhas-item-005",
-          "title": "Empadinhas de Palmito com Alho-Poró (Vegano)",
-          "description": "Empadinhas veganas com recheio cremoso de palmito com alho-poró, e tomates fresquinhos. (2 unidades grandes)",
-          "price": 21.9,
-          "image": "images/menu-items/empadinhas-palmito-vegano.png",
-          "available": true
-        },
-        {
-          "id": "empadinhas-item-006",
-          "title": "Empadinhas de Grão-de-Bico (Vegano)",
-          "description": "Empadinhas veganas com recheio cremoso de grão de bico, tomates fresquinhos, e leite de coco. (2 unidades grandes)",
-          "price": 21.9,
-          "image": "images/menu-items/empadinhas-grao-de-bico.jpeg",
-          "available": true
-        },
-        {
-          "id": "empadinhas-item-007",
-          "title": "Empadinhas de Espinafre com Ricota",
-          "description": "Empadinhas vegetarianas com recheio cremoso de espinafre fresco e creme de ricota. (2 unidades grandes)",
-          "price": 19.9,
-          "image": "images/menu-items/empadinhas-espinafre-ricota.jpeg",
-          "available": true
-        }
-      ]
-    },
-    {
-      "id": "bolinhas-de-queijo",
-      "name": "Bolinhas de Queijo",
-      "optionGroups": [
-        {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
-          "perItemMax": 1,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
-            }
-          ]
-        }
-      ],
-      "items": [
-        {
-          "id": "bolinhas-queijo-item-001",
-          "title": "Bolinhas de Queijo Tradicional",
-          "description": "Deliciosas bolinhas de queijo muçarela feitos com massa pré-cozida e preparo totalmente artesanal! (10 unidades)",
-          "price": 19.9,
-          "image": "images/menu-items/bolinhas-queijo-tradicional.png",
-          "available": true
-        },
-        {
-          "id": "bolinhas-queijo-item-002",
-          "title": "Bolinhas de Queijo com Calabresa",
-          "description": "Deliciosas bolinhas de queijo super recheadas com queijo muçarela e linguiça calabresa. (10 unidades)",
-          "price": 22.9,
-          "image": "images/menu-items/bolinhas-queijo-calabresa.png",
-          "available": true
-        },
-        {
-          "id": "bolinhas-queijo-item-003",
-          "title": "Bolinhas de Queijo com Bacon",
-          "description": "Deliciosas bolinhas de queijo feitas com massa pré-cozida e super recheadas com queijo muçarela e bacon. (10 unidades)",
-          "price": 24.9,
-          "image": "images/menu-items/bolinhas-queijo-bacon.jpeg",
-          "available": true
-        }
-      ]
-    },
-    {
-      "id": "combos-mini-salgados",
-      "name": "Combos & Mini Salgados",
-      "optionGroups": [
-        {
-          "id": "salgadinhos-traditional-flavors",
-          "name": "Escolha Seus Sabores",
-          "perItemMax": 5,
-          "minSelect": 5,
-          "options": [
-            {
-              "id": "risoles-carne-option",
-              "name": "Risoles de Carne",
-              "priceDelta": 0
-            },
-            {
-              "id": "risoles-frango-option",
-              "name": "Risoles de Frango",
-              "priceDelta": 0
-            },
-            {
-              "id": "risoles-presunto-queijo-option",
-              "name": "Risoles de Presunto e Queijo",
-              "priceDelta": 0
-            },
-            {
-              "id": "coxinha-frango-catupiry-option",
-              "name": "Coxinha de Frango com Catupiry",
-              "priceDelta": 0
-            },
-            {
-              "id": "coxinha-carne-option",
-              "name": "Coxinha de Carne",
-              "priceDelta": 0
-            },
-            {
-              "id": "bolinhas-queijo-option",
-              "name": "Risoles de Carne",
-              "priceDelta": 0
-            },
-            {
-              "id": "bolinhas-queijo-calabresa-option",
-              "name": "Bolinhas de Queijo com Calabresa",
-              "priceDelta": 0
-            },
-            {
-              "id": "enroladinhos-salsicha-option",
-              "name": "Enroladinhos de Salsicha",
-              "priceDelta": 0
-            },
-            {
-              "id": "Quibes Recheados",
-              "name": "Quibes Recheados",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "salgadinhos-vegan-flavors",
-          "name": "Escolha Seus Sabores",
-          "perItemMax": 5,
-          "minSelect": 5,
-          "options": [
-            {
-              "id": "risoles-alho-poro-option",
-              "name": "Risoles de Alho-Poró (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "risoles-alho-poro--queijo-option",
-              "name": "Risoles de Alho-Poró com Queijo (Vegetariano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "risoles-cogumelos-option",
-              "name": "Risoles de Cogumelos (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "risoles-queijo-option",
-              "name": "Risoles de Queijo (Vegetariano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "risoles-marguerita-option",
-              "name": "Risoles Marguerita (Vegetariano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "coxinhas-cogumelos-option",
-              "name": "Coxinhas de Cogumelos (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "coxinhas-grao-de-bico-option",
-              "name": "Coxinhas de Grão-de-bico (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "coxinhas-palmito-option",
-              "name": "Coxinhas de Palmito (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "bolinhas-mandioca-option",
-              "name": "Bolinhas de Mandioca (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "bolinhas-mandioca-queijo-option",
-              "name": "Bolinhas de Mandioca com Queijo (Vegetariano)",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "pasteizinhos-traditional-flavors",
-          "name": "Escolha Seus Sabores",
-          "perItemMax": 5,
-          "minSelect": 5,
-          "options": [
-            {
-              "id": "pasteizinhos-carne-option",
-              "name": "Carne",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-frango-option",
-              "name": "Frango",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-queijo-option",
-              "name": "Queijo",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-presunto-queijo-option",
-              "name": "Presunto e Queijo",
-              "priceDelta": 0
-            },
-            {
-              "id": "bolinhas-queijo-calabresa-option",
-              "name": "Queijo com Calabresa",
-              "priceDelta": 0
-            },
-            {
-              "id": "bolinhas-queijo-bacon-option",
-              "name": "Queijo com Bacon",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "pasteizinhos-vegan-flavors",
-          "name": "Escolha Seus Sabores",
-          "perItemMax": 5,
-          "minSelect": 5,
-          "options": [
-            {
-              "id": "pasteizinhos-veganos-alho-poro-option",
-              "name": "Alho-Poró (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-veganos-alho-poro-queijo-option",
-              "name": "Alho-Poró com Queijo (Vegetariano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-veganos-cogumelos-option",
-              "name": "Cogumelos (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-veganos-queijo-option",
-              "name": "Queijo (Vegetariano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-veganos-marguerita-option",
-              "name": "Marguerita (Vegetariano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-veganos-grao-de-bico-option",
-              "name": "Grão-de-bico (Vegano)",
-              "priceDelta": 0
-            },
-            {
-              "id": "pasteizinhos-veganos-palmito-option",
-              "name": "Palmito (Vegano)",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
-          "perItemMax": 1,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
-            }
-          ]
-        }
-      ],
-      "items": [
-        {
-          "id": "combos-item-001",
-          "title": "Mini Salgados Tradicionais",
-          "description": "Monte sua caixa com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
-          "image": "images/menu-items/salgadinhos-tradicionais.jpeg",
-          "available": true,
-          "optionGroupIds": ["salgadinhos-traditional-flavors", "sauce", "extras"],
+          "id": "burger-combo",
+          "description": "Classic burger with your choice of side and drink.",
+          "price": 13.99,
+          "image": "images/menu-items/combos.jpg",
           "variants": [
             {
-              "id": "25-units",
-              "label": "25 unidades",
-              "price": 33.9,
-              "optionOverrides": {
-                "salgadinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
-                "sauce": { "perItemMax": 1 },
-                "extras": { "perItemMax": 3 }
-              }
+              "id": "classic-combo",
+              "label": "Classic",
+              "price": 13.99
             },
             {
-              "id": "50-units",
-              "label": "50 unidades",
-              "price": 59.9,
-              "optionOverrides": {
-                "salgadinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
-                "sauce": { "perItemMax": 2 },
-                "extras": { "perItemMax": 5 }
-              }
+              "id": "cheese-combo",
+              "label": "Cheeseburger",
+              "price": 14.99
             },
             {
-              "id": "100-units",
-              "label": "100 unidades",
-              "price": 99.9,
-              "optionOverrides": {
-                "salgadinhos-traditional-flavors": { "perItemMax": 10, "minSelect": 5, "unitsPerSelection": 10 },
-                "sauce": { "perItemMax": 3 },
-                "extras": { "perItemMax": 8 }
-              }
+              "id": "veggie-combo",
+              "label": "Veggie",
+              "price": 15.49
             }
-          ]
+          ],
+          "optionGroupIds": [
+            "combo-drink",
+            "combo-side"
+          ],
+          "title": "Burger Combo",
+          "available": true
         },
         {
-          "id": "combos-item-002",
-          "title": "Mini Salgados Veganos/Vegetarianos",
-          "description": "Monte sua caixa vegana/vegetariana com seus salgadinhos favoritos! Escolha a quantidade e os sabores.",
-          "image": "images/menu-items/salgadinhos-veganos.png",
-          "available": true,
-          "optionGroupIds": ["salgadinhos-vegan-flavors", "sauce", "extras"],
-          "variants": [
-            {
-              "id": "25-units",
-              "label": "25 unidades",
-              "price": 35.9,
-              "optionOverrides": {
-                "salgadinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
-                "sauce": { "perItemMax": 1 },
-                "extras": { "perItemMax": 3 }
-              }
-            },
-            {
-              "id": "50-units",
-              "label": "50 unidades",
-              "price": 63.9,
-              "optionOverrides": {
-                "salgadinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
-                "sauce": { "perItemMax": 2 },
-                "extras": { "perItemMax": 5 }
-              }
-            },
-            {
-              "id": "100-units",
-              "label": "100 unidades",
-              "price": 109.9,
-              "optionOverrides": {
-                "salgadinhos-vegan-flavors": {
-                  "perItemMax": 10,
-                  "minSelect": 5,
-                  "unitsPerSelection": 10
-                },
-                "sauce": { "perItemMax": 3 },
-                "extras": { "perItemMax": 8 }
-              }
-            }
-          ]
-        },
-        {
-          "id": "combos-item-003",
-          "title": "Pasteizinhos Tradicionais",
-          "description": "Monte sua caixa com seus pasteizinhos de feira favoritos! Escolha a quantidade e os sabores.",
-          "image": "images/menu-items/pasteizinhos-tradicionais.webp",
-          "available": true,
-          "optionGroupIds": ["pasteizinhos-traditional-flavors", "sauce", "extras"],
-          "variants": [
-            {
-              "id": "25-units",
-              "label": "25 unidades",
-              "price": 29.9,
-              "optionOverrides": {
-                "pasteizinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
-                "sauce": { "perItemMax": 1 },
-                "extras": { "perItemMax": 3 }
-              }
-            },
-            {
-              "id": "50-units",
-              "label": "50 unidades",
-              "price": 52.9,
-              "optionOverrides": {
-                "pasteizinhos-traditional-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
-                "sauce": { "perItemMax": 2 },
-                "extras": { "perItemMax": 5 }
-              }
-            },
-            {
-              "id": "100-units",
-              "label": "100 unidades",
-              "price": 92.9,
-              "optionOverrides": {
-                "pasteizinhos-traditional-flavors": {
-                  "perItemMax": 10,
-                  "minSelect": 5,
-                  "unitsPerSelection": 10
-                },
-                "sauce": { "perItemMax": 3 },
-                "extras": { "perItemMax": 8 }
-              }
-            }
-          ]
-        },
-        {
-          "id": "combos-item-004",
-          "title": "Pasteizinhos Veganos/Vegetarianos",
-          "description": "Monte sua caixa vegana/vegetariano com seus pasteizinhos de feira favoritos! Escolha a quantidade e os sabores.",
-          "image": "images/menu-items/pasteizinhos-veganos.jpg",
-          "available": true,
-          "optionGroupIds": ["pasteizinhos-vegan-flavors", "sauce", "extras"],
-          "variants": [
-            {
-              "id": "25-units",
-              "label": "25 unidades",
-              "price": 32.9,
-              "optionOverrides": {
-                "pasteizinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 2, "unitsPerSelection": 5 },
-                "sauce": { "perItemMax": 1 },
-                "extras": { "perItemMax": 3 }
-              }
-            },
-            {
-              "id": "50-units",
-              "label": "50 unidades",
-              "price": 57.9,
-              "optionOverrides": {
-                "pasteizinhos-vegan-flavors": { "perItemMax": 5, "minSelect": 3, "unitsPerSelection": 10 },
-                "sauce": { "perItemMax": 2 },
-                "extras": { "perItemMax": 5 }
-              }
-            },
-            {
-              "id": "100-units",
-              "label": "100 unidades",
-              "price": 99.9,
-              "optionOverrides": {
-                "pasteizinhos-vegan-flavors": {
-                  "perItemMax": 10,
-                  "minSelect": 5,
-                  "unitsPerSelection": 10
-                },
-                "sauce": { "perItemMax": 3 },
-                "extras": { "perItemMax": 8 }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "pao-de-queijo",
-      "name": "Pão de Queijo Artesanal",
-      "optionGroups": [
-        {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
-          "perItemMax": 1,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
-            }
-          ]
-        }
-      ],
-      "items": [
-        {
-          "id": "pao-de-queijo-variant",
-          "title": "Pão de Queijo",
-          "description": "Massa levinha e super crocante por fora. Feito com ingredientes de alta qualidade, totalmente artesanal, e ideal para qualquer hora do dia. Disponível em embalagens com 5, 10 e 15 unidades.",
-          "image": "images/menu-items/pao-de-queijo.jpg",
-          "available": true,
-          "variants": [
-            {
-              "id": "5-units",
-              "label": "5 unidades",
-              "price": 11.9,
-              "optionOverrides": {
-                "sauce": { "perItemMax": 1 },
-                "extras": { "perItemMax": 3 }
-              }
-            },
-            {
-              "id": "10-units",
-              "label": "10 unidades",
-              "price": 21.9,
-              "optionOverrides": {
-                "sauce": { "perItemMax": 1 },
-                "extras": { "perItemMax": 5 }
-              }
-            },
-            {
-              "id": "15-units",
-              "label": "15 unidades",
-              "price": 29.9,
-              "optionOverrides": {
-                "sauce": { "perItemMax": 2 },
-                "extras": { "perItemMax": 5 }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "petiscos-variados",
-      "name": "Petiscos Varidados",
-      "optionGroups": [
-        {
-          "id": "sauce",
-          "name": "Escolha Seu Molho Grátis",
-          "perItemMax": 1,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0
-            }
-          ]
-        },
-        {
-          "id": "extras",
-          "name": "Molhos Extras (Adicionais)",
-          "perItemMax": 5,
-          "options": [
-            {
-              "id": "mostarda-picante",
-              "name": "Molho de Mostarda Picante",
-              "description": "Molho de mostarda com pimenta dedo-de-moça, cenoura, sálvia e cheiro verde.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "maionese-verde",
-              "name": "Maionese Verde com Alho Assado",
-              "description": "Maionese verde temperada com cheiro verde e alho assado.",
-              "priceDelta": 0.6
-            },
-            {
-              "id": "pimenta-defumado",
-              "name": "Molho de Pimenta Defumado",
-              "description": "Molho de pimenta dedo-de-moça, ketchup, cenoura, cebola e páprica defumada.",
-              "priceDelta": 0.8
-            },
-            {
-              "id": "especial-defumado",
-              "name": "Molho Especial Defumado",
-              "description": "Molho especial feito com maionese, páprica defumada e alho assado.",
-              "priceDelta": 0.8
-            }
-          ]
-        }
-      ],
-      "items": [
-        {
-          "id": "petiscos-item-001",
-          "title": "Faláfel de Grão-de-Bico (Vegano)",
-          "description": "Deliciosos bolinhos de origem árabe feitos com grão-de-bico, cebola, alho, salsinha, e especiarias. (10 unidades)",
-          "price": 21.9,
-          "image": "images/menu-items/falafel.png",
+          "id": "family-combo",
+          "description": "4 burgers, 2 large fries, and 4 drinks. Feeds the whole family!",
+          "price": 39.99,
+          "image": "images/menu-items/combos.jpg",
+          "optionGroupIds": [
+            "combo-drink"
+          ],
+          "title": "Family Combo",
           "available": true
         }
       ]
     },
     {
-      "id": "doces",
-      "name": "Bolos & Doces",
+      "id": "desserts",
+      "name": "Desserts",
+      "optionGroups": [],
       "items": [
         {
-          "id": "bolos-item-001",
-          "title": "Bolo de Mandioca Catedral - G",
-          "description": "Assado em forma especial com design gótico e inspirado no cartão-postal de Maringá! Receita de família com massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 8 pessoas. (Aprox. 1.2kg)",
-          "price": 60.9,
-          "image": "images/menu-items/bolo-mandioca-grande.jpeg",
+          "id": "brownie",
+          "description": "Warm fudge brownie served with a scoop of vanilla ice cream.",
+          "price": 6.99,
+          "image": "images/menu-items/desserts.jpg",
+          "optionGroupIds": [],
+          "title": "Chocolate Brownie",
           "available": true
         },
         {
-          "id": "bolos-item-002",
-          "title": "Bolo de Mandioca - M",
-          "description": "Receita de família cuidadosamente preparada para encantar seu paladar. Massa fofinha e cobertura irresistível de leite condensado e coco ralado. Serve até 4 pessoas. (Aprox. 600g)",
-          "price": 39.9,
-          "image": "images/menu-items/bolo-mandioca-medio.jpeg",
+          "id": "cheesecake",
+          "description": "Creamy cheesecake with a graham cracker crust and berry compote.",
+          "price": 7.49,
+          "image": "images/menu-items/desserts.jpg",
+          "optionGroupIds": [],
+          "title": "New York Cheesecake",
           "available": true
         }
       ]
     },
     {
-      "id": "bebidas",
-      "name": "Bebidas",
+      "id": "drinks",
+      "name": "Drinks",
+      "optionGroups": [],
       "items": [
         {
-          "id": "bebidas-item-001",
-          "title": "Coca-Cola Zero",
-          "description": "Lata 350ml",
-          "price": 6.49,
-          "image": "images/menu-items/coca-zero-350.png",
+          "id": "soda-can",
+          "description": "Coca-Cola, Sprite, or Fanta.",
+          "price": 1.99,
+          "image": "images/menu-items/drinks.jpg",
+          "optionGroupIds": [],
+          "title": "Soda Can",
           "available": true
         },
         {
-          "id": "bebidas-item-002",
-          "title": "Coca-Cola Original",
-          "description": "Lata 350ml",
-          "price": 6.49,
-          "image": "images/menu-items/coca-350.png",
+          "id": "fresh-juice",
+          "description": "Freshly squeezed orange or apple juice.",
+          "price": 4.49,
+          "image": "images/menu-items/drinks.jpg",
+          "optionGroupIds": [],
+          "title": "Fresh Juice",
           "available": true
         },
         {
-          "id": "bebidas-item-003",
-          "title": "Coca-Cola Zero",
-          "description": "Garrafa Pet 600ml",
-          "price": 8.9,
-          "image": "images/menu-items/coca-zero-600.webp",
+          "id": "water",
+          "description": "500ml bottled water.",
+          "price": 1.49,
+          "image": "images/menu-items/drinks.jpg",
+          "optionGroupIds": [],
+          "title": "Water",
           "available": true
         },
         {
-          "id": "bebidas-item-004",
-          "title": "Coca-Cola Original",
-          "description": "Garrafa Pet 600ml",
-          "price": 8.9,
-          "image": "images/menu-items/coca-600.png",
-          "available": true
-        },
-        {
-          "id": "bebidas-item-005",
-          "title": "Coca-Cola Zero",
-          "description": "Garrafa Pet 2l",
-          "price": 19.9,
-          "image": "images/menu-items/coca-zero-2l.webp",
-          "available": true
-        },
-        {
-          "id": "bebidas-item-006",
-          "title": "Coca-Cola Original",
-          "description": "Garrafa Pet 2l",
-          "price": 19.9,
-          "image": "images/menu-items/coca-2l.webp",
-          "available": true
-        },
-        {
-          "id": "bebidas-item-007",
-          "title": "Guaraná Antarctica Original",
-          "description": "Garrafa Pet 2l",
-          "price": 17.9,
-          "image": "images/menu-items/guarana-2l.jpg",
-          "available": true
-        },
-        {
-          "id": "bebidas-item-009",
-          "title": "Sprite Original",
-          "description": "Garrafa Pet 2l",
-          "price": 18.5,
-          "image": "images/menu-items/sprite-2l.webp",
+          "id": "iced-coffee",
+          "description": "Cold brew coffee served over ice with milk.",
+          "price": 3.99,
+          "image": "images/menu-items/drinks.jpg",
+          "optionGroupIds": [],
+          "title": "Iced Coffee",
           "available": true
         }
       ]

@@ -24,6 +24,11 @@ const config = {
     country: process.env.COUNTRY || "",
     email: process.env.EMAIL || "",
   },
+  currency: {
+    symbol: process.env.CURRENCY_SYMBOL || "$",
+    decimal: process.env.CURRENCY_DECIMAL || ".",
+    thousands: process.env.CURRENCY_THOUSANDS || ",",
+  },
 };
 
 // Read the base data.json file
@@ -33,6 +38,7 @@ const menuData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
 // Update restaurant info with config values
 menuData.restaurant.name = config.name;
 menuData.restaurant.contact = config.contact;
+menuData.restaurant.currency = config.currency;
 
 // Write to public directory
 const outDir = path.join(process.cwd(), "/");
