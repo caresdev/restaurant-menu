@@ -1,186 +1,160 @@
-# Dynamic Restaurant Menu Template
+# Digital Menu Template
 
-A clean, responsive, and dynamic restaurant menu template that preserves the original design while adding powerful interactivity features.
+A ready-to-use, mobile-first digital menu for restaurants, food trucks, bakeries — anything with a menu and a WhatsApp number.
 
-## Features
+Drop in your data, swap the images, and you're live.
 
-- **Dynamic Menu Rendering**: Menu items are loaded from `data.json`
-- **Category Filtering**: Filter menu items by category with smooth animations
-- **Shopping Cart**: Add/remove items with quantity management and cart persistence
-- **WhatsApp Integration**: Send orders directly via WhatsApp with formatted messages
-- **Responsive Design**: Works perfectly on all device sizes (mobile-first approach)
-- **Template-Ready**: Contains only placeholder data, perfect for deployment as a public template
+<!-- TODO: Add screenshots/demo GIF here -->
 
-## Files Structure
+## What you get
 
+- **Data-driven menu** — everything loads from a single `data.json` file
+- **Cart + checkout** — add items, customize with options, pick a payment method, send the order via WhatsApp
+- **Option groups** — extras, sauces, sizes, toppings — with per-item limits and required selections
+- **Item variants** — same item, different sizes/prices (e.g. Small/Medium/Large)
+- **Configurable currency** — USD, EUR, BRL, whatever — set the symbol and formatting in your config
+- **Responsive** — works on phones, tablets, and desktops out of the box
+
+## Quick start
+
+```bash
+# clone it
+git clone https://github.com/caresdev/restaurant-menu.git
+cd restaurant-menu
+
+# open it
+# use Live Server in VS Code, or:
+python3 -m http.server 8000
 ```
-restaurant-menu/
-├── index.html          # Main HTML file (minimal skeleton)
-├── css/index.css       # All styling (preserves original design)
-├── js/index.js         # Dynamic functionality
-├── data.json           # Menu data (edit this file to customize)
-├── images/
-│   ├── menu-item.png   # Placeholder image for all menu items
-│   ├── header-bg.png   # Header background
-│   ├── header-img.png  # Header product image
-│   └── logo.png        # Company logo
-└── README.md           # This documentation
-```
 
-## How to Customize Your Menu
+Then open `http://localhost:8000` and you should see the sample menu.
 
-### 1. Update Restaurant Information
+## Make it yours
 
-Edit the `restaurant` section in `data.json`:
+Everything lives in `data.json`. Here's the structure:
+
+### Restaurant info
 
 ```json
 {
   "restaurant": {
-    "name": "Your Restaurant Name",
-    "tagline": "Your Tagline",
-    "slogan": "Your Captivating Message!",
-    "description": "Your description of products/services",
-    "phone": "5531999999999",  // WhatsApp phone (international format)
+    "name": "Your Place",
+    "tagline": "Digital Menu",
+    "slogan": "Your catchy headline",
+    "description": "A short description of what you serve",
+    "ctaText": "Order Now",
+    "currency": { "symbol": "$", "decimal": ".", "thousands": "," },
     "contact": {
-      "address": "Your Address",
-      "email": "your@email.com",
-      "phone": "+1 (123) 456-7890"
-    }
+      "phone": "15551234567",
+      "email": "hello@yourplace.com",
+      "address": "123 Main St",
+      "city": "Springfield",
+      "state": "IL",
+      "zip": "62701",
+      "country": "USA"
+    },
+    "hours": {
+      "monday": "9:00 AM - 9:00 PM",
+      "tuesday": "9:00 AM - 9:00 PM"
+    },
+    "social": [
+      { "platform": "whatsapp", "url": "https://wa.me/15551234567", "icon": "fab fa-whatsapp", "label": "WhatsApp" },
+      { "platform": "instagram", "url": "https://instagram.com/you", "icon": "fab fa-instagram", "label": "Instagram" }
+    ]
   }
 }
 ```
 
-### 2. Add New Categories
-
-Add new categories to the `categories` array:
+### Adding items
 
 ```json
 {
-  "id": "beverages",           // Unique identifier
-  "name": "Beverages",         // Display name
-  "items": [...]              // Array of menu items
+  "id": "margherita",
+  "title": "Margherita Pizza",
+  "description": "Fresh mozzarella, tomato sauce, basil",
+  "price": 12.99,
+  "image": "images/menu-items/pizzas.jpg",
+  "available": true,
+  "optionGroupIds": ["pizza-size", "pizza-extras"]
 }
 ```
 
-### 3. Add New Menu Items
+> Set `"available": false` to hide an item without deleting it.
 
-Add items to any category's `items` array:
+### Option groups
 
-```json
-{
-  "id": "item-008",                    // Unique identifier
-  "title": "Item Name",               // Display name
-  "description": "Item description",   // Full description
-  "price": 15.99,                     // Price as number
-  "image": "images/menu-item.png",    // Image path (use menu-item.png for template)
-  "available": true                   // Whether item is available
-}
-```
-
-### 4. Manage Item Availability
-
-Set `"available": false` to temporarily hide items without deleting them:
+Define them at the category level, then reference by ID in each item:
 
 ```json
 {
-  "id": "item-001",
-  "title": "Seasonal Item",
-  "available": false  // This item won't appear in the menu
-}
-```
-
-## Example: Adding a New Category
-
-To add a "Beverages" category with 2 drinks:
-
-```json
-{
-  "id": "beverages",
-  "name": "Beverages",
-  "items": [
-    {
-      "id": "drink-001",
-      "title": "Fresh Orange Juice",
-      "description": "Freshly squeezed orange juice served chilled",
-      "price": 5.99,
-      "image": "images/menu-item.png",
-      "available": true
-    },
-    {
-      "id": "drink-002",
-      "title": "Cappuccino",
-      "description": "Rich espresso with steamed milk foam",
-      "price": 4.99,
-      "image": "images/menu-item.png",
-      "available": true
-    }
+  "id": "pizza-size",
+  "name": "Choose Size",
+  "perItemMax": 1,
+  "minSelect": 1,
+  "options": [
+    { "id": "small", "name": "Small (10\")", "priceDelta": 0 },
+    { "id": "large", "name": "Large (14\")", "priceDelta": 5.00 }
   ]
 }
 ```
 
-## Images
+### Variants
 
-- **Template Mode**: Use `images/menu-item.png` for all items (current setup)
-- **Custom Images**: Replace with actual food photos, maintain aspect ratio for best results
-- **Supported Formats**: JPG, PNG, WebP
-- **Recommended Size**: 400x400px minimum
+For items with size/type options that change the base price:
 
-## WhatsApp Integration
-
-1. Update the phone number in `data.json` restaurant section
-2. Use international format: country code + number (no spaces, no + symbol)
-3. Example: For +1 (555) 123-4567, use: "15551234567"
-
-## Deployment
-
-1. Update `data.json` with your menu data
-2. Replace placeholder images with your photos
-3. Deploy to any web server (GitHub Pages, Netlify, etc.)
-4. The template is ready for production use
-
-## Technologies and Tools
-
-- **Design & Prototype:** Figma, Canva
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript, Bootstrap 5.3
-- **Icons:** Font Awesome 5.14
-- **Fonts:** Google Fonts (Poppins, Bebas Neue, Roboto Condensed)
-- **Deployment & Hosting:** Netlify, GitHub Pages, or any static hosting
-
-## Browser Compatibility
-
-- Chrome/Safari/Firefox (modern versions)
-- Mobile browsers
-- IE11+ (with polyfills if needed)
-
-## Development
-
-To run locally:
-
-```bash
-# Start a local server in the project directory
-python3 -m http.server 8000
-# or
-php -S localhost:8000
-# or use Live Server in VS Code
-
-# Visit http://localhost:8000
+```json
+{
+  "id": "burger-combo",
+  "title": "Burger Combo",
+  "price": 13.99,
+  "variants": [
+    { "id": "classic", "label": "Classic", "price": 13.99 },
+    { "id": "veggie", "label": "Veggie", "price": 15.49 }
+  ]
+}
 ```
 
-## Technical Notes
+### Images
 
-- Uses vanilla JavaScript (no frameworks required)
-- Bootstrap 5.3 for responsive layout
-- Font Awesome 5.14 for icons
-- Fetches menu data asynchronously
-- Preserves original CSS styling and responsive behavior
-- Mobile-first responsive design
-- Smooth animations and transitions
-- Cart data persists during session
+Put your item photos in `images/menu-items/`. One image per category works fine, or use individual images per item. JPG, PNG, and WebP are all supported.
 
-## Support
+### Environment config (optional)
 
-This template maintains the exact look and feel of the original static design while adding powerful dynamic features. All styling is preserved in `css/index.css` and should not be modified unless you want to change the visual design.
+If you want to keep sensitive info out of `data.json`, create a `.env` file (see `.env.example`) and run:
 
-## Get in Touch
+```bash
+npm install
+npm run build
+```
 
-If you find this project useful or have suggestions for improvements, please reach out or submit a pull request. Thank you for visiting!
+This injects your restaurant name, contact info, and currency settings into `data.json` at build time.
+
+## Project structure
+
+```
+├── index.html
+├── css/index.css
+├── js/
+│   ├── index.js           # all the app logic
+│   └── make-config.js     # optional build script for .env config
+├── data.json              # your menu data
+├── images/
+│   ├── header-bg.png      # hero background
+│   ├── header-img.png     # hero food image
+│   ├── logo.png           # your logo
+│   └── menu-items/        # item photos
+├── .env.example
+└── package.json
+```
+
+## Built with
+
+HTML, CSS, vanilla JS, [Bootstrap 5.3](https://getbootstrap.com/), [Font Awesome 5](https://fontawesome.com/), [Google Fonts](https://fonts.google.com/) (Poppins, Bebas Neue, Roboto Condensed)
+
+## Deploy
+
+This is a static site. Drop it on [Netlify](https://netlify.com), [GitHub Pages](https://pages.github.com), [Vercel](https://vercel.com), or any web server.
+
+## License
+
+MIT — use it however you want.
